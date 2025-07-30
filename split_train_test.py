@@ -87,7 +87,7 @@ def split_colmap_dataset(input_path, output_path, test_every_nth=8):
             src_path = images_dir / img_name
             dst_path = images_out_dir / img_name
             if src_path.exists():
-                shutil.copy2(src_path, dst_path)
+                shutil.move(str(src_path), str(dst_path))
             else:
                 print(f"Warning: Image file not found: {src_path}")
         
@@ -158,7 +158,7 @@ def main():
     
     parser = argparse.ArgumentParser(
         description="Split COLMAP dataset into train and test sets using systematic sampling (Gaussian Splatting style)")
-    parser.add_argument("input_path", help="Path to COLMAP dataset directory")
+    parser.add_argument("input_path", help="Path to COLMAP dataset directory (folder that contains images/ and sparse/ folders)")
     parser.add_argument("output_path", help="Path where train/ and test/ folders will be created")
     parser.add_argument("--test_every_nth", type=int, default=8, 
                        help="Take every Nth image for test set (default: 8, same as Gaussian Splatting)")
