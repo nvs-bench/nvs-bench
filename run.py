@@ -30,5 +30,5 @@ def download_dataset():
     gpu="T4",
     timeout=3600, 
 )
-def evaluate(method: str, dataset_and_scene: str):
-    os.system(f"python /root/workspace/evaluate.py /nvs-leaderboard-data/{dataset_and_scene}/test/images/ /nvs-leaderboard-output/{dataset_and_scene}/{method}/renders_test/")
+def evaluate(method: str, scene: str):
+    os.system(f"python /root/workspace/evaluate.py --method {method} --scene {scene}")
