@@ -5,6 +5,7 @@ import imageio.v2 as imageio
 from torchmetrics.functional.image import peak_signal_noise_ratio, structural_similarity_index_measure, learned_perceptual_image_patch_similarity
 
 import torch
+from tqdm import tqdm
 
 def evaluate(gt_dir, rendered_dir):
     """
@@ -25,7 +26,7 @@ def evaluate(gt_dir, rendered_dir):
     ssim_scores = []
     lpips_scores = []
 
-    for gt_file, rendered_file in zip(gt_files, rendered_files):
+    for gt_file, rendered_file in tqdm(zip(gt_files, rendered_files), total=len(gt_files)):
         gt_path = os.path.join(gt_dir, gt_file)
         rendered_path = os.path.join(rendered_dir, rendered_file)
 
