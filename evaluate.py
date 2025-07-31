@@ -25,6 +25,9 @@ def evaluate_metrics(gt_dir, rendered_dir):
 
     print(f"Loading {len(gt_files)} image pairs...")
     
+    # Check if GPU is available
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    
     # Load all images into tensors
     gt_tensors = []
     rendered_tensors = []
@@ -33,11 +36,17 @@ def evaluate_metrics(gt_dir, rendered_dir):
         gt_image = imageio.imread(gt_path / gt_file)
         rendered_image = imageio.imread(rendered_path / rendered_file)
         
+        # Print image size information for first image
+        if len(gt_tensors) == 0:
+            print(f"Image size: {gt_image.shape}")
+        
         gt_tensors.append(torch.from_numpy(gt_image).permute(2, 0, 1).float())
         rendered_tensors.append(torch.from_numpy(rendered_image).permute(2, 0, 1).float())
 
-    gt_batch = torch.stack(gt_tensors)  # Shape: [N, C, H, W]
-    rendered_batch = torch.stack(rendered_tensors)  # Shape: [N, C, H, W]
+    gt_batch = torch.stack(gt_tensors).to(device)  # Move to GPU
+    rendered_batch = torch.stack(rendered_tensors).to(device)  # Move to GPU
+    
+    print("Calculating metrics in batch mode...")
     
     # PSNR
     psnr_scores = peak_signal_noise_ratio(rendered_batch, gt_batch, data_range=255.0)
@@ -46,8 +55,11 @@ def evaluate_metrics(gt_dir, rendered_dir):
     gt_batch_ssim = gt_batch / 255.0
     rendered_batch_ssim = rendered_batch / 255.0
     ssim_scores = structural_similarity_index_measure(rendered_batch_ssim, gt_batch_ssim)
+    # Handle SSIM tuple return (annoying you have to do this at all)
+    if isinstance(ssim_scores, tuple):
+        ssim_scores = ssim_scores[0]
     
-    # LPIPS
+    # LPIPS - now running on GPU for faster computation
     gt_batch_lpips = gt_batch / 255.0
     rendered_batch_lpips = rendered_batch / 255.0
     lpips_scores = learned_perceptual_image_patch_similarity(gt_batch_lpips, rendered_batch_lpips, net_type='vgg', normalize=True)
