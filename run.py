@@ -12,4 +12,5 @@ app = modal.App("nvs-leaderboard-downloader")
     timeout=3600, 
 )
 def download_dataset():
-    os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/mipnerf360.sh")
+    # os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/mipnerf360.sh")
+    os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/examples.sh")
