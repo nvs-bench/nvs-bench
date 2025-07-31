@@ -1,18 +1,20 @@
 import argparse
-import os
+from pathlib import Path
 import numpy as np
 import imageio.v2 as imageio
 from torchmetrics.functional.image import peak_signal_noise_ratio, structural_similarity_index_measure, learned_perceptual_image_patch_similarity
 
 import torch
-from tqdm import tqdm
 
 def evaluate(gt_dir, rendered_dir):
     """
     Evaluates rendered images against ground truth images using PSNR, SSIM, and LPIPS.
     """
-    gt_files = sorted(os.listdir(gt_dir))
-    rendered_files = sorted(os.listdir(rendered_dir))
+    gt_path = Path(gt_dir)
+    rendered_path = Path(rendered_dir)
+    
+    gt_files = sorted([f.name for f in gt_path.iterdir() if f.is_file()])
+    rendered_files = sorted([f.name for f in rendered_path.iterdir() if f.is_file()])
 
     # Filter out non-image files
     gt_files = [f for f in gt_files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
@@ -22,47 +24,41 @@ def evaluate(gt_dir, rendered_dir):
         print("Error: The number of ground truth and rendered images do not match.")
         return
 
-    psnr_scores = []
-    ssim_scores = []
-    lpips_scores = []
+    print(f"Loading {len(gt_files)} image pairs...")
+    
+    # Load all images into tensors
+    gt_tensors = []
+    rendered_tensors = []
 
-    for gt_file, rendered_file in tqdm(zip(gt_files, rendered_files), total=len(gt_files)):
-        gt_path = os.path.join(gt_dir, gt_file)
-        rendered_path = os.path.join(rendered_dir, rendered_file)
+    for gt_file, rendered_file in zip(gt_files, rendered_files):
+        gt_image = imageio.imread(gt_path / gt_file)
+        rendered_image = imageio.imread(rendered_path / rendered_file)
+        
+        gt_tensors.append(torch.from_numpy(gt_image).permute(2, 0, 1).float())
+        rendered_tensors.append(torch.from_numpy(rendered_image).permute(2, 0, 1).float())
 
-        gt_image = imageio.imread(gt_path)
-        rendered_image = imageio.imread(rendered_path)
+    gt_batch = torch.stack(gt_tensors)  # Shape: [N, C, H, W]
+    rendered_batch = torch.stack(rendered_tensors)  # Shape: [N, C, H, W]
+    
+    # PSNR
+    psnr_scores = peak_signal_noise_ratio(rendered_batch, gt_batch, data_range=255.0)
+    
+    # SSIM
+    gt_batch_ssim = gt_batch / 255.0
+    rendered_batch_ssim = rendered_batch / 255.0
+    ssim_scores = structural_similarity_index_measure(rendered_batch_ssim, gt_batch_ssim)
+    
+    # LPIPS
+    gt_batch_lpips = gt_batch / 255.0
+    rendered_batch_lpips = rendered_batch / 255.0
+    lpips_scores = learned_perceptual_image_patch_similarity(gt_batch_lpips, rendered_batch_lpips, net_type='vgg', normalize=True)
 
-        gt_tensor = torch.from_numpy(gt_image).permute(2, 0, 1).float()
-        rendered_tensor = torch.from_numpy(rendered_image).permute(2, 0, 1).float()
-
-        # PSNR
-        psnr_score = peak_signal_noise_ratio(rendered_tensor, gt_tensor, data_range=255.0)
-        psnr_scores.append(psnr_score.item())
-
-        # SSIM
-        gt_tensor_ssim = (gt_tensor / 255.0).unsqueeze(0)
-        rendered_tensor_ssim = (rendered_tensor / 255.0).unsqueeze(0)
-        ssim_score = structural_similarity_index_measure(rendered_tensor_ssim, gt_tensor_ssim)
-        ssim_scores.append(ssim_score.item())
-
-        # LPIPS
-        gt_tensor_lpips = (gt_tensor / 255.0).unsqueeze(0)
-        rendered_tensor_lpips = (rendered_tensor / 255.0).unsqueeze(0)
-        lpips_score = learned_perceptual_image_patch_similarity(gt_tensor_lpips, rendered_tensor_lpips, net_type='vgg', normalize=True)
-        lpips_scores.append(lpips_score.item())
-
-        print(f"Image: {gt_file}")
-        print(f"  PSNR: {psnr_score:.4f}")
-        print(f"  SSIM: {ssim_score:.4f}")
-        print(f"  LPIPS: {lpips_score.item():.4f}")
-
-    avg_psnr = np.mean(psnr_scores)
-    avg_ssim = np.mean(ssim_scores)
-    avg_lpips = np.mean(lpips_scores)
+    avg_psnr = psnr_scores.mean().item()
+    avg_ssim = ssim_scores.mean().item()
+    avg_lpips = lpips_scores.mean().item()
 
     print("\n" + "="*20)
-    print("Average Scores:")
+    print("Metrics:")
     print(f"  PSNR: {avg_psnr:.4f}")
     print(f"  SSIM: {avg_ssim:.4f}")
     print(f"  LPIPS: {avg_lpips:.4f}")
