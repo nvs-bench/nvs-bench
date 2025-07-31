@@ -1,0 +1,6 @@
+torchmetrics
+numpy
+imageio
+torch
+torchvision
+modal
