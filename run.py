@@ -5,15 +5,21 @@ import os
 app = modal.App("nvs-leaderboard-downloader")
 
 @app.function(
-    image=modal.Image.debian_slim().apt_install("wget", "unzip").add_local_dir(".", remote_path="/root/workspace"),
+    image=modal.Image.debian_slim().apt_install("wget", "unzip", "imagemagick").add_local_dir(".", remote_path="/root/workspace"),
     volumes={"/nvs-leaderboard-data": modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True),
-             "/nvs-leaderboard-output": modal.Volume.from_name("nvs-leaderboard-output", create_if_missing=True)
+             "/nvs-leaderboard-output": modal.Volume.from_name("nvs-leaderboard-output", create_if_missing=True),
+             "/tour-storage": modal.CloudBucketMount("tour_storage", bucket_endpoint_url="https://storage.googleapis.com", secret=modal.Secret.from_name("gcp-hmac-secret"))
+
     },
     timeout=3600, 
 )
 def download_dataset():
+    # TODO: These probably should be parallelized across different modal workers
     # os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/mipnerf360.sh")
-    os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/examples.sh")
+    # os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/examples.sh")
+    # os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/tandt.sh")
+    # os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/db.sh")
+    os.system("cd /nvs-leaderboard-data && bash /root/workspace/dataset_downloads/zipnerf.sh")
 
 
 @app.function(
