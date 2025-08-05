@@ -1,6 +1,7 @@
 #! /bin/bash
 
 cd /nvs-leaderboard-data/
+rm -rf zipnerf
 mkdir zipnerf
 
 wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/alameda.zip
@@ -13,7 +14,7 @@ unzip berlin.zip -d zipnerf/berlin
 unzip london.zip -d zipnerf/london
 unzip nyc.zip -d zipnerf/nyc
 
-rm alameda.zip berlin.zip london.zip nyc.zip
+# rm alameda.zip berlin.zip london.zip nyc.zip
 
 # Remove the downresolution images
 for scene in */; do
