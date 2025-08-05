@@ -3,7 +3,7 @@ Evaluating a new method is as simple as rendering images on the test splits of t
 
 NVS-leaderboard also provides a framework for taking any repo and running it on serverless GPUs (via Beam). If you're using vscode/cursor you can even open up a native dev experience backed by cloud gpus for quick development!
 
-Our preferred way of generating them for a new repo consists of three simple files (located in `/):
+Our preferred way of generating them for a new repo consists of three simple files (located in `boilerplate/`):
 
 - `Dockerfile` —- Your installation instructions
 - `nvs_leaderboard.sh` -- Your training / rendering commands
