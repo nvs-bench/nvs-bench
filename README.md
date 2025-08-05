@@ -3,11 +3,11 @@ Evaluating a new method is as simple as rendering images on the test splits of t
 
 NVS-leaderboard also provides a framework for taking any repo and running it on serverless GPUs (via Beam). If you're using vscode/cursor you can even open up a native dev experience backed by cloud gpus for quick development!
 
-Our preferred way of generating them for a new repo consists of two simple components:
+Our preferred way of generating them for a new repo consists of three simple files (located in `/):
 
-- `Dockerfile` — simple machine environment configuration (cuda, pytorch versions etc)
-- `nvs_leaderboard.sh` -- user filled bash script for training / rendering images
-- `nvs_leaderboard.py` — code to run training/eval on a serverless gpu provider (we chose Beam for their RTX 4090s, <$30 free tier, and simple python interface)
+- `Dockerfile` —- Your installation instructions
+- `nvs_leaderboard.sh` -- Your training / rendering commands
+- `nvs_leaderboard.py` —- (does not need to be edited) Runs training/rendering on a serverless gpu provider (we chose Beam for their RTX 4090s, <$30 free tier, and simple python interface)
 
 # Adding a New Method
 In our experience, very few lines of code need to be changed from the base templates for a new method to integrate with nvs-leaderboard:
