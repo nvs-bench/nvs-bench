@@ -1,4 +1,4 @@
-# Novel-View Synthesis Leaderboard
+# [wip] Novel-View Synthesis Leaderboard
 Evaluating a new method is as simple as rendering images on the test splits of the benchmark datasets (already have them? skip to **upload**) and running `evaluate.py`
 
 NVS-leaderboard also provides a framework for taking any repo and running it on serverless GPUs (via Beam). If you're using vscode/cursor you can even open up a native dev experience backed by cloud gpus for quick development!
