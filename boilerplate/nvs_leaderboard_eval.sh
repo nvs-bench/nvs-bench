@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# FOR USER FILLING:
+method="gaussian-splatting"
+
 # Check if scene argument is provided
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <dataset/scene>"
@@ -9,7 +12,6 @@ fi
 
 scene=$1
 
-method="gaussian-splatting"
 expected_output_folder="/nvs-leaderboard-output/$scene/$method/renders_test"
 
 # Remove the output folder if it already exists

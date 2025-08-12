@@ -25,12 +25,3 @@ done
 
 # Split train and test
 cd /nvs-leaderboard-data/
-mv zipnerf zipnerf_original
-
-# for scene in zipnerf_original/*/; do
-#     scene_name=$(basename "$scene")
-#     echo "Processing scene: $scene_name"
-#     python /root/workspace/split_train_test.py "$scene" "zipnerf/$scene_name"
-# done
-
-# rm -fr zipnerf_original

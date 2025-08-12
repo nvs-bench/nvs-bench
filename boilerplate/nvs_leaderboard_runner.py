@@ -7,6 +7,7 @@ import threading
 import time
 
 import modal
+from nvs_leaderboard_image import image
 
 
 nvs_leaderboard_data_volume = modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True)
@@ -17,10 +18,12 @@ MODAL_VOLUMES = {
 }
 
 app = modal.App("nvs-leaderboard-runner", 
-                image=modal.Image.from_dockerfile("Dockerfile").run_commands(
+                image=image
+                .run_commands(
                     "mkdir -p /run/sshd"
                 ).add_local_file(Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys")
-                .add_local_file("nvs_leaderboard_eval.sh", "/root/workspace/nvs_leaderboard_eval.sh")
+                # This overwrites the git cloned repo (used for install) with the current local directory
+                .add_local_dir(Path.cwd(), "/root/workspace")
                 )
 
 @app.function(
@@ -29,7 +32,7 @@ app = modal.App("nvs-leaderboard-runner",
     volumes=MODAL_VOLUMES,
 )
 def run(scene: str):
-    # Kind of silly modal requires this to avoid race conditions while using volumes
+    # Kind of silly but modal requires reload/commit to avoid race conditions while using volumes
     nvs_leaderboard_data_volume.reload()
     os.system(f"bash nvs_leaderboard_eval.sh {scene}")
     nvs_leaderboard_output_volume.commit()

@@ -26,16 +26,3 @@ done
 
 # Remove poses_bounds.npy files from all scene folders
 find . -name "poses_bounds.npy" -type f -delete 
-
-# Split train and test
-mv mipnerf360 mipnerf360_original
-
-for scene in mipnerf360_original/*/; do
-    scene_name=$(basename "$scene")
-    echo "Processing scene: $scene_name"
-    python /root/workspace/split_train_test.py "$scene" "mipnerf360/$scene_name"
-done
-
-rm -fr mipnerf360_original
-
-rm -fr __pycache__
