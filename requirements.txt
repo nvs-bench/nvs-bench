@@ -5,3 +5,4 @@ torch
 torchvision
 modal
 tqdm
+ssh-config

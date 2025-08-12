@@ -1,9 +1,7 @@
 # You shouldn't need to edit this file, but feel free to take a look at how things are called and run remotely
 import os
-from pathlib import Path
-import socket
+from pathlib import Path, PurePosixPath
 import subprocess
-import threading
 import time
 
 import modal
@@ -12,23 +10,24 @@ from nvs_leaderboard_image import image
 
 nvs_leaderboard_data_volume = modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True)
 nvs_leaderboard_output_volume = modal.Volume.from_name("nvs-leaderboard-output", create_if_missing=True)
-MODAL_VOLUMES = {
+MODAL_VOLUMES: dict[str | PurePosixPath, modal.Volume | modal.CloudBucketMount] = {
     "/nvs-leaderboard-data": nvs_leaderboard_data_volume,
     "/nvs-leaderboard-output": nvs_leaderboard_output_volume,
 }
 
 app = modal.App("nvs-leaderboard-runner", 
                 image=image
-                .run_commands(
-                    "mkdir -p /run/sshd"
-                ).add_local_file(Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys")
+                .apt_install("openssh-server")
+                .run_commands("mkdir /run/sshd")
+                .workdir("/root/workspace/")
+                .add_local_file(Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys") # If you don't have this keyfile locally, generate it with: ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
                 # This overwrites the git cloned repo (used for install) with the current local directory
                 .add_local_dir(Path.cwd(), "/root/workspace")
                 )
 
 @app.function(
     timeout=3600,
-    gpu="T4",
+    gpu="L40S",
     volumes=MODAL_VOLUMES,
 )
 def run(scene: str):
@@ -40,35 +39,69 @@ def run(scene: str):
 
 ###### Dev Server ######
 
-LOCAL_PORT = 9090
+HOSTNAME = "modal-vscode-server"
 
-def wait_for_port(host, port, q):
-    start_time = time.monotonic()
-    while True:
-        try:
-            with socket.create_connection(("localhost", 22), timeout=30.0):
-                break
-        except OSError as exc:
-            time.sleep(0.01)
-            if time.monotonic() - start_time >= 30.0:
-                raise TimeoutError("Waited too long for port 22 to accept connections") from exc
-        q.put((host, port))
+cursor_volume = modal.Volume.from_name("cursor-volume", create_if_missing=True)
+
+def update_ssh_config(hostname, new_host, new_port):
+    # Import here so we don't have to install it on the modal image
+    from ssh_config.client import SSHConfig, Host
+
+    ssh_config_path = Path.home() / ".ssh" / "config"
+    
+    # Create .ssh directory if it doesn't exist
+    ssh_config_path.parent.mkdir(mode=0o700, exist_ok=True)
+    
+    # Create config file if it doesn't exist
+    if not ssh_config_path.exists():
+        ssh_config_path.touch(mode=0o600)
+    
+    # Parse existing config
+    config = SSHConfig(str(ssh_config_path))
+    
+    # Check if host already exists
+    if config.exists(hostname):
+        config.update(hostname, {
+            'HostName': new_host,
+            'Port': int(new_port),
+            'User': 'root',
+            'StrictHostKeyChecking': "no",
+        })
+        print(f"Updated existing SSH config entry for {hostname}")
+    else:
+        # Add new host
+        new_host_entry = Host(hostname, {
+            'HostName': new_host,
+            'Port': int(new_port),
+            'User': 'root',
+            'StrictHostKeyChecking': "no",
+        })
+        new_host_entry.attributes()
+        config.add(new_host_entry)
+        print(f"Added new SSH config entry for {hostname}")
+    
+    # Write back to file
+    config.write()
+    
+    # Set proper permissions
+    ssh_config_path.chmod(0o600)
 
 
 @app.function(
     timeout=3600 * 24,
     gpu="T4",
-    volumes=MODAL_VOLUMES
+    volumes={
+        "/root/.cursor-server": cursor_volume,
+        **MODAL_VOLUMES,
+    }
 )
-def run_server(q):
+def run_server(q: modal.Queue):
     with modal.forward(22, unencrypted=True) as tunnel:
         host, port = tunnel.tcp_socket
-        threading.Thread(target=wait_for_port, args=(host, port, q)).start()
+        q.put((host, port))
 
-        # Added these commands to get the env variables that docker loads in through ENV to show up in my ssh
-        import os
+        # Added these commands to get the env variables that docker loads in through ENV to show up in my ssh when vscode connects
         import shlex
-        from pathlib import Path
 
         output_file = Path.home() / "env_variables.sh"
 
@@ -78,33 +111,23 @@ def run_server(q):
                 f.write(f'export {key}={escaped_value}\n')
         subprocess.run("echo 'source ~/env_variables.sh' >> ~/.bashrc", shell=True)
 
-        subprocess.run(["/usr/sbin/sshd", "-D"])  # TODO: I don't know why I need to start this here
+        # Run openssh so that we can connect to it
+        os.system("/usr/sbin/sshd -D")
 
 
 @app.local_entrypoint()
-def run_server_and_tunnel():   
-    import sshtunnel
-
-    with modal.Queue.ephemeral() as q:
+def run_server_and_tunnel():
+    with modal.Queue.ephemeral() as q: 
         run_server.spawn(q)
-        host, port = q.get()
-        print(f"SSH server running at {host}:{port}")
+        host, port = q.get(block=True) # type: ignore
+        print(f"Server running at: {host}:{port}")
 
-        ssh_tunnel = sshtunnel.SSHTunnelForwarder(
-            (host, port),
-            ssh_username="root",
-            ssh_password=" ",
-            remote_bind_address=("127.0.0.1", 22),
-            local_bind_address=("127.0.0.1", LOCAL_PORT),
-            allow_agent=False,
-        )
+        # We need to create the ssh config entry before we can open vscode. For some reason
+        # the remote-ssh extension doesn't work with full ssh urls, so it needs a config entry.
+        update_ssh_config(HOSTNAME, host, port)
 
-        try:
-            ssh_tunnel.start()
-            print(f"SSH tunnel forwarded to localhost:{ssh_tunnel.local_bind_port}")
-            while True:
-                time.sleep(1)
-        except KeyboardInterrupt:
-            print("\nShutting down SSH tunnel...")
-        finally:
-            ssh_tunnel.stop()
+        # Open vscode for the user
+        os.system(f"code --remote ssh-remote+{HOSTNAME} /root/workspace")
+
+        while True:
+            time.sleep(1)
