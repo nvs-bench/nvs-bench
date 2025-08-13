@@ -10,6 +10,7 @@ from modal import Image
 
 image = (
     Image
+    # Change this base image to whatever torch/cuda version you want
     .from_registry("pytorch/pytorch:2.4.1-cuda12.4-cudnn9-devel")
     .env(
         {
@@ -53,12 +54,12 @@ image = (
 
     ###### Your Code Here ######
     # Would recommend pulling the repo from github (we later overwrite it with the current local directory) 
-    # eg: .run_commands("git clone -b nvs-leaderboard https://github.com/N-Demir/EDGS.git --recursive .")
+    # eg: .run_commands("git clone https://github.com/<repo-name>.git -b <optional-branch-name> --recursive .")
 
     # Install (avoid conda installs because they don't work well in dockerfile situations)
     # Separating these on separate lines helps if there are errors (previous lines will be cached) especially on the large package installs
     # eg:
     # .run_commands("pip install -e .")
     # .run_commands("pip install submodules/diff-gaussian-rasterization")
-    # Note: If your run_commands step needs access to a gpu it's actually possible to do that through "run_commands(gpu='L40S', ...)"
+    # Note: If your run_commands step needs access to a gpu it's actually possible to do that through "run_commands(gpu='T4', ...)"
 )
