@@ -22,7 +22,7 @@ app = modal.App(
     image=(
         # If you've already got a Dockerfile, just replace image with:
         # modal.Image.from_dockerfile("Dockerfile")
-        image.apt_install("openssh-server")
+        image.apt_install("openssh-server", "wget", "unzip")
         .run_commands("mkdir /run/sshd")
         .workdir("/root/workspace/")
         .add_local_file(

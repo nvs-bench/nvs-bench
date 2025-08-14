@@ -5,7 +5,7 @@ torch
 torchvision
 modal
 tqdm
-ssh-config
+sshconf
 
 # Development dependencies
 ruff>=0.1.6
