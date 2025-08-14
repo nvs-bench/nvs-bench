@@ -1,0 +1,22 @@
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "C4", "UP", "N", "Q", "SIM", "ARG", "PIE", "T20", "TCH", "TID", "RUF"]
+ignore = [
+    "E203",  # whitespace before colon (auto-fixed by ruff)
+    "E266",  # too many # for comments (allow section dividers)
+    "D100",  # missing module docstring (not all modules need docs)
+    "D103",  # missing function docstring (simple functions are self-explanatory)
+    "D200",  # one-line docstring should fit on one line (allow multi-line for readability)
+    "D401",  # docstring should be imperative mood (not always needed)
+    "D101",  # missing class docstring (simple classes don't need docs)
+    "D102",  # missing method docstring (simple methods are self-explanatory)
+    "D205",  # need blank line between docstring summary and description (allow compact docs)
+    "D403",  # docstring first word should be capitalized (sometimes lowercase is natural)
+    "D400",  # docstring should end with period (not all docs need to be sentences)
+    "T201"   # print statements (allow print for debugging/CLI tools)
+]
+
+exclude = ["nvs_leaderboard/read_write_model.py"]

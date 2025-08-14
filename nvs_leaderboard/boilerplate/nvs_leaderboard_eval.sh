@@ -26,7 +26,7 @@ start_time=$(date +%s)
 # eg: python train.py --data /nvs-leaderboard-data/$scene/train --output /nvs-leaderboard-output/$scene/$method_name/
 
 # Render the test split
-# eg: python render.py --data /nvs-leaderboard-data/$scene/test --output /nvs-leaderboard-output/$scene/$method_name/ 
+# eg: python render.py --data /nvs-leaderboard-data/$scene/test --output /nvs-leaderboard-output/$scene/$method_name/
 
 # At the end, move your renders into the `expected_output_folder`
 # eg: mv /nvs-leaderboard-output/$scene/$method_name/test/ours_30000/renders $expected_output_folder

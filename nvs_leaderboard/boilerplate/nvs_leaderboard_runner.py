@@ -1,12 +1,11 @@
 # You shouldn't need to edit this file, but feel free to take a look at how things are called and run remotely
 import os
-from pathlib import Path, PurePosixPath
 import subprocess
 import time
+from pathlib import Path, PurePosixPath
 
 import modal
 from nvs_leaderboard_image import image
-
 
 nvs_leaderboard_data_volume = modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True)
 nvs_leaderboard_output_volume = modal.Volume.from_name("nvs-leaderboard-output", create_if_missing=True)
@@ -18,18 +17,23 @@ MODAL_VOLUMES: dict[str | PurePosixPath, modal.Volume] = {
     "/root/.cursor-server": cursor_volume,
 }
 
-app = modal.App("nvs-leaderboard-runner", 
-                image=(
-                    image
-                    .apt_install("openssh-server")
-                    .run_commands("mkdir /run/sshd")
-                    .workdir("/root/workspace/")
-                    .add_local_file(Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys") # If you don't have this keyfile locally, generate it with: ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
-                    # This overwrites the git cloned repo (used for install) with the current local directory
-                    .add_local_dir(Path.cwd(), "/root/workspace")
-                ),
-                volumes=MODAL_VOLUMES,
-                )
+app = modal.App(
+    "nvs-leaderboard-runner",
+    image=(
+        # If you've already got a Dockerfile, just replace image with:
+        # modal.Image.from_dockerfile("Dockerfile")
+        image.apt_install("openssh-server")
+        .run_commands("mkdir /run/sshd")
+        .workdir("/root/workspace/")
+        .add_local_file(
+            Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys"
+        )  # If you don't have this keyfile locally, generate it with: ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
+        # This overwrites the git cloned repo (used for install) with the current local directory
+        .add_local_dir(Path.cwd(), "/root/workspace")
+    ),
+    volumes=MODAL_VOLUMES,
+)
+
 
 @app.function(
     timeout=3600,
@@ -46,37 +50,44 @@ def run(scene: str):
 
 HOSTNAME = "modal-vscode-server"
 
+
 def update_ssh_config(hostname, new_host, new_port):
     # Import here so we don't have to install it on the modal image
-    from ssh_config.client import SSHConfig, Host
+    from ssh_config.client import Host, SSHConfig
 
     ssh_config_path = Path.home() / ".ssh" / "config"
-    
+
     ssh_config_path.parent.mkdir(mode=0o700, exist_ok=True)
     if not ssh_config_path.exists():
         ssh_config_path.touch(mode=0o600)
-    
+
     config = SSHConfig(str(ssh_config_path))
-    
+
     if config.exists(hostname):
-        config.update(hostname, {
-            'HostName': new_host,
-            'Port': int(new_port),
-            'User': 'root',
-            'StrictHostKeyChecking': "no",
-        })
+        config.update(
+            hostname,
+            {
+                "HostName": new_host,
+                "Port": int(new_port),
+                "User": "root",
+                "StrictHostKeyChecking": "no",
+            },
+        )
         print(f"Updated existing SSH config entry for {hostname}")
     else:
-        new_host_entry = Host(hostname, {
-            'HostName': new_host,
-            'Port': int(new_port),
-            'User': 'root',
-            'StrictHostKeyChecking': "no",
-        })
+        new_host_entry = Host(
+            hostname,
+            {
+                "HostName": new_host,
+                "Port": int(new_port),
+                "User": "root",
+                "StrictHostKeyChecking": "no",
+            },
+        )
         new_host_entry.attributes()
         config.add(new_host_entry)
         print(f"Added new SSH config entry for {hostname}")
-    
+
     config.write()
     ssh_config_path.chmod(0o600)
 
@@ -90,7 +101,7 @@ def start_ssh_tunnel(q: modal.Queue):
         host, port = tunnel.tcp_socket
         q.put((host, port))
 
-        # Added these commands to get the env variables that docker loads in through ENV to show up in the dev environment
+        # Added these commands to get the env variables that docker loads in through ENV to show up in the dev shell
         import shlex
 
         output_file = Path.home() / "env_variables.sh"
@@ -98,16 +109,17 @@ def start_ssh_tunnel(q: modal.Queue):
         with open(output_file, "w") as f:
             for key, value in os.environ.items():
                 escaped_value = shlex.quote(value)
-                f.write(f'export {key}={escaped_value}\n')
+                f.write(f"export {key}={escaped_value}\n")
         subprocess.run("echo 'source ~/env_variables.sh' >> ~/.bashrc", shell=True)
 
         # Run openssh so that we can connect to it
         os.system("/usr/sbin/sshd -D")
 
+
 def open_dev_environment():
-    with modal.Queue.ephemeral() as q: 
+    with modal.Queue.ephemeral() as q:
         start_ssh_tunnel.spawn(q)
-        host, port = q.get(block=True) # type: ignore
+        host, port = q.get(block=True)  # type: ignore
         print(f"Dev environment running at: {host}:{port}")
 
         # We need to create the ssh config entry before we can open vscode. For some reason

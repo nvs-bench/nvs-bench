@@ -1,5 +1,5 @@
 # [wip] Novel-View Synthesis Leaderboard
-Reproducible, standardized 
+Reproducible, standardized
 
 
 Evaluating a new method is as simple as rendering images on the test splits of the benchmark datasets (already have them? skip to **upload**) and running `evaluate.py`
@@ -26,5 +26,4 @@ You then have two ways to run the method on cloud gpus:
 
 With Beam's $30 per month free credits you should have plenty to iterate and try out new methods
 
-Note: beam's dockerfiles don't have layers cached yet but that is supposed to be coming soon. 
-
+Note: beam's dockerfiles don't have layers cached yet but that is supposed to be coming soon.

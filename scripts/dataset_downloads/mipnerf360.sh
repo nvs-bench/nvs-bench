@@ -25,4 +25,4 @@ for scene in */; do
 done
 
 # Remove poses_bounds.npy files from all scene folders
-find . -name "poses_bounds.npy" -type f -delete 
+find . -name "poses_bounds.npy" -type f -delete
