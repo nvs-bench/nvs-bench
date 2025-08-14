@@ -18,5 +18,3 @@ ignore = [
     "D400",  # docstring should end with period (not all docs need to be sentences)
     "T201"   # print statements (allow print for debugging/CLI tools)
 ]
-
-exclude = ["nvs_leaderboard/read_write_model.py"]

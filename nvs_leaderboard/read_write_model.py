@@ -1,3 +1,4 @@
+# ruff: noqa
 # Copyright (c) 2023, ETH Zurich and UNC Chapel Hill.
 # All rights reserved.
 #
