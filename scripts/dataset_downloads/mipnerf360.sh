@@ -13,7 +13,7 @@ fi
 unzip 360_v2.zip -d /nvs-leaderboard-data/mipnerf360
 unzip 360_extra_scenes.zip -d /nvs-leaderboard-data/mipnerf360
 
-rm flowers.txt treehill.txt # These were disclaimers from the original dataset that the extra_scenes were not yet available
+rm /nvs-leaderboard-data/mipnerf360/flowers.txt /nvs-leaderboard-data/mipnerf360/treehill.txt # These were disclaimers from the original dataset that the extra_scenes were not yet available
 
 # Remove the different resolution image folders and select the remaining images folder as:
 # outdoor scenes: images_4 -> images, indoor scenes: images_2 -> images
