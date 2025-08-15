@@ -1,6 +1,6 @@
 # DEPRECATED: Instead of downloading from the source, we now use the Inria 3DGS version that contains also processed
 # tanks and temples scenes.
-# See scripts/dataset_downloads/db_and_tandt.sh for the new script.
+# See scripts/dataset_downloads/deepblending_and_tanksandtemples.sh for the new script.
 
 """DeepBlending Dataset Download Script.
 
