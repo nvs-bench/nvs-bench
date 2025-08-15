@@ -8,6 +8,7 @@ import modal
 
 nvs_leaderboard_data_volume = modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True)
 nvs_leaderboard_output_volume = modal.Volume.from_name("nvs-leaderboard-output", create_if_missing=True)
+nvs_leaderboard_downloads_volume = modal.Volume.from_name("nvs-leaderboard-downloads", create_if_missing=True)
 cursor_volume = modal.Volume.from_name("cursor-volume", create_if_missing=True)
 
 # Necessary for git pushes to work from the remote machine
@@ -18,6 +19,7 @@ local_users_git_email = subprocess.check_output(["git", "config", "--global", "u
 MODAL_VOLUMES: dict[str | PurePosixPath, modal.Volume] = {
     "/nvs-leaderboard-data": nvs_leaderboard_data_volume,
     "/nvs-leaderboard-output": nvs_leaderboard_output_volume,
+    "/nvs-leaderboard-downloads": nvs_leaderboard_downloads_volume,
     "/root/.cursor-server": cursor_volume,
 }
 
