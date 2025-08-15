@@ -1,20 +1,27 @@
 #! /bin/bash
 
-cd /nvs-leaderboard-data/
+cd /nvs-leaderboard-downloads/
 rm -rf zipnerf
 mkdir zipnerf
+cd /nvs-leaderboard-downloads/zipnerf
 
-wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/alameda.zip
-wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/berlin.zip
-wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/london.zip
-wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/nyc.zip
+if [ ! -f alameda.zip ]; then
+    wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/alameda.zip
+fi
+if [ ! -f berlin.zip ]; then
+    wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/berlin.zip
+fi
+if [ ! -f london.zip ]; then
+    wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/london.zip
+fi
+if [ ! -f nyc.zip ]; then
+    wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/nyc.zip
+fi
 
-unzip alameda.zip -d zipnerf/alameda
-unzip berlin.zip -d zipnerf/berlin
-unzip london.zip -d zipnerf/london
-unzip nyc.zip -d zipnerf/nyc
-
-# rm alameda.zip berlin.zip london.zip nyc.zip
+unzip alameda.zip -d /nvs-leaderboard-downloads/zipnerf/alameda
+unzip berlin.zip -d /nvs-leaderboard-downloads/zipnerf/berlin
+unzip london.zip -d /nvs-leaderboard-downloads/zipnerf/london
+unzip nyc.zip -d /nvs-leaderboard-downloads/zipnerf/nyc
 
 # Remove the downresolution images
 for scene in */; do
@@ -23,5 +30,5 @@ for scene in */; do
     cd ..
 done
 
-# Split train and test
-cd /nvs-leaderboard-data/
+rm -rf /nvs-leaderboard-data/zipnerf
+mv /nvs-leaderboard-downloads/zipnerf /nvs-leaderboard-data/zipnerf
