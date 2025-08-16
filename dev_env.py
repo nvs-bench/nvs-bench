@@ -51,6 +51,7 @@ app = modal.App(
         .add_local_dir(Path.cwd(), "/root/workspace")
     ),
     volumes=MODAL_VOLUMES,
+    secrets=[modal.Secret.from_name("github-token")],
 )
 
 ###### Dev Server ######

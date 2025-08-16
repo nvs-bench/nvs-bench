@@ -10,8 +10,8 @@ if [ ! -f 360_extra_scenes.zip ]; then
     wget https://storage.googleapis.com/gresearch/refraw360/360_extra_scenes.zip
 fi
 
-unzip 360_v2.zip -d /nvs-leaderboard-data/mipnerf360
-unzip 360_extra_scenes.zip -d /nvs-leaderboard-data/mipnerf360
+unzip -o 360_v2.zip -d /nvs-leaderboard-data/mipnerf360
+unzip -o 360_extra_scenes.zip -d /nvs-leaderboard-data/mipnerf360
 
 rm /nvs-leaderboard-data/mipnerf360/flowers.txt /nvs-leaderboard-data/mipnerf360/treehill.txt # These were disclaimers from the original dataset that the extra_scenes were not yet available
 
