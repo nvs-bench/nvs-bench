@@ -24,12 +24,11 @@ app = modal.App(
         # modal.Image.from_dockerfile("Dockerfile")
         image.apt_install("openssh-server", "wget", "unzip")
         .run_commands("mkdir /run/sshd")
-        .workdir("/root/workspace/")
         .add_local_file(
             Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys"
         )  # If you don't have this keyfile locally, generate it with: ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
         # This overwrites the git cloned repo (used for install) with the current local directory
-        .add_local_dir(Path.cwd(), "/root/workspace")
+        .add_local_dir(Path.cwd(), f"/root/{Path.cwd().name}")
     ),
     volumes=MODAL_VOLUMES,
 )
