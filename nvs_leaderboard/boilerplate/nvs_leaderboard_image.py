@@ -7,6 +7,8 @@
 # - avoid using conda installs (just replace them with pip installs) because getting conda initialized in docker is a
 #   pain
 #
+from pathlib import Path
+
 from modal import Image
 
 image = (
@@ -51,7 +53,7 @@ image = (
             libxxf86vm-dev \
             && rm -rf /var/lib/apt/lists/*"
     )
-    .workdir("/root/workspace")
+    .workdir(f"/root/{Path.cwd().name}")
     ###### Your Code Here ######
     # Would recommend pulling the repo from github (we later overwrite it with the current local directory)
     # eg: .run_commands("git clone https://github.com/<repo-name>.git -b <optional-branch-name> --recursive .")
