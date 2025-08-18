@@ -53,7 +53,7 @@ HOSTNAME = "modal-vscode-server"
 
 def update_ssh_config(hostname, new_host, new_port):
     # Import here so we don't have to install it on the modal image
-    from ssh_config.client import Host, SSHConfig
+    from sshconf import read_ssh_config
 
     ssh_config_path = Path.home() / ".ssh" / "config"
 
@@ -61,34 +61,10 @@ def update_ssh_config(hostname, new_host, new_port):
     if not ssh_config_path.exists():
         ssh_config_path.touch(mode=0o600)
 
-    config = SSHConfig(str(ssh_config_path))
+    config = read_ssh_config(str(ssh_config_path))
+    config.set(hostname, HostName=new_host, Port=new_port, User="root", StrictHostKeyChecking="no")
+    config.write(str(ssh_config_path))
 
-    if config.exists(hostname):
-        config.update(
-            hostname,
-            {
-                "HostName": new_host,
-                "Port": int(new_port),
-                "User": "root",
-                "StrictHostKeyChecking": "no",
-            },
-        )
-        print(f"Updated existing SSH config entry for {hostname}")
-    else:
-        new_host_entry = Host(
-            hostname,
-            {
-                "HostName": new_host,
-                "Port": int(new_port),
-                "User": "root",
-                "StrictHostKeyChecking": "no",
-            },
-        )
-        new_host_entry.attributes()
-        config.add(new_host_entry)
-        print(f"Added new SSH config entry for {hostname}")
-
-    config.write()
     ssh_config_path.chmod(0o600)
 
 
