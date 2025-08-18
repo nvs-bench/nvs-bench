@@ -18,16 +18,16 @@ if [ ! -f nyc.zip ]; then
     wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/nyc.zip
 fi
 
-unzip -o alameda.zip -d /nvs-leaderboard-downloads/zipnerf/alameda
-unzip -o berlin.zip -d /nvs-leaderboard-downloads/zipnerf/berlin
-unzip -o london.zip -d /nvs-leaderboard-downloads/zipnerf/london
-unzip -o nyc.zip -d /nvs-leaderboard-downloads/zipnerf/nyc
+unzip -o alameda.zip -d /nvs-leaderboard-downloads/zipnerf
+unzip -o berlin.zip -d /nvs-leaderboard-downloads/zipnerf
+unzip -o london.zip -d /nvs-leaderboard-downloads/zipnerf
+unzip -o nyc.zip -d /nvs-leaderboard-downloads/zipnerf
 
 # Remove the downresolution images
 for scene in alameda berlin london nyc; do
-    cd "$scene"
+    cd /nvs-leaderboard-downloads/zipnerf/$scene
     rm -rf images_[0-9]*
-    cd ..
+    cd /nvs-leaderboard-downloads/zipnerf
 done
 
 rm -rf /nvs-leaderboard-data/zipnerf
