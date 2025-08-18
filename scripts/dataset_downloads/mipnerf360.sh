@@ -21,7 +21,7 @@ cd /nvs-leaderboard-data/mipnerf360
 for scene in */; do
     cd "$scene"
     case "$(basename "$scene")" in
-        bicycle|flowers|garden|stump|treehill) rm -rf images && mv images_4 images ;;
+        bicycle|flowers|garden|stump|treehill) rm -rf images && mv images_4 images ;; # Note that zipnerf may train on full resolution outdoor frames?
         room|counter|kitchen|bonsai) rm -rf images && mv images_2 images ;;
     esac
     rm -rf images_[0-9]*

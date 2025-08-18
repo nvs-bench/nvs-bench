@@ -18,7 +18,7 @@ MODAL_VOLUMES: dict[str | PurePosixPath, modal.Volume] = {
 }
 
 app = modal.App(
-    "nvs-leaderboard-runner",
+    "nvs-leaderboard-" + Path.cwd().name,
     image=(
         # If you've already got a Dockerfile, just replace image with:
         # modal.Image.from_dockerfile("Dockerfile")
