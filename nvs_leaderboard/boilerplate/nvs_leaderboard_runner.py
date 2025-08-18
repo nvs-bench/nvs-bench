@@ -102,7 +102,7 @@ def open_dev_environment():
         update_ssh_config(HOSTNAME, host, port)
 
         # Open vscode/cursor for the user
-        os.system(f"code --remote ssh-remote+{HOSTNAME} /root/workspace")
+        os.system(f"code --remote ssh-remote+{HOSTNAME} /root/{Path.cwd().name}")
 
         while True:
             time.sleep(1)
