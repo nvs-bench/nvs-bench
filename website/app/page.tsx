@@ -23,16 +23,24 @@ export default function Home() {
         {/* Dataset Selection Tabs */}
         <div className="mb-8">
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-8">
-              {["all", "mipnerf360", "tanks", "synthetic"].map((dataset) => (
-                <TabsTrigger key={dataset} value={dataset} className="col-span-1">
-                  {dataset === "all" ? "All" : 
-                   dataset === "mipnerf360" ? "Mip-NeRF 360" :
-                   dataset === "tanks" ? "Tanks & Temples" : "Synthetic"}
+            <div className="mb-8 flex w-full items-center justify-center gap-4">
+              <TabsList className="w-fit">
+                <TabsTrigger value="all" className="px-6 py-2 text-sm font-semibold">
+                  All
                 </TabsTrigger>
-              ))}
-            </TabsList>
+              </TabsList>
+              <div className="h-9 w-px bg-muted" />
+              <TabsList className="w-fit gap-3">
+                {["mipnerf360", "tanks", "synthetic"].map((dataset) => (
+                  <TabsTrigger key={dataset} value={dataset} className="px-4">
+                    {dataset === "mipnerf360" ? "Mip-NeRF 360" :
+                     dataset === "tanks" ? "Tanks & Temples" : "Synthetic"}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
 
+            {/* Tabs Content */}
             {[
               { value: "all", title: "All Datasets", description: "Comprehensive results across all benchmark datasets" },
               { value: "mipnerf360", title: "Mip-NeRF 360", description: "Some text explaining the dataset" },
