@@ -1,5 +1,4 @@
 import { NvsBenchTable } from "@/components/nvs-bench-table";
-import { ExternalLinkIcon } from "lucide-react";
 
 export default function Home() {
   return (
