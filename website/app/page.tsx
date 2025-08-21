@@ -1,4 +1,5 @@
 import { NvsBenchTable } from "@/components/nvs-bench-table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home() {
   return (
@@ -19,17 +20,38 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mip-NeRF 360 Section */}
+        {/* Dataset Selection Tabs */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-2">
-            Mip-NeRF 360
-          </h2>
-          <p className="text-lg text-foreground leading-relaxed mb-8">
-            Some text explaining the dataset
-          </p>
+          <Tabs defaultValue="all" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mb-8">
+              {["all", "mipnerf360", "tanks", "synthetic"].map((dataset) => (
+                <TabsTrigger key={dataset} value={dataset} className="col-span-1">
+                  {dataset === "all" ? "All" : 
+                   dataset === "mipnerf360" ? "Mip-NeRF 360" :
+                   dataset === "tanks" ? "Tanks & Temples" : "Synthetic"}
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-          {/* Results Table */}
-          <NvsBenchTable />
+            {[
+              { value: "all", title: "All Datasets", description: "Comprehensive results across all benchmark datasets" },
+              { value: "mipnerf360", title: "Mip-NeRF 360", description: "Some text explaining the dataset" },
+              { value: "tanks", title: "Tanks & Temples", description: "Some text explaining the dataset" },
+              { value: "synthetic", title: "Synthetic", description: "Some text explaining the dataset" }
+            ].map(({ value, title, description }) => (
+              <TabsContent key={value} value={value} className="mt-0">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-2">
+                    {title}
+                  </h2>
+                  <p className="text-lg text-foreground leading-relaxed mb-8">
+                    {description}
+                  </p>
+                  <NvsBenchTable />
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </div>
     </div>
