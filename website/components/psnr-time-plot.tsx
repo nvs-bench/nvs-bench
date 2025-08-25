@@ -1,56 +1,36 @@
 "use client";
 
-import { ComposedChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
-import { Result } from '@/lib/types';
+import { ComposedChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList, Cell } from 'recharts';
+import { Result, MethodMeta } from '@/lib/types';
+import methodsData from '@/lib/methods.json';
 
 interface PSNRTimePlotProps {
   results: Result[];
 }
 
 export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
-  // Transform the data for the plot
-  const plotData = results.map(result => ({
-    name: `${result.method_name} - ${result.scene_name}`,
-    method: result.method_name,
-    scene: result.scene_name,
-    dataset: result.dataset_name,
-    psnr: result.psnr,
-    time: result.time,
-    timeMinutes: result.time / 60, // Convert to minutes for better readability
-    gpuMem: result.gpuMem,
-    hasPaper: result.hasPaperPsnr || result.hasPaperSsim || result.hasPaperLpips,
-  }));
+//   // Define a color palette for different methods
+//   const colors = [
+//     '#3B82F6', // Blue
+//     '#EF4444', // Red
+//     '#10B981', // Green
+//     '#F59E0B', // Yellow
+//     '#8B5CF6', // Purple
+//     '#F97316', // Orange
+//     '#06B6D4', // Cyan
+//     '#EC4899', // Pink
+//   ];
 
-  // Color scheme for different methods
-  const methodColors: { [key: string]: string } = {
-    h3dgs: "#8884d8",
-    "3dgut": "#82ca9d",
-  };
-
-  // Get unique methods for legend
-  const uniqueMethods = Array.from(new Set(results.map(r => r.method_name)));
-
-  // Custom tooltip content
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-semibold text-gray-800">{data.name}</p>
-          <p className="text-sm text-gray-600">Method: {data.method}</p>
-          <p className="text-sm text-gray-600">Scene: {data.scene}</p>
-          <p className="text-sm text-gray-600">Dataset: {data.dataset}</p>
-          <p className="text-sm text-gray-600">PSNR: {data.psnr.toFixed(2)}</p>
-          <p className="text-sm text-gray-600">Time: {(data.time / 60).toFixed(1)} minutes</p>
-          <p className="text-sm text-gray-600">GPU Memory: {data.gpuMem.toFixed(2)} GB</p>
-          {data.hasPaper && (
-            <p className="text-sm text-blue-600 font-medium">📄 Paper Result</p>
-          )}
-        </div>
-      );
-    }
-    return null;
-  };
+  // Transform the data for the plot with unique colors for each datapoint
+  const plotData = results.map((result, index) => {
+    const methodMeta = methodsData.find((m: MethodMeta) => m.method_name === result.method_name);
+    return {
+      methodDisplayName: methodMeta?.method_display_name || result.method_name,
+      psnr: result.psnr,
+      timeMinutes: result.time / 60, // Convert to minutes for better readability
+    //   color: colors[index % colors.length], // Assign unique color to each datapoint
+    };
+  });
 
   return (
     <div className="mt-12 bg-card border border-border rounded-lg p-6 shadow-sm">
@@ -61,7 +41,7 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
       <div className="h-96 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
-            data={plotData}
+            // data={plotData} // TODO: Not sure if this is needed here for other features to come
             margin={{
               top: 20,
               right: 20,
@@ -69,14 +49,13 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
               left: 20,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
+            <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
             <XAxis 
               type="number" 
               dataKey="psnr" 
               name="PSNR"
               label={{ value: 'PSNR (dB)', position: 'bottom', offset: 0 }}
               domain={[20, 35]}
-              stroke="#6b7280"
               fontSize={12}
             />
             <YAxis 
@@ -90,31 +69,20 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
                 style: { textAnchor: 'middle' }
               }}
               tickFormatter={(value) => `${value.toFixed(0)}m`}
-              stroke="#6b7280"
               fontSize={12}
             />
-            <Tooltip content={<CustomTooltip />} />
             
-            {/* Scatter plots for each method */}
-            {uniqueMethods.map((method) => (
-              <Scatter
-                key={method}
-                name={method}
-                data={plotData.filter(d => d.method === method)}
-                fill={methodColors[method]}
-                shape="circle"
-                stroke={methodColors[method]}
-                strokeWidth={2}
-              >
-                <LabelList 
-                  dataKey="method" 
-                  position="right" 
-                  offset={8}
-                  fontSize={12}
-                  fill="#6b7280"
-                />
-              </Scatter>
-            ))}
+            <Scatter
+              data={plotData}
+              shape="circle"
+            >
+              <LabelList 
+                dataKey="methodDisplayName" 
+                position="right" 
+                offset={8}
+                fontSize={12}
+              />
+            </Scatter>
           </ComposedChart>
         </ResponsiveContainer>
       </div>
