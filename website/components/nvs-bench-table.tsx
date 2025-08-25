@@ -23,6 +23,7 @@ import {
 interface Result {
   method_name: string;
   dataset_name: string;
+  scene_name: string; // Add scene_name field
   psnr: number;
   ssim: number;
   lpips: number;
@@ -43,6 +44,7 @@ const results: Result[] = [
   {
     method_name: "h3dgs",
     dataset_name: "mipnerf360",
+    scene_name: "bicycle",
     psnr: 26.93,
     ssim: 0.79,
     lpips: 0.269,
@@ -52,6 +54,7 @@ const results: Result[] = [
   {
     method_name: "3dgut",
     dataset_name: "mipnerf360",
+    scene_name: "bicycle",
     psnr: 27.04,
     ssim: 0.812,
     lpips: 0.252,
@@ -59,6 +62,27 @@ const results: Result[] = [
     gpuMem: 14.92,
     hasPaperPsnr: true,
     hasPaperSsim: true,
+  },
+  // Add more results with different scenes
+  {
+    method_name: "h3dgs",
+    dataset_name: "mipnerf360",
+    scene_name: "garden",
+    psnr: 25.87,
+    ssim: 0.76,
+    lpips: 0.289,
+    time: 2987,
+    gpuMem: 8.95,
+  },
+  {
+    method_name: "3dgut",
+    dataset_name: "tanks",
+    scene_name: "tank",
+    psnr: 28.12,
+    ssim: 0.834,
+    lpips: 0.198,
+    time: 1567,
+    gpuMem: 12.45,
   },
 ];
 
@@ -163,7 +187,13 @@ function SortableHeader({
   );
 }
 
-export function NvsBenchTable({ datasetFilter }: { datasetFilter?: string }) {
+export function NvsBenchTable({ 
+  datasetFilter, 
+  sceneFilter 
+}: { 
+  datasetFilter?: string;
+  sceneFilter?: string;
+}) {
   const [sortKey, setSortKey] = useState<SortKey>("psnr");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
@@ -171,7 +201,12 @@ export function NvsBenchTable({ datasetFilter }: { datasetFilter?: string }) {
     // Filter by dataset if specified
     let filteredResults = results;
     if (datasetFilter && datasetFilter !== "all") {
-      filteredResults = results.filter((result) => result.dataset_name === datasetFilter);
+      filteredResults = filteredResults.filter((result) => result.dataset_name === datasetFilter);
+    }
+    
+    // Filter by scene if specified
+    if (sceneFilter && sceneFilter !== "all") {
+      filteredResults = filteredResults.filter((result) => result.scene_name === sceneFilter);
     }
     
     // Sort the filtered results
@@ -182,7 +217,7 @@ export function NvsBenchTable({ datasetFilter }: { datasetFilter?: string }) {
       // All values are now numbers, so simple numeric comparison
       return sortOrder === "asc" ? aVal - bVal : bVal - aVal;
     });
-  }, [sortKey, sortOrder, datasetFilter]);
+  }, [sortKey, sortOrder, datasetFilter, sceneFilter]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -224,7 +259,7 @@ export function NvsBenchTable({ datasetFilter }: { datasetFilter?: string }) {
               onSort={handleSort}
               higherIsBetter={false}
             >
-              LPIPS (VGG)
+              LPIPS
             </SortableHeader>
             <SortableHeader
               sortKey="time"
