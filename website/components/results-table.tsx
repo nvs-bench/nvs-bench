@@ -167,7 +167,7 @@ function SortableHeader({
   );
 }
 
-export function NvsBenchTable({
+export function ResultsTable({
   datasetFilter,
   sceneFilter,
 }: {

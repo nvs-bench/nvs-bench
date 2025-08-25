@@ -1,5 +1,5 @@
 import { DatasetHeader } from "@/components/dataset-header";
-import { NvsBenchTable } from "@/components/nvs-bench-table";
+import { ResultsTable } from "@/components/results-table";
 import { SceneTabs } from "@/components/scene-tabs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
@@ -37,7 +37,7 @@ export function DatasetTabs() {
           <p className="text-lg text-foreground leading-relaxed mb-8">
             Comprehensive results across all benchmark datasets
           </p>
-          <NvsBenchTable datasetFilter="all" sceneFilter="all" />
+          <ResultsTable datasetFilter="all" sceneFilter="all" />
         </div>
       </TabsContent>
 

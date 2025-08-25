@@ -1,4 +1,4 @@
-import { NvsBenchTable } from "@/components/nvs-bench-table";
+import { ResultsTable } from "@/components/results-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { DatasetMeta } from "@/lib/types";
 
@@ -32,7 +32,7 @@ export function SceneTabs({ dataset }: SceneTabsProps) {
         {/* Scene-specific content */}
         {["all", ...dataset.scenes].map((scene: string) => (
           <TabsContent key={scene} value={scene} className="mt-0">
-            <NvsBenchTable
+            <ResultsTable
               datasetFilter={dataset.dataset_name}
               sceneFilter={scene}
             />
