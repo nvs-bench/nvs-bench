@@ -98,7 +98,10 @@ function SortableHeader({
   higherIsBetter?: boolean;
 }) {
   function getSortIcon() {
-    if (currentSortKey !== sortKey) return null;
+    if (currentSortKey !== sortKey) {
+      // Return an invisible placeholder to maintain consistent spacing
+      return <div className="w-4 h-4 ml-1" />;
+    }
     return sortOrder === "asc" ? (
       <ChevronUpIcon className="w-4 h-4 ml-1" />
     ) : (
@@ -112,11 +115,11 @@ function SortableHeader({
       onClick={() => onSort(sortKey)}
     >
       <div className="flex items-center">
-        {getSortIcon()}
         {children}
         <div className="ml-1">
           <HigherIsBetterIndicator higherIsBetter={higherIsBetter} />
         </div>
+        {getSortIcon()}
       </div>
     </TableHead>
   );
