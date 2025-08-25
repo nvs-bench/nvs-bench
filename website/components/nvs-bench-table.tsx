@@ -22,6 +22,7 @@ import {
 
 interface Result {
   method_name: string;
+  dataset_name: string;
   psnr: number;
   ssim: number;
   lpips: number;
@@ -41,6 +42,7 @@ interface MethodMeta {
 const results: Result[] = [
   {
     method_name: "h3dgs",
+    dataset_name: "mipnerf360",
     psnr: 26.93,
     ssim: 0.79,
     lpips: 0.269,
@@ -49,6 +51,7 @@ const results: Result[] = [
   },
   {
     method_name: "3dgut",
+    dataset_name: "mipnerf360",
     psnr: 27.04,
     ssim: 0.812,
     lpips: 0.252,
@@ -160,19 +163,26 @@ function SortableHeader({
   );
 }
 
-export function NvsBenchTable() {
+export function NvsBenchTable({ datasetFilter }: { datasetFilter?: string }) {
   const [sortKey, setSortKey] = useState<SortKey>("psnr");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
-  const sortedData = useMemo(() => {
-    return [...results].sort((a, b) => {
+  const filteredAndSortedData = useMemo(() => {
+    // Filter by dataset if specified
+    let filteredResults = results;
+    if (datasetFilter && datasetFilter !== "all") {
+      filteredResults = results.filter((result) => result.dataset_name === datasetFilter);
+    }
+    
+    // Sort the filtered results
+    return filteredResults.sort((a, b) => {
       const aVal = a[sortKey];
       const bVal = b[sortKey];
 
       // All values are now numbers, so simple numeric comparison
       return sortOrder === "asc" ? aVal - bVal : bVal - aVal;
     });
-  }, [sortKey, sortOrder]);
+  }, [sortKey, sortOrder, datasetFilter]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -237,7 +247,7 @@ export function NvsBenchTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedData.map((row) => {
+          {filteredAndSortedData.map((row) => {
             const methodMeta = (methods as MethodMeta[]).find(
               (m) => m.method_name === row.method_name,
             );

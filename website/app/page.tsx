@@ -4,6 +4,7 @@ import datasets from "@/lib/datasets.json";
 
 interface DatasetMeta {
   dataset_name: string;
+  dataset_display_name: string;
   dataset_description: string;
   dataset_source_link: string;
   dataset_download_link: string;
@@ -48,7 +49,7 @@ export default function Home() {
                     value={d.dataset_name}
                     className="px-4"
                   >
-                    {d.dataset_name}
+                    {d.dataset_display_name}
                   </TabsTrigger>
                 ))}
               </TabsList>
@@ -63,7 +64,7 @@ export default function Home() {
                 <p className="text-lg text-foreground leading-relaxed mb-8">
                   Comprehensive results across all benchmark datasets
                 </p>
-                <NvsBenchTable />
+                <NvsBenchTable datasetFilter="all" />
               </div>
             </TabsContent>
 
@@ -99,7 +100,7 @@ export default function Home() {
                       Download
                     </a>
                   </div>
-                  <NvsBenchTable />
+                  <NvsBenchTable datasetFilter={d.dataset_name} />
                 </div>
               </TabsContent>
             ))}
