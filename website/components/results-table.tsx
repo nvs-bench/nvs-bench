@@ -18,53 +18,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import methods from "@/lib/methods.json";
+import results from "@/lib/results.json";
 import type { MethodMeta, Result } from "@/lib/types";
-
-const results: Result[] = [
-  {
-    method_name: "h3dgs",
-    dataset_name: "mipnerf360",
-    scene_name: "bicycle",
-    psnr: 26.93,
-    ssim: 0.79,
-    lpips: 0.269,
-    time: 3329, // 55m 29s in seconds
-    gpuMem: 9.08,
-  },
-  {
-    method_name: "3dgut",
-    dataset_name: "mipnerf360",
-    scene_name: "bicycle",
-    psnr: 27.04,
-    ssim: 0.812,
-    lpips: 0.252,
-    time: 2074, // 34m 34s in seconds
-    gpuMem: 14.92,
-    hasPaperPsnr: true,
-    hasPaperSsim: true,
-  },
-  // Add more results with different scenes
-  {
-    method_name: "h3dgs",
-    dataset_name: "mipnerf360",
-    scene_name: "garden",
-    psnr: 25.87,
-    ssim: 0.76,
-    lpips: 0.289,
-    time: 2987,
-    gpuMem: 8.95,
-  },
-  {
-    method_name: "3dgut",
-    dataset_name: "tanks",
-    scene_name: "tank",
-    psnr: 28.12,
-    ssim: 0.834,
-    lpips: 0.198,
-    time: 1567,
-    gpuMem: 12.45,
-  },
-];
 
 type SortKey = keyof Pick<
   Result,

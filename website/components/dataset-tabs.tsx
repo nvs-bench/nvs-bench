@@ -1,8 +1,10 @@
 import { DatasetHeader } from "@/components/dataset-header";
 import { ResultsTable } from "@/components/results-table";
 import { SceneTabs } from "@/components/scene-tabs";
+import { PSNRTimePlot } from "@/components/psnr-time-plot";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
+import results from "@/lib/results.json";
 import type { DatasetMeta } from "@/lib/types";
 
 export function DatasetTabs() {
@@ -39,6 +41,9 @@ export function DatasetTabs() {
           </p>
           <ResultsTable datasetFilter="all" sceneFilter="all" />
         </div>
+        
+        {/* PSNR vs Time Plot for All Datasets */}
+        <PSNRTimePlot results={results} />
       </TabsContent>
 
       {/* Individual dataset content */}

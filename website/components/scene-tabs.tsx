@@ -1,6 +1,8 @@
 import { ResultsTable } from "@/components/results-table";
+import { PSNRTimePlot } from "@/components/psnr-time-plot";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { DatasetMeta } from "@/lib/types";
+import results from "@/lib/results.json";
 
 interface SceneTabsProps {
   dataset: DatasetMeta;
@@ -35,6 +37,14 @@ export function SceneTabs({ dataset }: SceneTabsProps) {
             <ResultsTable
               datasetFilter={dataset.dataset_name}
               sceneFilter={scene}
+            />
+            
+            {/* PSNR vs Time Plot for this dataset/scene */}
+            <PSNRTimePlot 
+              results={results.filter(r => 
+                r.dataset_name === dataset.dataset_name && 
+                (scene === "all" || r.scene_name === scene)
+              )} 
             />
           </TabsContent>
         ))}
