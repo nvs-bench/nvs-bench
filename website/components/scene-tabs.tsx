@@ -1,26 +1,12 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NvsBenchTable } from "@/components/nvs-bench-table";
-import datasets from "@/lib/datasets.json";
-
-interface DatasetMeta {
-  dataset_name: string;
-  dataset_display_name: string;
-  dataset_description: string;
-  dataset_source_link: string;
-  dataset_download_link: string;
-  scenes: string[];
-}
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { DatasetMeta } from "@/lib/types";
 
 interface SceneTabsProps {
-  selectedDataset: string;
+  dataset: DatasetMeta;
 }
 
-export function SceneTabs({ selectedDataset }: SceneTabsProps) {
-  if (selectedDataset === "all") return null;
-
-  const dataset = (datasets as DatasetMeta[]).find(d => d.dataset_name === selectedDataset);
-  if (!dataset) return null;
-
+export function SceneTabs({ dataset }: SceneTabsProps) {
   return (
     <div className="mb-6">
       <Tabs defaultValue="all" className="w-full">
@@ -35,12 +21,8 @@ export function SceneTabs({ selectedDataset }: SceneTabsProps) {
           </TabsList>
           <div className="h-9 w-px bg-muted" />
           <TabsList className="w-fit gap-3">
-            {dataset.scenes.map((scene) => (
-              <TabsTrigger
-                key={scene}
-                value={scene}
-                className="px-4"
-              >
+            {dataset.scenes.map((scene: string) => (
+              <TabsTrigger key={scene} value={scene} className="px-4">
                 {scene}
               </TabsTrigger>
             ))}
@@ -48,22 +30,11 @@ export function SceneTabs({ selectedDataset }: SceneTabsProps) {
         </div>
 
         {/* Scene-specific content */}
-        <TabsContent value="all" className="mt-0">
-          <NvsBenchTable 
-            datasetFilter={selectedDataset} 
-            sceneFilter="all" 
-          />
-        </TabsContent>
-
-        {dataset.scenes.map((scene) => (
-          <TabsContent
-            key={scene}
-            value={scene}
-            className="mt-0"
-          >
-            <NvsBenchTable 
-              datasetFilter={selectedDataset} 
-              sceneFilter={scene} 
+        {["all", ...dataset.scenes].map((scene: string) => (
+          <TabsContent key={scene} value={scene} className="mt-0">
+            <NvsBenchTable
+              datasetFilter={dataset.dataset_name}
+              sceneFilter={scene}
             />
           </TabsContent>
         ))}

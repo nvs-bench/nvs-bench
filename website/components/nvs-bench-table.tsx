@@ -1,44 +1,24 @@
 "use client";
 
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  FileTextIcon,
+  TrendingDownIcon,
+  TrendingUpIcon,
+} from "lucide-react";
 import type React from "react";
-
-import { useState, useMemo } from "react";
-import methods from "@/lib/methods.json";
+import { useMemo, useState } from "react";
 import {
   Table,
-  TableHeader,
   TableBody,
-  TableRow,
-  TableHead,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
-import {
-  ChevronUpIcon,
-  ChevronDownIcon,
-  FileTextIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
-} from "lucide-react";
-
-interface Result {
-  method_name: string;
-  dataset_name: string;
-  scene_name: string; // Add scene_name field
-  psnr: number;
-  ssim: number;
-  lpips: number;
-  time: number; // time in seconds
-  gpuMem: number; // memory in GB
-  hasPaperPsnr?: boolean;
-  hasPaperSsim?: boolean;
-  hasPaperLpips?: boolean;
-}
-
-interface MethodMeta {
-  method_name: string;
-  method_display_name: string;
-  method_url: string;
-}
+import methods from "@/lib/methods.json";
+import type { MethodMeta, Result } from "@/lib/types";
 
 const results: Result[] = [
   {
@@ -187,10 +167,10 @@ function SortableHeader({
   );
 }
 
-export function NvsBenchTable({ 
-  datasetFilter, 
-  sceneFilter 
-}: { 
+export function NvsBenchTable({
+  datasetFilter,
+  sceneFilter,
+}: {
   datasetFilter?: string;
   sceneFilter?: string;
 }) {
@@ -201,14 +181,18 @@ export function NvsBenchTable({
     // Filter by dataset if specified
     let filteredResults = results;
     if (datasetFilter && datasetFilter !== "all") {
-      filteredResults = filteredResults.filter((result) => result.dataset_name === datasetFilter);
+      filteredResults = filteredResults.filter(
+        (result) => result.dataset_name === datasetFilter,
+      );
     }
-    
+
     // Filter by scene if specified
     if (sceneFilter && sceneFilter !== "all") {
-      filteredResults = filteredResults.filter((result) => result.scene_name === sceneFilter);
+      filteredResults = filteredResults.filter(
+        (result) => result.scene_name === sceneFilter,
+      );
     }
-    
+
     // Sort the filtered results
     return filteredResults.sort((a, b) => {
       const aVal = a[sortKey];
