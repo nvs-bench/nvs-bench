@@ -1,6 +1,6 @@
 "use client";
 
-import { ComposedChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { ComposedChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
 import { Result } from '@/lib/types';
 
 interface PSNRTimePlotProps {
@@ -55,10 +55,7 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
   return (
     <div className="mt-12 bg-card border border-border rounded-lg p-6 shadow-sm">
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-foreground mb-2">PSNR vs Training Time</h3>
-        <p className="text-muted-foreground">
-          Performance comparison showing PSNR quality versus training time across different methods and scenes.
-        </p>
+        <h3 className="text-2xl font-bold text-foreground mb-2">Training Time vs PSNR</h3>
       </div>
       
       <div className="h-96 w-full">
@@ -75,28 +72,28 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
             <XAxis 
               type="number" 
-              dataKey="timeMinutes" 
-              name="Time (minutes)"
-              label={{ value: 'Training Time (minutes)', position: 'bottom', offset: 0 }}
-              tickFormatter={(value) => `${value.toFixed(0)}m`}
+              dataKey="psnr" 
+              name="PSNR"
+              label={{ value: 'PSNR (dB)', position: 'bottom', offset: 0 }}
+              domain={[20, 35]}
               stroke="#6b7280"
               fontSize={12}
             />
             <YAxis 
               type="number" 
-              dataKey="psnr" 
-              name="PSNR"
-              label={{ value: 'PSNR (dB)', angle: -90, position: 'left' }}
+              dataKey="timeMinutes" 
+              name="Time (minutes)"
+              label={{ 
+                value: 'Training Time (minutes)', 
+                angle: -90, 
+                position: 'left',
+                style: { textAnchor: 'middle' }
+              }}
+              tickFormatter={(value) => `${value.toFixed(0)}m`}
               stroke="#6b7280"
               fontSize={12}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend 
-              verticalAlign="top" 
-              height={36}
-              iconType="circle"
-              wrapperStyle={{ paddingBottom: '10px' }}
-            />
             
             {/* Scatter plots for each method */}
             {uniqueMethods.map((method) => (
@@ -108,17 +105,18 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
                 shape="circle"
                 stroke={methodColors[method]}
                 strokeWidth={2}
-              />
+              >
+                <LabelList 
+                  dataKey="method" 
+                  position="right" 
+                  offset={8}
+                  fontSize={12}
+                  fill="#6b7280"
+                />
+              </Scatter>
             ))}
           </ComposedChart>
         </ResponsiveContainer>
-      </div>
-      
-      <div className="mt-4 text-sm text-muted-foreground">
-        <p>• Each point represents a method-scene combination</p>
-        <p>• Higher PSNR values indicate better image quality</p>
-        <p>• Lower time values indicate faster training</p>
-        <p>• Points with 📄 are results taken from published papers</p>
       </div>
     </div>
   );

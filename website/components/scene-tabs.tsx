@@ -32,22 +32,20 @@ export function SceneTabs({ dataset }: SceneTabsProps) {
         </div>
 
         {/* Scene-specific content */}
-        {["all", ...dataset.scenes].map((scene: string) => (
-          <TabsContent key={scene} value={scene} className="mt-0">
-            <ResultsTable
-              datasetFilter={dataset.dataset_name}
-              sceneFilter={scene}
-            />
-            
-            {/* PSNR vs Time Plot for this dataset/scene */}
-            <PSNRTimePlot 
-              results={results.filter(r => 
-                r.dataset_name === dataset.dataset_name && 
-                (scene === "all" || r.scene_name === scene)
-              )} 
-            />
-          </TabsContent>
-        ))}
+        {["all", ...dataset.scenes].map((scene: string) => {
+          // Filter results for this dataset and scene
+          const filteredResults = results.filter(r => 
+            r.dataset_name === dataset.dataset_name && 
+            (scene === "all" || r.scene_name === scene)
+          );
+          
+          return (
+            <TabsContent key={scene} value={scene} className="mt-0">
+              <ResultsTable results={filteredResults} />
+              <PSNRTimePlot results={filteredResults} />
+            </TabsContent>
+          );
+        })}
       </Tabs>
     </div>
   );

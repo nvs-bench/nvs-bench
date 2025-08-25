@@ -123,40 +123,23 @@ function SortableHeader({
 }
 
 export function ResultsTable({
-  datasetFilter,
-  sceneFilter,
+  results,
 }: {
-  datasetFilter?: string;
-  sceneFilter?: string;
+  results: Result[];
 }) {
   const [sortKey, setSortKey] = useState<SortKey>("psnr");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
-  const filteredAndSortedData = useMemo(() => {
-    // Filter by dataset if specified
-    let filteredResults = results;
-    if (datasetFilter && datasetFilter !== "all") {
-      filteredResults = filteredResults.filter(
-        (result) => result.dataset_name === datasetFilter,
-      );
-    }
-
-    // Filter by scene if specified
-    if (sceneFilter && sceneFilter !== "all") {
-      filteredResults = filteredResults.filter(
-        (result) => result.scene_name === sceneFilter,
-      );
-    }
-
-    // Sort the filtered results
-    return filteredResults.sort((a, b) => {
+  const sortedData = useMemo(() => {
+    // Sort the results
+    return results.sort((a, b) => {
       const aVal = a[sortKey];
       const bVal = b[sortKey];
 
       // All values are now numbers, so simple numeric comparison
       return sortOrder === "asc" ? aVal - bVal : bVal - aVal;
     });
-  }, [sortKey, sortOrder, datasetFilter, sceneFilter]);
+  }, [sortKey, sortOrder, results]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -221,7 +204,7 @@ export function ResultsTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredAndSortedData.map((row) => {
+          {sortedData.map((row) => {
             const methodMeta = (methods as MethodMeta[]).find(
               (m) => m.method_name === row.method_name,
             );

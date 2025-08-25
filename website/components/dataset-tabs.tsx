@@ -39,10 +39,8 @@ export function DatasetTabs() {
           <p className="text-lg text-foreground leading-relaxed mb-8">
             Comprehensive results across all benchmark datasets
           </p>
-          <ResultsTable datasetFilter="all" sceneFilter="all" />
+          <ResultsTable results={results} />
         </div>
-        
-        {/* PSNR vs Time Plot for All Datasets */}
         <PSNRTimePlot results={results} />
       </TabsContent>
 

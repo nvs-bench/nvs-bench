@@ -11,7 +11,6 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-6 py-12">
         <Header />
         <DatasetTabs />
-        <PSNRTimePlot results={results} />
       </div>
     </div>
   );
