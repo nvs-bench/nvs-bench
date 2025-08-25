@@ -1,5 +1,13 @@
 import { NvsBenchTable } from "@/components/nvs-bench-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import datasets from "@/lib/datasets.json";
+
+interface DatasetMeta {
+  dataset_name: string;
+  dataset_description: string;
+  dataset_source_link: string;
+  dataset_download_link: string;
+}
 
 export default function Home() {
   return (
@@ -25,36 +33,72 @@ export default function Home() {
           <Tabs defaultValue="all" className="w-full">
             <div className="mb-8 flex w-full items-center justify-center gap-4">
               <TabsList className="w-fit">
-                <TabsTrigger value="all" className="px-6 py-2 text-sm font-semibold">
+                <TabsTrigger
+                  value="all"
+                  className="px-6 py-2 text-sm font-semibold"
+                >
                   All
                 </TabsTrigger>
               </TabsList>
               <div className="h-9 w-px bg-muted" />
               <TabsList className="w-fit gap-3">
-                {["mipnerf360", "tanks", "synthetic"].map((dataset) => (
-                  <TabsTrigger key={dataset} value={dataset} className="px-4">
-                    {dataset === "mipnerf360" ? "Mip-NeRF 360" :
-                     dataset === "tanks" ? "Tanks & Temples" : "Synthetic"}
+                {(datasets as DatasetMeta[]).map((d) => (
+                  <TabsTrigger
+                    key={d.dataset_name}
+                    value={d.dataset_name}
+                    className="px-4"
+                  >
+                    {d.dataset_name}
                   </TabsTrigger>
                 ))}
               </TabsList>
             </div>
 
             {/* Tabs Content */}
-            {[
-              { value: "all", title: "All Datasets", description: "Comprehensive results across all benchmark datasets" },
-              { value: "mipnerf360", title: "Mip-NeRF 360", description: "Some text explaining the dataset" },
-              { value: "tanks", title: "Tanks & Temples", description: "Some text explaining the dataset" },
-              { value: "synthetic", title: "Synthetic", description: "Some text explaining the dataset" }
-            ].map(({ value, title, description }) => (
-              <TabsContent key={value} value={value} className="mt-0">
+            <TabsContent value="all" className="mt-0">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-2">
+                  All Datasets
+                </h2>
+                <p className="text-lg text-foreground leading-relaxed mb-8">
+                  Comprehensive results across all benchmark datasets
+                </p>
+                <NvsBenchTable />
+              </div>
+            </TabsContent>
+
+            {(datasets as DatasetMeta[]).map((d) => (
+              <TabsContent
+                key={d.dataset_name}
+                value={d.dataset_name}
+                className="mt-0"
+              >
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-2">
-                    {title}
+                    {d.dataset_name}
                   </h2>
-                  <p className="text-lg text-foreground leading-relaxed mb-8">
-                    {description}
+                  <p className="text-lg text-foreground leading-relaxed mb-6">
+                    {d.dataset_description}
                   </p>
+                  <div className="flex items-center gap-4 mb-8 text-sm">
+                    <a
+                      href={d.dataset_source_link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline underline-offset-4"
+                    >
+                      Source
+                    </a>
+                    <span className="text-muted-foreground">•</span>
+                    <a
+                      href={d.dataset_download_link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline underline-offset-4"
+                    >
+                      Download
+                    </a>
+                  </div>
                   <NvsBenchTable />
                 </div>
               </TabsContent>

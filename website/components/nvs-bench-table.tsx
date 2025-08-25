@@ -3,6 +3,7 @@
 import type React from "react";
 
 import { useState, useMemo } from "react";
+import methods from "@/lib/methods.json";
 import {
   Table,
   TableHeader,
@@ -19,8 +20,8 @@ import {
   TrendingDownIcon,
 } from "lucide-react";
 
-interface MethodData {
-  method: string;
+interface Result {
+  method_name: string;
   psnr: number;
   ssim: number;
   lpips: number;
@@ -31,9 +32,15 @@ interface MethodData {
   hasPaperLpips?: boolean;
 }
 
-const data: MethodData[] = [
+interface MethodMeta {
+  method_name: string;
+  method_display_name: string;
+  method_url: string;
+}
+
+const results: Result[] = [
   {
-    method: "H3DGS",
+    method_name: "h3dgs",
     psnr: 26.93,
     ssim: 0.79,
     lpips: 0.269,
@@ -41,7 +48,7 @@ const data: MethodData[] = [
     gpuMem: 9.08,
   },
   {
-    method: "3DGUT",
+    method_name: "3dgut",
     psnr: 27.04,
     ssim: 0.812,
     lpips: 0.252,
@@ -50,10 +57,12 @@ const data: MethodData[] = [
     hasPaperPsnr: true,
     hasPaperSsim: true,
   },
-
 ];
 
-type SortKey = keyof Pick<MethodData, "psnr" | "ssim" | "lpips" | "time" | "gpuMem">;
+type SortKey = keyof Pick<
+  Result,
+  "psnr" | "ssim" | "lpips" | "time" | "gpuMem"
+>;
 type SortOrder = "asc" | "desc";
 
 // Helper functions for formatting display
@@ -61,7 +70,7 @@ function formatTime(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
-  
+
   if (hours > 0) {
     return `${hours}h ${minutes}m ${secs}s`;
   } else if (minutes > 0) {
@@ -92,7 +101,11 @@ function PaperIcon() {
   );
 }
 
-function HigherIsBetterIndicator({ higherIsBetter }: { higherIsBetter: boolean }) {
+function HigherIsBetterIndicator({
+  higherIsBetter,
+}: {
+  higherIsBetter: boolean;
+}) {
   return (
     <div className="relative group">
       {higherIsBetter ? (
@@ -104,7 +117,7 @@ function HigherIsBetterIndicator({ higherIsBetter }: { higherIsBetter: boolean }
         {higherIsBetter ? "Higher is better" : "Lower is better"}
       </div>
     </div>
-  )
+  );
 }
 
 function SortableHeader({
@@ -152,10 +165,10 @@ export function NvsBenchTable() {
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
   const sortedData = useMemo(() => {
-    return [...data].sort((a, b) => {
+    return [...results].sort((a, b) => {
       const aVal = a[sortKey];
       const bVal = b[sortKey];
-      
+
       // All values are now numbers, so simple numeric comparison
       return sortOrder === "asc" ? aVal - bVal : bVal - aVal;
     });
@@ -209,42 +222,64 @@ export function NvsBenchTable() {
               sortOrder={sortOrder}
               onSort={handleSort}
               higherIsBetter={false}
-            >Time</SortableHeader>
+            >
+              Time
+            </SortableHeader>
             <SortableHeader
               sortKey="gpuMem"
               currentSortKey={sortKey}
               sortOrder={sortOrder}
               onSort={handleSort}
               higherIsBetter={false}
-            >GPU mem.</SortableHeader>
+            >
+              GPU mem.
+            </SortableHeader>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedData.map((row) => (
-            <TableRow key={row.method}>
-              <TableCell className="font-medium">{row.method}</TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <span>{row.psnr.toFixed(2)}</span>
-                  {row.hasPaperPsnr && <PaperIcon />}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <span>{row.ssim.toFixed(3)}</span>
-                  {row.hasPaperSsim && <PaperIcon />}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <span>{row.lpips.toFixed(3)}</span>
-                  {row.hasPaperLpips && <PaperIcon />}
-                </div>
-              </TableCell>
-              <TableCell>{formatTime(row.time)}</TableCell>
-              <TableCell>{formatMemory(row.gpuMem)}</TableCell>
-            </TableRow>
-          ))}
+          {sortedData.map((row) => {
+            const methodMeta = (methods as MethodMeta[]).find(
+              (m) => m.method_name === row.method_name,
+            );
+            return (
+              <TableRow key={row.method_name}>
+                <TableCell className="font-medium">
+                  {methodMeta ? (
+                    <a
+                      href={methodMeta.method_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline underline-offset-2"
+                    >
+                      {methodMeta.method_display_name}
+                    </a>
+                  ) : (
+                    row.method_name
+                  )}
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <span>{row.psnr.toFixed(2)}</span>
+                    {row.hasPaperPsnr && <PaperIcon />}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <span>{row.ssim.toFixed(3)}</span>
+                    {row.hasPaperSsim && <PaperIcon />}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <span>{row.lpips.toFixed(3)}</span>
+                    {row.hasPaperLpips && <PaperIcon />}
+                  </div>
+                </TableCell>
+                <TableCell>{formatTime(row.time)}</TableCell>
+                <TableCell>{formatMemory(row.gpuMem)}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>
