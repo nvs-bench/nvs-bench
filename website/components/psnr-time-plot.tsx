@@ -83,6 +83,19 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
                 fontSize={12}
               />
             </Scatter>
+            
+            {/* Add text indicating direction is better */}
+            <text
+              x="95%"
+              y="95%"
+              textAnchor="end"
+              dominantBaseline="text-before-edge"
+              fontSize={14}
+              fill="currentColor"
+              className="text-muted-foreground"
+                          >
+                ↘ better
+              </text>
           </ComposedChart>
         </ResponsiveContainer>
       </div>
