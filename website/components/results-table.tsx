@@ -209,7 +209,7 @@ export function ResultsTable({
               (m) => m.method_name === row.method_name,
             );
             return (
-              <TableRow key={row.method_name}>
+              <TableRow key={`${row.method_name}-${row.dataset_name}-${row.scene_name}`}>
                 <TableCell className="font-medium">
                   {methodMeta ? (
                     <a
