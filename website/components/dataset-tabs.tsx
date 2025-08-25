@@ -1,4 +1,5 @@
-import { TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { NvsBenchTable } from "@/components/nvs-bench-table";
 import datasets from "@/lib/datasets.json";
 
 interface DatasetMeta {
@@ -12,27 +13,42 @@ interface DatasetMeta {
 
 export function DatasetTabs() {
   return (
-    <div className="mb-8 flex w-full items-center justify-center gap-4">
-      <TabsList className="w-fit">
-        <TabsTrigger
-          value="all"
-          className="px-6 py-2 text-sm font-semibold"
-        >
-          All
-        </TabsTrigger>
-      </TabsList>
-      <div className="h-9 w-px bg-muted" />
-      <TabsList className="w-fit gap-3">
-        {(datasets as DatasetMeta[]).map((d) => (
+    <>
+      <div className="mb-4 flex w-full items-center justify-center gap-4">
+        <TabsList className="w-fit">
           <TabsTrigger
-            key={d.dataset_name}
-            value={d.dataset_name}
-            className="px-4"
+            value="all"
+            className="px-6 py-2 text-sm font-semibold"
           >
-            {d.dataset_display_name}
+            All
           </TabsTrigger>
-        ))}
-      </TabsList>
-    </div>
+        </TabsList>
+        <div className="h-9 w-px bg-muted" />
+        <TabsList className="w-fit gap-3">
+          {(datasets as DatasetMeta[]).map((d) => (
+            <TabsTrigger
+              key={d.dataset_name}
+              value={d.dataset_name}
+              className="px-4"
+            >
+              {d.dataset_display_name}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </div>
+
+      {/* All datasets content */}
+      <TabsContent value="all" className="mt-0">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-2">
+            All Datasets
+          </h2>
+          <p className="text-lg text-foreground leading-relaxed mb-8">
+            Comprehensive results across all benchmark datasets
+          </p>
+          <NvsBenchTable datasetFilter="all" sceneFilter="all" />
+        </div>
+      </TabsContent>
+    </>
   );
 }

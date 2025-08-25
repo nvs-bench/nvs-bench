@@ -22,7 +22,7 @@ export function SceneTabs({ selectedDataset }: SceneTabsProps) {
   if (!dataset) return null;
 
   return (
-    <div className="mb-6 -mt-4">
+    <div className="mb-6">
       <Tabs defaultValue="all" className="w-full">
         <div className="mb-8 flex w-full items-center justify-center gap-4">
           <TabsList className="w-fit">
@@ -49,14 +49,6 @@ export function SceneTabs({ selectedDataset }: SceneTabsProps) {
 
         {/* Scene-specific content */}
         <TabsContent value="all" className="mt-0">
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold text-foreground mb-2">
-              All Scenes in {dataset.dataset_display_name}
-            </h3>
-            <p className="text-foreground/80">
-              Results across all scenes in this dataset
-            </p>
-          </div>
           <NvsBenchTable 
             datasetFilter={selectedDataset} 
             sceneFilter="all" 
@@ -69,14 +61,6 @@ export function SceneTabs({ selectedDataset }: SceneTabsProps) {
             value={scene}
             className="mt-0"
           >
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                {scene}
-              </h3>
-              <p className="text-foreground/80">
-                Results for {scene} scene
-              </p>
-            </div>
             <NvsBenchTable 
               datasetFilter={selectedDataset} 
               sceneFilter={scene} 

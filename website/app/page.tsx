@@ -3,8 +3,8 @@
 import { Tabs } from "@/components/ui/tabs";
 import { Header } from "@/components/header";
 import { DatasetTabs } from "@/components/dataset-tabs";
+import { DatasetHeader } from "@/components/dataset-header";
 import { SceneTabs } from "@/components/scene-tabs";
-import { DatasetContent } from "@/components/dataset-content";
 import { useState } from "react";
 
 export default function Home() {
@@ -22,8 +22,8 @@ export default function Home() {
             onValueChange={(value) => setSelectedDataset(value)}
           >
             <DatasetTabs />
+            <DatasetHeader selectedDataset={selectedDataset} />
             <SceneTabs selectedDataset={selectedDataset} />
-            <DatasetContent />
           </Tabs>
         </div>
       </div>
