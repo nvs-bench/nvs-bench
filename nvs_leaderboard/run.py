@@ -55,3 +55,24 @@ def download_dataset():
 )
 def evaluate(method: str, scene: str):
     os.system(f"python /root/workspace/nvs_leaderboard/evaluate.py --method {method} --scene {scene}")
+
+
+@app.function(
+    volumes={
+        "/nvs-leaderboard-data": modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True),
+        "/nvs-leaderboard-output": modal.Volume.from_name("nvs-leaderboard-output", create_if_missing=True),
+        "/nvs-bench": modal.CloudBucketMount(
+            bucket_name="nvs-bench",
+            bucket_endpoint_url="https://storage.googleapis.com",
+            secret=modal.Secret.from_name(
+                "gcp-hmac-secret", required_keys=["GOOGLE_ACCESS_KEY_ID", "GOOGLE_ACCESS_KEY_SECRET"]
+            ),
+        ),
+    },
+    timeout=3600,
+)
+def upload_results(method: str, scene: str):
+    upload_dir = f"/nvs-bench/output/{scene}/{method}/"
+    os.makedirs(upload_dir, exist_ok=True)
+    os.system(f"cp /nvs-leaderboard-output/{scene}/{method}/nvs-bench-results.json {upload_dir}/results.json")
+    os.system(f"cp -r /nvs-leaderboard-output/{scene}/{method}/test_renders/ {upload_dir}/test_renders/")

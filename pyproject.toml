@@ -1,6 +1,9 @@
 [tool.ruff]
 line-length = 120
 target-version = "py38"
+exclude = [
+    "methods/"
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W", "B", "C4", "UP", "N", "Q", "SIM", "ARG", "PIE", "T20", "TCH", "TID", "RUF"]
