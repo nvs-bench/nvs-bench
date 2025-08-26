@@ -23,7 +23,7 @@ import type { MethodMeta, Result } from "@/lib/types";
 
 type SortKey = keyof Pick<
   Result,
-  "psnr" | "ssim" | "lpips" | "time" | "gpuMem"
+  "psnr" | "ssim" | "lpips" | "time"
 >;
 type SortOrder = "asc" | "desc";
 
@@ -42,15 +42,6 @@ function formatTime(seconds: number): string {
   }
 }
 
-function formatMemory(gb: number): string {
-  if (gb < 1) {
-    return `${gb.toFixed(2)} GB`;
-  } else if (gb < 10) {
-    return `${gb.toFixed(2)} GB`;
-  } else {
-    return `${gb.toFixed(2)} GB`;
-  }
-}
 
 function PaperIcon() {
   return (
@@ -195,15 +186,6 @@ export function ResultsTable({
             >
               Time
             </SortableHeader>
-            <SortableHeader
-              sortKey="gpuMem"
-              currentSortKey={sortKey}
-              sortOrder={sortOrder}
-              onSort={handleSort}
-              higherIsBetter={false}
-            >
-              GPU mem.
-            </SortableHeader>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -246,7 +228,6 @@ export function ResultsTable({
                   </div>
                 </TableCell>
                 <TableCell>{formatTime(row.time)}</TableCell>
-                <TableCell>{formatMemory(row.gpuMem)}</TableCell>
               </TableRow>
             );
           })}

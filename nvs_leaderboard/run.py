@@ -44,7 +44,7 @@ def download_dataset():
             "net_type='vgg', normalize=True)"
             '"'
         )
-        .add_local_dir(".", remote_path="/root/workspace")
+        .add_local_dir(".", remote_path="/root/workspace", ignore=["website/", "methods/"])
     ),
     volumes={
         "/nvs-leaderboard-data": modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True),
@@ -54,4 +54,4 @@ def download_dataset():
     timeout=3600,
 )
 def evaluate(method: str, scene: str):
-    os.system(f"python /root/workspace/evaluate.py --method {method} --scene {scene}")
+    os.system(f"python /root/workspace/nvs_leaderboard/evaluate.py --method {method} --scene {scene}")

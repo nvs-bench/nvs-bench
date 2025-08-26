@@ -50,7 +50,7 @@ app = modal.App(
             Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys"
         )  # If you don't have this keyfile locally, generate it with: ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
         # Add local files
-        .add_local_dir(Path.cwd(), "/root/workspace", ignore=["website/"])
+        .add_local_dir(Path.cwd(), "/root/workspace", ignore=["website/", "methods/"])
     ),
     volumes=MODAL_VOLUMES,
     secrets=[modal.Secret.from_name("github-token")],

@@ -1,4 +1,6 @@
 import argparse
+import json
+from dataclasses import dataclass
 from pathlib import Path
 
 import imageio.v2 as imageio
@@ -11,23 +13,26 @@ from torchmetrics.functional.image import (
 )
 
 
-def evaluate_metrics(gt_dir, rendered_dir):
-    """
-    Evaluates rendered images against ground truth images using PSNR, SSIM, and LPIPS.
-    """
-    gt_path = Path(gt_dir)
-    rendered_path = Path(rendered_dir)
+@dataclass
+class Metrics:
+    psnr: float
+    ssim: float
+    lpips: float
+
+
+def evaluate_metrics(scene: str, method: str) -> Metrics:
+    """Evaluates rendered images against ground truth images using PSNR, SSIM, and LPIPS."""
+    gt_path = Path(f"/nvs-leaderboard-data/{scene}/images/")
+    rendered_path = Path(f"/nvs-leaderboard-output/{scene}/{method}/test_renders/")
 
     gt_files = sorted([f.name for f in gt_path.iterdir() if f.is_file()])
+    # Create the test dataset by selecting every 8th image
+    gt_files = [name for idx, name in enumerate(gt_files) if idx % 8 == 0]
+
     rendered_files = sorted([f.name for f in rendered_path.iterdir() if f.is_file()])
 
-    # Filter out non-image files
-    gt_files = [f for f in gt_files if f.lower().endswith((".png", ".jpg", ".jpeg"))]
-    rendered_files = [f for f in rendered_files if f.lower().endswith((".png", ".jpg", ".jpeg"))]
-
     if len(gt_files) != len(rendered_files):
-        print("Error: The number of ground truth and rendered images do not match.")
-        return
+        raise ValueError("The number of ground truth and rendered images do not match.")
 
     print(f"Loading {len(gt_files)} image pairs...")
 
@@ -80,18 +85,14 @@ def evaluate_metrics(gt_dir, rendered_dir):
             torch.cuda.empty_cache()
 
     # Calculate averages
-    avg_psnr = np.mean(psnr_scores)
-    avg_ssim = np.mean(ssim_scores)
-    avg_lpips = np.mean(lpips_scores)
+    avg_psnr = np.mean(psnr_scores).item()
+    avg_ssim = np.mean(ssim_scores).item()
+    avg_lpips = np.mean(lpips_scores).item()
 
-    print("\n" + "=" * 20)
-    print("Metrics:")
-    print(f"  PSNR: {avg_psnr:.4f}")
-    print(f"  SSIM: {avg_ssim:.4f}")
-    print(f"  LPIPS: {avg_lpips:.4f}")
+    return Metrics(psnr=avg_psnr, ssim=avg_ssim, lpips=avg_lpips)
 
 
-def read_training_time(scene, method):
+def read_training_time(scene: str, method: str) -> float:
     """
     Reads and prints the training time from a file.
     """
@@ -99,9 +100,26 @@ def read_training_time(scene, method):
     if time_file.exists():
         with open(time_file) as f:
             training_time = f.read().strip()
-            print(f"Training took {training_time} seconds")
+            return float(training_time)
     else:
-        print(f"Training time file not found at: {time_file}")
+        raise FileNotFoundError(f"Training time file not found at: {time_file}")
+
+
+def write_results_to_json(scene: str, method: str, metrics: Metrics, training_time: float):
+    results_json_file_path = f"/nvs-leaderboard-output/{scene}/{method}/nvs-bench-results.json"
+
+    results = {
+        "method": method,
+        "scene": scene,
+        "psnr": metrics.psnr,
+        "ssim": metrics.ssim,
+        "lpips": metrics.lpips,
+        "training_time": training_time,
+    }
+    print(results)
+
+    with open(results_json_file_path, "w") as f:
+        json.dump(results, f)
 
 
 if __name__ == "__main__":
@@ -110,10 +128,6 @@ if __name__ == "__main__":
     parser.add_argument("--scene", type=str, required=True, help="Scene name.")
     args = parser.parse_args()
 
-    # Hardcoding the base paths for now.
-    # User might need to change these depending on their setup.
-    gt_dir = f"/nvs-leaderboard-data/{args.scene}/test/images/"
-    rendered_dir = f"/nvs-leaderboard-output/{args.scene}/{args.method}/renders_test/"
-
-    evaluate_metrics(gt_dir, rendered_dir)
-    read_training_time(args.scene, args.method)
+    metrics = evaluate_metrics(args.scene, args.method)
+    training_time = read_training_time(args.scene, args.method)
+    write_results_to_json(args.scene, args.method, metrics, training_time)
