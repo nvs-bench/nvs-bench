@@ -1,0 +1,8 @@
+[submodule "methods/ever_training"]
+	path = methods/ever_training
+	url = https://github.com/N-Demir/ever_training.git
+	branch = nvs-bench
+[submodule "methods/EDGS"]
+	path = methods/EDGS
+	url = https://github.com/N-Demir/EDGS.git
+	branch = nvs-bench
