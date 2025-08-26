@@ -30,11 +30,13 @@ app = modal.App(
         # modal.Image.from_dockerfile("Dockerfile")
         modal.Image.debian_slim()
         # Install dev-env dependencies
-        .apt_install("openssh-server", "wget", "unzip", "git")
+        .apt_install("wget", "unzip")
         # Configure git
+        .apt_install("git")
         .run_commands(f"git config --global user.name '{local_users_git_name}'")
         .run_commands(f"git config --global user.email '{local_users_git_email}'")
         # Configure ssh
+        .apt_install("openssh-server")
         .run_commands("mkdir /run/sshd")
         .workdir("/root/workspace/")
         # Install requirements
@@ -48,7 +50,7 @@ app = modal.App(
             Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys"
         )  # If you don't have this keyfile locally, generate it with: ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
         # Add local files
-        .add_local_dir(Path.cwd(), "/root/workspace")
+        .add_local_dir(Path.cwd(), "/root/workspace", ignore=["website/"])
     ),
     volumes=MODAL_VOLUMES,
     secrets=[modal.Secret.from_name("github-token")],
