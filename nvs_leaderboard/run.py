@@ -72,6 +72,7 @@ def evaluate(method: str, scene: str):
     timeout=3600,
 )
 def upload_results(method: str, scene: str):
+    # TODO: Probably will want otherways to upload results. Like from local files if users provide them.
     upload_dir = f"/nvs-bench/output/{scene}/{method}/"
     os.makedirs(upload_dir, exist_ok=True)
     os.system(f"cp /nvs-leaderboard-output/{scene}/{method}/nvs-bench-results.json {upload_dir}/results.json")
