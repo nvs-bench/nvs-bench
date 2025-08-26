@@ -105,10 +105,10 @@ def read_training_time(scene: str, method: str) -> float:
         raise FileNotFoundError(f"Training time file not found at: {time_file}")
 
 
-def write_results_to_json(scene: str, method: str, metrics: Metrics, training_time: float):
-    results_json_file_path = f"/nvs-leaderboard-output/{scene}/{method}/nvs-bench-results.json"
+def write_result_to_json(scene: str, method: str, metrics: Metrics, training_time: float):
+    result_json_file_path = f"/nvs-leaderboard-output/{scene}/{method}/nvs-bench-result.json"
 
-    results = {
+    result = {
         "method": method,
         "scene": scene,
         "psnr": metrics.psnr,
@@ -116,10 +116,10 @@ def write_results_to_json(scene: str, method: str, metrics: Metrics, training_ti
         "lpips": metrics.lpips,
         "training_time": training_time,
     }
-    print(results)
+    print(result)
 
-    with open(results_json_file_path, "w") as f:
-        json.dump(results, f)
+    with open(result_json_file_path, "w") as f:
+        json.dump(result, f)
 
 
 if __name__ == "__main__":
@@ -130,4 +130,4 @@ if __name__ == "__main__":
 
     metrics = evaluate_metrics(args.scene, args.method)
     training_time = read_training_time(args.scene, args.method)
-    write_results_to_json(args.scene, args.method, metrics, training_time)
+    write_result_to_json(args.scene, args.method, metrics, training_time)
