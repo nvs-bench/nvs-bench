@@ -92,29 +92,30 @@ def evaluate_metrics(scene: str, method: str) -> Metrics:
     return Metrics(psnr=avg_psnr, ssim=avg_ssim, lpips=avg_lpips)
 
 
-def read_training_time(scene: str, method: str) -> float:
+def read_time(scene: str, method: str) -> float:
     """
     Reads and prints the training time from a file.
     """
-    time_file = Path(f"/nvs-leaderboard-output/{scene}/{method}/training_time.txt")
+    time_file = Path(f"/nvs-leaderboard-output/{scene}/{method}/time.txt")
     if time_file.exists():
         with open(time_file) as f:
-            training_time = f.read().strip()
-            return float(training_time)
+            time = f.read().strip()
+            return float(time)
     else:
         raise FileNotFoundError(f"Training time file not found at: {time_file}")
 
 
-def write_result_to_json(scene: str, method: str, metrics: Metrics, training_time: float):
+def write_result_to_json(scene: str, method: str, metrics: Metrics, time: float):
     result_json_file_path = f"/nvs-leaderboard-output/{scene}/{method}/nvs-bench-result.json"
 
     result = {
-        "method": method,
-        "scene": scene,
+        "method_name": method,
+        "dataset_name": scene.split("/")[0],
+        "scene_name": scene.split("/")[1],
         "psnr": metrics.psnr,
         "ssim": metrics.ssim,
         "lpips": metrics.lpips,
-        "training_time": training_time,
+        "time": time,
     }
     print(result)
 
@@ -129,5 +130,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     metrics = evaluate_metrics(args.scene, args.method)
-    training_time = read_training_time(args.scene, args.method)
-    write_result_to_json(args.scene, args.method, metrics, training_time)
+    time = read_time(args.scene, args.method)
+    write_result_to_json(args.scene, args.method, metrics, time)

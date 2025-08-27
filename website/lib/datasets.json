@@ -22,5 +22,13 @@
     "dataset_source_link": "https://example.com/synthetic-source",
     "dataset_download_link": "https://example.com/synthetic-download",
     "scenes": ["lego", "drums", "ficus"]
+  },
+  {
+    "dataset_name": "examples",
+    "dataset_display_name": "Examples",
+    "dataset_description": "Placeholder: Blender synthetic scenes commonly used in NeRF-style evaluations.",
+    "dataset_source_link": "https://example.com/synthetic-source",
+    "dataset_download_link": "https://example.com/synthetic-download",
+    "scenes": ["kitchen"]
   }
 ]

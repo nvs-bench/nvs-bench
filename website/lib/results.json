@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "method_name": "EDGS",
+    "dataset_name": "examples",
+    "scene_name": "kitchen",
+    "psnr": 16.542744636535645,
+    "ssim": 0.35032687584559125,
+    "lpips": 0.5366436044375101,
+    "time": 1123
+  }
+]

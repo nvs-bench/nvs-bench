@@ -2,50 +2,35 @@
 import os
 import subprocess
 import time
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 
 import modal
-from nvs_leaderboard_image import image
+from image import image, method_name, modal_volumes
 
-nvs_leaderboard_data_volume = modal.Volume.from_name("nvs-leaderboard-data", create_if_missing=True)
-nvs_leaderboard_output_volume = modal.Volume.from_name("nvs-leaderboard-output", create_if_missing=True)
-cursor_volume = modal.Volume.from_name("cursor-volume", create_if_missing=True)
-
-MODAL_VOLUMES: dict[str | PurePosixPath, modal.Volume] = {
-    "/nvs-leaderboard-data": nvs_leaderboard_data_volume,
-    "/nvs-leaderboard-output": nvs_leaderboard_output_volume,
-    "/root/.cursor-server": cursor_volume,
-}
+# Necessary for git pushes to work from the remote machine
+local_users_git_name = subprocess.check_output(["git", "config", "--global", "user.name"], text=True).strip()
+local_users_git_email = subprocess.check_output(["git", "config", "--global", "user.email"], text=True).strip()
 
 app = modal.App(
-    "nvs-leaderboard-" + Path.cwd().name,
+    "nvs-bench-dev-env-" + method_name,
     image=(
-        # If you've already got a Dockerfile, just replace image with:
-        # modal.Image.from_dockerfile("Dockerfile")
-        image.apt_install("openssh-server", "wget", "unzip")
+        image  # If using Dockerfile, replace with `modal.Image.from_dockerfile("Dockerfile")`
+        # Configure git
+        .apt_install("git")
+        .run_commands(f"git config --global user.name '{local_users_git_name}'")
+        .run_commands(f"git config --global user.email '{local_users_git_email}'")
+        # Configure ssh
+        .apt_install("openssh-server")
         .run_commands("mkdir /run/sshd")
+        .add_local_dir(Path.home() / ".ssh", "/root/.ssh")  # Add local ssh key for ssh access and git access
         .add_local_file(
             Path.home() / ".ssh/id_rsa.pub", "/root/.ssh/authorized_keys"
-        )  # If you don't have this keyfile locally, generate it with: ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
-        # This overwrites the git cloned repo (used for install) with the current local directory
+        )  # If you don't have this keyfile locally, generate it with: `ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""`
+        # Add local files
         .add_local_dir(Path.cwd(), f"/root/{Path.cwd().name}")
     ),
-    volumes=MODAL_VOLUMES,
+    volumes=modal_volumes,
 )
-
-
-@app.function(
-    timeout=3600,
-    gpu="L40S",
-)
-def run(scene: str):
-    # Kind of silly but modal requires reload/commit to avoid race conditions while using volumes
-    nvs_leaderboard_data_volume.reload()
-    os.system(f"bash nvs_leaderboard_eval.sh {scene}")
-    nvs_leaderboard_output_volume.commit()
-
-
-###### Dev Server ######
 
 HOSTNAME = "modal-vscode-server"
 
@@ -91,6 +76,7 @@ def start_ssh_tunnel(q: modal.Queue):
         os.system("/usr/sbin/sshd -D")
 
 
+@app.local_entrypoint()
 def open_dev_environment():
     with modal.Queue.ephemeral() as q:
         start_ssh_tunnel.spawn(q)
@@ -106,12 +92,3 @@ def open_dev_environment():
 
         while True:
             time.sleep(1)
-
-
-@app.local_entrypoint()
-def main(scene: str | None = None):
-    """Run train/render on a scene or, if scene not provided, open a dev environment."""
-    if scene is not None:
-        run.remote(scene)
-    else:
-        open_dev_environment()

@@ -1,20 +1,24 @@
-###### How to edit this file ######
-# Docker and Dockerfiles are quite simple:
-# - a dockerfile is the set of instructions for getting a fresh machine ready to run your code
-# - start by defining a base image (FROM ...) based on the cuda and torch version you want. This gets the hard gpu
-#   driver stuff out of the way.
-# - set env vars with ENV ..., change directories with WORKDIR ..., and run commands with RUN ...
-# - avoid using conda installs (just replace them with pip installs) because getting conda initialized in docker is a
-#   pain
-#
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
-from modal import Image
+from modal import Image, Volume
+
+method_name = Path.cwd().name
+assert method_name != "nvs-bench", (
+    "nvs-bench must be called from the method's directory, not the nvs-bench subdirectory. Eg: `modal run nvs-bench/image.py`."
+)
+
+data_volume = Volume.from_name("nvs-bench-data", create_if_missing=True)
+output_volume = Volume.from_name("nvs-bench-output", create_if_missing=True)
+
+modal_volumes: dict[str | PurePosixPath, Volume] = {
+    "/nvs-bench-data": data_volume,
+    "/nvs-bench-output": output_volume,
+    # "/root/.cursor-server": Volume.from_name("cursor-volume", create_if_missing=True),
+}
+
 
 image = (
-    Image
-    # Change this base image to whatever torch/cuda version you want
-    .from_registry("pytorch/pytorch:2.4.1-cuda12.4-cudnn9-devel")
+    Image.from_registry("pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel")
     .env(
         {
             # Set Torch CUDA Compatbility to be for RTX 4090, T4, L40s, and A100
@@ -55,14 +59,12 @@ image = (
     )
     .workdir(f"/root/{Path.cwd().name}")
     ###### Your Code Here ######
-    # Would recommend pulling the repo from github (we later overwrite it with the current local directory)
-    # eg: .run_commands("git clone https://github.com/<repo-name>.git -b <optional-branch-name> --recursive .")
+    # Probably easiest to pull the repo from github, but you can also copy files from your local machine with add_local_dir
+    # eg: .run_commands("git clone https://github.com/graphdeco-inria/gaussian-splatting.git . --recursive")
     # Install (avoid conda installs because they don't work well in dockerfile situations)
-    # Separating these on separate lines helps if there are errors (previous lines will be cached) especially on the
-    # large package installs
+    # Separating these on separate lines helps if there are errors (previous lines will be cached) especially on the large package installs
     # eg:
-    # .run_commands("pip install -e .")
     # .run_commands("pip install submodules/diff-gaussian-rasterization")
-    # Note: If your run_commands step needs access to a gpu it's actually possible to do that through
-    # "run_commands(gpu='T4', ...)"
+    # .run_commands("pip install -e .")
+    # Note: If your run_commands step needs access to a gpu it's actually possible to do that through "run_commands(gpu='T4', ...)"
 )
