@@ -1,4 +1,4 @@
-# [wip] Novel-View Synthesis Leaderboard
+# [wip] Novel-View Synthesis Benchmark
 Reproducible, standardized
 
 
