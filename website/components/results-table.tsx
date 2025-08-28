@@ -23,7 +23,7 @@ import type { MethodMeta, Result } from "@/lib/types";
 
 type SortKey = keyof Pick<
   Result,
-  "psnr" | "ssim" | "lpips" | "time"
+  "psnr" | "ssim" | "lpips" | "time" | "max_gpu_memory"
 >;
 type SortOrder = "asc" | "desc";
 
@@ -31,7 +31,7 @@ type SortOrder = "asc" | "desc";
 function formatTime(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
+  const secs = Math.floor(seconds % 60);
 
   if (hours > 0) {
     return `${hours}h ${minutes}m ${secs}s`;
@@ -40,6 +40,11 @@ function formatTime(seconds: number): string {
   } else {
     return `${secs}s`;
   }
+}
+
+function formatGpuMemory(mb: number): string {
+  const gb = mb / 1024;
+  return `${gb.toFixed(2)} GB`;
 }
 
 
@@ -186,6 +191,15 @@ export function ResultsTable({
             >
               Time
             </SortableHeader>
+            <SortableHeader
+              sortKey="max_gpu_memory"
+              currentSortKey={sortKey}
+              sortOrder={sortOrder}
+              onSort={handleSort}
+              higherIsBetter={false}
+            >
+              GPU Memory
+            </SortableHeader>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -217,17 +231,18 @@ export function ResultsTable({
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <span>{row.ssim.toFixed(3)}</span>
+                    <span>{row.ssim.toFixed(4)}</span>
                     {row.hasPaperSsim && <PaperIcon />}
                   </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <span>{row.lpips.toFixed(3)}</span>
+                    <span>{row.lpips.toFixed(4)}</span>
                     {row.hasPaperLpips && <PaperIcon />}
                   </div>
                 </TableCell>
                 <TableCell>{formatTime(row.time)}</TableCell>
+                <TableCell>{formatGpuMemory(row.max_gpu_memory)}</TableCell>
               </TableRow>
             );
           })}

@@ -91,7 +91,7 @@ def eval(scene: str):
     output_folder.mkdir(parents=True, exist_ok=True)
 
     with log_max_gpu_memory(f"{output_folder}/max_gpu_memory.txt"), log_time(f"{output_folder}/time.txt"):
-        os.system(f"bash eval.sh {data_folder} {output_folder}")
+        os.system(f"bash nvs-bench/eval.sh {data_folder} {output_folder}")
 
     output_volume.commit()
 

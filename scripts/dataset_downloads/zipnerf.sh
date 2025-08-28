@@ -1,9 +1,9 @@
 #! /bin/bash
 
-if [ ! -d /nvs-leaderboard-downloads/zipnerf ]; then
-    mkdir -p /nvs-leaderboard-downloads/zipnerf
+if [ ! -d /nvs-bench-downloads/zipnerf ]; then
+    mkdir -p /nvs-bench-downloads/zipnerf
 fi
-cd /nvs-leaderboard-downloads/zipnerf
+cd /nvs-bench-downloads/zipnerf
 
 if [ ! -f alameda.zip ]; then
     wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/alameda.zip
@@ -18,21 +18,21 @@ if [ ! -f nyc.zip ]; then
     wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/nyc.zip
 fi
 
-unzip -o alameda.zip -d /nvs-leaderboard-downloads/zipnerf
-unzip -o berlin.zip -d /nvs-leaderboard-downloads/zipnerf
-unzip -o london.zip -d /nvs-leaderboard-downloads/zipnerf
-unzip -o nyc.zip -d /nvs-leaderboard-downloads/zipnerf
+unzip -o alameda.zip -d /nvs-bench-downloads/zipnerf
+unzip -o berlin.zip -d /nvs-bench-downloads/zipnerf
+unzip -o london.zip -d /nvs-bench-downloads/zipnerf
+unzip -o nyc.zip -d /nvs-bench-downloads/zipnerf
 
 # Remove the downresolution images
 for scene in alameda berlin london nyc; do
-    cd /nvs-leaderboard-downloads/zipnerf/$scene
+    cd /nvs-bench-downloads/zipnerf/$scene
     rm -rf images_[0-9]*
-    cd /nvs-leaderboard-downloads/zipnerf
+    cd /nvs-bench-downloads/zipnerf
 done
 
-rm -rf /nvs-leaderboard-data/zipnerf
-mkdir -p /nvs-leaderboard-data/zipnerf/
-mv /nvs-leaderboard-downloads/zipnerf/alameda /nvs-leaderboard-data/zipnerf/alameda
-mv /nvs-leaderboard-downloads/zipnerf/berlin /nvs-leaderboard-data/zipnerf/berlin
-mv /nvs-leaderboard-downloads/zipnerf/london /nvs-leaderboard-data/zipnerf/london
-mv /nvs-leaderboard-downloads/zipnerf/nyc /nvs-leaderboard-data/zipnerf/nyc
+rm -rf /nvs-bench-data/zipnerf
+mkdir -p /nvs-bench-data/zipnerf/
+mv /nvs-bench-downloads/zipnerf/alameda /nvs-bench-data/zipnerf/alameda
+mv /nvs-bench-downloads/zipnerf/berlin /nvs-bench-data/zipnerf/berlin
+mv /nvs-bench-downloads/zipnerf/london /nvs-bench-data/zipnerf/london
+mv /nvs-bench-downloads/zipnerf/nyc /nvs-bench-data/zipnerf/nyc

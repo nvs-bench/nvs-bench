@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Setting up development environment for nvs-leaderboard..."
+echo "Setting up development environment for nvs-bench..."
 
 # Install development dependencies
 echo "Installing development dependencies..."

@@ -21,6 +21,7 @@ export interface Result {
   ssim: number;
   lpips: number;
   time: number;
+  max_gpu_memory: number;
   hasPaperPsnr?: boolean;
   hasPaperSsim?: boolean;
   hasPaperLpips?: boolean;

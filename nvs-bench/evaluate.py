@@ -22,8 +22,8 @@ class Metrics:
 
 def evaluate_metrics(scene: str, method: str) -> Metrics:
     """Evaluates rendered images against ground truth images using PSNR, SSIM, and LPIPS."""
-    gt_path = Path(f"/nvs-leaderboard-data/{scene}/images/")
-    rendered_path = Path(f"/nvs-leaderboard-output/{scene}/{method}/test_renders/")
+    gt_path = Path(f"/nvs-bench-data/{scene}/images/")
+    rendered_path = Path(f"/nvs-bench-output/{scene}/{method}/test_renders/")
 
     gt_files = sorted([f.name for f in gt_path.iterdir() if f.is_file()])
     # Create the test dataset by selecting every 8th image
@@ -96,7 +96,7 @@ def read_time(scene: str, method: str) -> float:
     """
     Reads and prints the training time from a file.
     """
-    time_file = Path(f"/nvs-leaderboard-output/{scene}/{method}/time.txt")
+    time_file = Path(f"/nvs-bench-output/{scene}/{method}/time.txt")
     if time_file.exists():
         with open(time_file) as f:
             time = f.read().strip()
@@ -105,8 +105,21 @@ def read_time(scene: str, method: str) -> float:
         raise FileNotFoundError(f"Training time file not found at: {time_file}")
 
 
+def read_memory(scene: str, method: str) -> float:
+    """
+    Reads and prints the training memory from a file.
+    """
+    memory_file = Path(f"/nvs-bench-output/{scene}/{method}/max_gpu_memory.txt")
+    if memory_file.exists():
+        with open(memory_file) as f:
+            memory = f.read().strip()
+            return float(memory)
+    else:
+        raise FileNotFoundError(f"Training memory file not found at: {memory_file}")
+
+
 def write_result_to_json(scene: str, method: str, metrics: Metrics, time: float):
-    result_json_file_path = f"/nvs-leaderboard-output/{scene}/{method}/nvs-bench-result.json"
+    result_json_file_path = f"/nvs-bench-output/{scene}/{method}/nvs-bench-result.json"
 
     result = {
         "method_name": method,
@@ -116,6 +129,7 @@ def write_result_to_json(scene: str, method: str, metrics: Metrics, time: float)
         "ssim": metrics.ssim,
         "lpips": metrics.lpips,
         "time": time,
+        "max_gpu_memory": memory,
     }
     print(result)
 
@@ -131,4 +145,5 @@ if __name__ == "__main__":
 
     metrics = evaluate_metrics(args.scene, args.method)
     time = read_time(args.scene, args.method)
+    memory = read_memory(args.scene, args.method)
     write_result_to_json(args.scene, args.method, metrics, time)

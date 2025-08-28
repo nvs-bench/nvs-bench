@@ -3,9 +3,10 @@
     "method_name": "EDGS",
     "dataset_name": "examples",
     "scene_name": "kitchen",
-    "psnr": 16.542744636535645,
-    "ssim": 0.35032687584559125,
-    "lpips": 0.5366436044375101,
-    "time": 1123
+    "psnr": 16.638207753499348,
+    "ssim": 0.34905900557835895,
+    "lpips": 0.5373149514198303,
+    "time": 1119.52,
+    "max_gpu_memory": 0
   }
 ]
