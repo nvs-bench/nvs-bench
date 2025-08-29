@@ -66,7 +66,7 @@ image = (
     .run_commands("pip install gpu_tracker")
     # Set the working dir
     .workdir(f"/root/{method_name}")
-    ###### Your Code Here ######
+    ######## START OF YOUR CODE ########
     # Probably easiest to pull the repo from github, but you can also copy files from your local machine with .add_local_dir()
     # eg: .run_commands("git clone -b nvs-bench https://github.com/N-Demir/gaussian-splatting.git --recursive .")
     # Install (avoid conda installs because they don't work well in dockerfile situations)
