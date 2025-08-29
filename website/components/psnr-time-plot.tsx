@@ -3,32 +3,57 @@
 import { ComposedChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList, Cell } from 'recharts';
 import { Result, MethodMeta } from '@/lib/types';
 import methodsData from '@/lib/methods.json';
+import { useMemo } from 'react';
 
 interface PSNRTimePlotProps {
   results: Result[];
 }
 
-export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
-//   // Define a color palette for different methods
-//   const colors = [
-//     '#3B82F6', // Blue
-//     '#EF4444', // Red
-//     '#10B981', // Green
-//     '#F59E0B', // Yellow
-//     '#8B5CF6', // Purple
-//     '#F97316', // Orange
-//     '#06B6D4', // Cyan
-//     '#EC4899', // Pink
-//   ];
+// Interface for averaged results (same as in results table)
+interface AveragedResult {
+  method_name: string;
+  psnr: number;
+  time: number;
+}
 
-  // Transform the data for the plot with unique colors for each datapoint
-  const plotData = results.map((result, index) => {
+// Function to calculate averages for a method (same as in results table)
+function calculateMethodAverages(results: Result[]): AveragedResult[] {
+  const methodGroups = new Map<string, Result[]>();
+  
+  // Group results by method
+  results.forEach(result => {
+    if (!methodGroups.has(result.method_name)) {
+      methodGroups.set(result.method_name, []);
+    }
+    methodGroups.get(result.method_name)!.push(result);
+  });
+  
+  // Calculate averages for each method
+  return Array.from(methodGroups.entries()).map(([methodName, methodResults]) => {
+    const totalPsnr = methodResults.reduce((sum, r) => sum + r.psnr, 0);
+    const totalTime = methodResults.reduce((sum, r) => sum + r.time, 0);
+    
+    return {
+      method_name: methodName,
+      psnr: totalPsnr / methodResults.length,
+      time: totalTime / methodResults.length,
+    };
+  });
+}
+
+export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
+  // Calculate averages for methods using the same logic as results table
+  const averagedResults = useMemo(() => {
+    return calculateMethodAverages(results);
+  }, [results]);
+
+  // Transform the averaged data for the plot
+  const plotData = averagedResults.map((result) => {
     const methodMeta = methodsData.find((m: MethodMeta) => m.method_name === result.method_name);
     return {
       methodDisplayName: methodMeta?.method_display_name || result.method_name,
       psnr: result.psnr,
       timeMinutes: result.time / 60, // Convert to minutes for better readability
-    //   color: colors[index % colors.length], // Assign unique color to each datapoint
     };
   });
 
@@ -41,7 +66,6 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
       <div className="h-96 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
-            // data={plotData} // TODO: Not sure if this is needed here for other features to come
             margin={{
               top: 20,
               right: 20,
@@ -93,9 +117,9 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
               fontSize={14}
               fill="currentColor"
               className="text-muted-foreground"
-                          >
-                ↘ better
-              </text>
+            >
+              ↘ better
+            </text>
           </ComposedChart>
         </ResponsiveContainer>
       </div>
