@@ -3,7 +3,6 @@
 import {
   ChevronDownIcon,
   ChevronUpIcon,
-  FileTextIcon,
   TrendingDownIcon,
   TrendingUpIcon,
 } from "lucide-react";
@@ -18,7 +17,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import methods from "@/lib/methods.json";
-import results from "@/lib/results.json";
 import type { MethodMeta, Result } from "@/lib/types";
 
 type SortKey = keyof Pick<
@@ -26,6 +24,17 @@ type SortKey = keyof Pick<
   "psnr" | "ssim" | "lpips" | "time" | "max_gpu_memory"
 >;
 type SortOrder = "asc" | "desc";
+
+// Interface for averaged results
+interface AveragedResult {
+  method_name: string;
+  psnr: number;
+  ssim: number;
+  lpips: number;
+  time: number;
+  max_gpu_memory: number;
+  resultCount: number;
+}
 
 // Helper functions for formatting display
 function formatTime(seconds: number): string {
@@ -47,16 +56,36 @@ function formatGpuMemory(mb: number): string {
   return `${gb.toFixed(2)} GB`;
 }
 
-
-function PaperIcon() {
-  return (
-    <div className="relative group">
-      <FileTextIcon className="w-4 h-4 text-blue-500 cursor-help" />
-      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
-        Result taken from the paper
-      </div>
-    </div>
-  );
+// Function to calculate averages for a method
+function calculateMethodAverages(results: Result[]): AveragedResult[] {
+  const methodGroups = new Map<string, Result[]>();
+  
+  // Group results by method
+  results.forEach(result => {
+    if (!methodGroups.has(result.method_name)) {
+      methodGroups.set(result.method_name, []);
+    }
+    methodGroups.get(result.method_name)!.push(result);
+  });
+  
+  // Calculate averages for each method
+  return Array.from(methodGroups.entries()).map(([methodName, methodResults]) => {
+    const totalPsnr = methodResults.reduce((sum, r) => sum + r.psnr, 0);
+    const totalSsim = methodResults.reduce((sum, r) => sum + r.ssim, 0);
+    const totalLpips = methodResults.reduce((sum, r) => sum + r.lpips, 0);
+    const totalTime = methodResults.reduce((sum, r) => sum + r.time, 0);
+    const totalGpuMemory = methodResults.reduce((sum, r) => sum + r.max_gpu_memory, 0);
+    
+    return {
+      method_name: methodName,
+      psnr: totalPsnr / methodResults.length,
+      ssim: totalSsim / methodResults.length,
+      lpips: totalLpips / methodResults.length,
+      time: totalTime / methodResults.length,
+      max_gpu_memory: totalGpuMemory / methodResults.length,
+      resultCount: methodResults.length,
+    };
+  });
 }
 
 function HigherIsBetterIndicator({
@@ -129,16 +158,21 @@ export function ResultsTable({
   const [sortKey, setSortKey] = useState<SortKey>("psnr");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
+  // Calculate averages for methods
+  const averagedResults = useMemo(() => {
+    return calculateMethodAverages(results);
+  }, [results]);
+
   const sortedData = useMemo(() => {
-    // Sort the results
-    return results.sort((a, b) => {
+    // Sort the averaged results
+    return averagedResults.sort((a, b) => {
       const aVal = a[sortKey];
       const bVal = b[sortKey];
 
       // All values are now numbers, so simple numeric comparison
       return sortOrder === "asc" ? aVal - bVal : bVal - aVal;
     });
-  }, [sortKey, sortOrder, results]);
+  }, [sortKey, sortOrder, averagedResults]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -208,37 +242,34 @@ export function ResultsTable({
               (m) => m.method_name === row.method_name,
             );
             return (
-              <TableRow key={`${row.method_name}-${row.dataset_name}-${row.scene_name}`}>
+              <TableRow key={row.method_name}>
                 <TableCell className="font-medium">
-                  {methodMeta ? (
-                    <a
-                      href={methodMeta.method_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-foreground hover:text-foreground/80 underline underline-offset-2"
-                    >
-                      {methodMeta.method_display_name}
-                    </a>
-                  ) : (
-                    row.method_name
-                  )}
+                    {methodMeta ? (
+                      <a
+                        href={methodMeta.method_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-foreground hover:text-foreground/80 underline underline-offset-2"
+                      >
+                        {methodMeta.method_display_name}
+                      </a>
+                    ) : (
+                      row.method_name
+                    )}
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <span>{row.psnr.toFixed(2)}</span>
-                    {row.hasPaperPsnr && <PaperIcon />}
                   </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <span>{row.ssim.toFixed(4)}</span>
-                    {row.hasPaperSsim && <PaperIcon />}
                   </div>
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <span>{row.lpips.toFixed(4)}</span>
-                    {row.hasPaperLpips && <PaperIcon />}
                   </div>
                 </TableCell>
                 <TableCell>{formatTime(row.time)}</TableCell>
