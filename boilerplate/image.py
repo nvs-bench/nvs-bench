@@ -16,7 +16,6 @@ modal_volumes: dict[str | PurePosixPath, Volume] = {
     # "/root/.cursor-server": Volume.from_name("cursor-volume", create_if_missing=True),
 }
 
-
 image = (
     Image.from_registry("pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel")
     .env(
@@ -54,17 +53,26 @@ image = (
             libxrandr-dev \
             libxxf86vm-dev \
             libxxf86dga-dev \
-            libxxf86vm-dev \
-            && rm -rf /var/lib/apt/lists/*"
+            libxxf86vm-dev"
     )
-    .workdir(f"/root/{Path.cwd().name}")
+    # Install gsutil (for downloading datasets the first time)
+    .apt_install("curl", "ca-certificates", "gnupg")
+    .run_commands(
+        "curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -",
+        "echo 'deb https://packages.cloud.google.com/apt cloud-sdk main' | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list",
+        "apt-get update && apt-get install -y google-cloud-cli",
+    )
+    # For tracking GPU usage
+    .run_commands("pip install gpu_tracker")
+    # Set the working dir
+    .workdir(f"/root/{method_name}")
     ###### Your Code Here ######
-    # Probably easiest to pull the repo from github, but you can also copy files from your local machine with add_local_dir
-    # eg: .run_commands("git clone https://github.com/graphdeco-inria/gaussian-splatting.git . --recursive")
+    # Probably easiest to pull the repo from github, but you can also copy files from your local machine with .add_local_dir()
+    # eg: .run_commands("git clone -b nvs-bench https://github.com/N-Demir/gaussian-splatting.git --recursive .")
     # Install (avoid conda installs because they don't work well in dockerfile situations)
     # Separating these on separate lines helps if there are errors (previous lines will be cached) especially on the large package installs
     # eg:
     # .run_commands("pip install submodules/diff-gaussian-rasterization")
     # .run_commands("pip install -e .")
-    # Note: If your run_commands step needs access to a gpu it's actually possible to do that through "run_commands(gpu='T4', ...)"
+    # Note: If your run_commands step needs access to a gpu it's actually possible to do that through "run_commands(gpu='L40S', ...)"
 )
