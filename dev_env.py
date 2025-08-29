@@ -5,14 +5,36 @@ import time
 from pathlib import Path
 
 import modal
-from image import image, method_name, modal_volumes
+
+from .image import image, modal_volumes
+
+assert not (Path.cwd() / ".git").is_file(), """
+.git in your cwd is a file, this usually indicates this repo is a submodule of another one. In nvs-bench, that's a common scenario if you've
+cloned the original nvs-bench repo and then populated the methods/ folder with the submodule repos.
+The problem with this is that you won't be able to make git commits from the remote machine because your .git is not a standalone repo and
+the superrepo's .git won't be copied into the remote machine as well.
+
+There is an interesting solution I found, but I didn't want to apply it automatically because while it has worked for me, I haven't tested
+it enough to know what the downsides are if any.
+
+The hack fix:
+cp -r $(awk '/^gitdir:/ {print $2}' .git) .git_new && rm .git && mv .git_new .git && sed -i '' '/worktree/d' .git/config
+
+What this does is:
+1) Remove the current .git file and replace it with the .git folder from the superrepo
+2) Remove the worktree entry from the copied in .git/config file. It would have pointed to the superrepo's .git/worktrees/
+Essentially, this allows the subrepo to still be a submodule that the superrepo tracks the commit hash of, but the subrepo functions
+also as a standalone repo and can be copied to the remote machine no problem.
+
+Seems like the best of both worlds? Make an issue or reach out if there are problems with this.
+"""
 
 # Necessary for git pushes to work from the remote machine
 local_users_git_name = subprocess.check_output(["git", "config", "--global", "user.name"], text=True).strip()
 local_users_git_email = subprocess.check_output(["git", "config", "--global", "user.email"], text=True).strip()
 
 app = modal.App(
-    "nvs-bench-dev-env-" + method_name,
+    "nvs-bench",
     image=(
         image  # If using Dockerfile, replace with `modal.Image.from_dockerfile("Dockerfile")`
         # Configure git

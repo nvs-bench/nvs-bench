@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Check if data_folder and output_folder arguments are provided
 if [ $# -ne 2 ]; then
@@ -8,7 +9,6 @@ if [ $# -ne 2 ]; then
 fi
 data_folder=$1
 output_folder=$2
-
 
 ######## START OF YOUR CODE ########
 # 1) Train 
