@@ -9,7 +9,11 @@ interface DatasetMeta {
   scenes: string[];
 }
 
-export function DatasetHeader({ selectedDataset }: { selectedDataset: string }) {
+export function DatasetHeader({
+  selectedDataset,
+}: {
+  selectedDataset: string;
+}) {
   if (selectedDataset === "all") return null;
 
   const dataset = (datasets as DatasetMeta[]).find(
@@ -47,5 +51,3 @@ export function DatasetHeader({ selectedDataset }: { selectedDataset: string }) 
     </div>
   );
 }
-
-

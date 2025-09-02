@@ -5,7 +5,17 @@
     "dataset_description": "Placeholder: High-resolution unbounded scenes used in novel view synthesis benchmarks.",
     "dataset_source_link": "https://example.com/mipnerf360-source",
     "dataset_download_link": "https://example.com/mipnerf360-download",
-    "scenes": ["bicycle", "treehill", "stump", "room", "kitchen", "garden", "flowers", "counter", "bonsai"]
+    "scenes": [
+      "bicycle",
+      "treehill",
+      "stump",
+      "room",
+      "kitchen",
+      "garden",
+      "flowers",
+      "counter",
+      "bonsai"
+    ]
   },
   {
     "dataset_name": "tanksandtemples",

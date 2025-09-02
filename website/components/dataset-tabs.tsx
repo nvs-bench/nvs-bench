@@ -1,7 +1,7 @@
 import { DatasetHeader } from "@/components/dataset-header";
+import { PSNRTimePlot } from "@/components/psnr-time-plot";
 import { ResultsTable } from "@/components/results-table";
 import { SceneTabs } from "@/components/scene-tabs";
-import { PSNRTimePlot } from "@/components/psnr-time-plot";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
 import results from "@/lib/results.json";

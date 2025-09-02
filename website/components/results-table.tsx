@@ -59,33 +59,38 @@ function formatGpuMemory(mb: number): string {
 // Function to calculate averages for a method
 function calculateMethodAverages(results: Result[]): AveragedResult[] {
   const methodGroups = new Map<string, Result[]>();
-  
+
   // Group results by method
-  results.forEach(result => {
+  results.forEach((result) => {
     if (!methodGroups.has(result.method_name)) {
       methodGroups.set(result.method_name, []);
     }
     methodGroups.get(result.method_name)!.push(result);
   });
-  
+
   // Calculate averages for each method
-  return Array.from(methodGroups.entries()).map(([methodName, methodResults]) => {
-    const totalPsnr = methodResults.reduce((sum, r) => sum + r.psnr, 0);
-    const totalSsim = methodResults.reduce((sum, r) => sum + r.ssim, 0);
-    const totalLpips = methodResults.reduce((sum, r) => sum + r.lpips, 0);
-    const totalTime = methodResults.reduce((sum, r) => sum + r.time, 0);
-    const totalGpuMemory = methodResults.reduce((sum, r) => sum + r.max_gpu_memory, 0);
-    
-    return {
-      method_name: methodName,
-      psnr: totalPsnr / methodResults.length,
-      ssim: totalSsim / methodResults.length,
-      lpips: totalLpips / methodResults.length,
-      time: totalTime / methodResults.length,
-      max_gpu_memory: totalGpuMemory / methodResults.length,
-      resultCount: methodResults.length,
-    };
-  });
+  return Array.from(methodGroups.entries()).map(
+    ([methodName, methodResults]) => {
+      const totalPsnr = methodResults.reduce((sum, r) => sum + r.psnr, 0);
+      const totalSsim = methodResults.reduce((sum, r) => sum + r.ssim, 0);
+      const totalLpips = methodResults.reduce((sum, r) => sum + r.lpips, 0);
+      const totalTime = methodResults.reduce((sum, r) => sum + r.time, 0);
+      const totalGpuMemory = methodResults.reduce(
+        (sum, r) => sum + r.max_gpu_memory,
+        0,
+      );
+
+      return {
+        method_name: methodName,
+        psnr: totalPsnr / methodResults.length,
+        ssim: totalSsim / methodResults.length,
+        lpips: totalLpips / methodResults.length,
+        time: totalTime / methodResults.length,
+        max_gpu_memory: totalGpuMemory / methodResults.length,
+        resultCount: methodResults.length,
+      };
+    },
+  );
 }
 
 function HigherIsBetterIndicator({
@@ -152,8 +157,12 @@ function SortableHeader({
 
 export function ResultsTable({
   results,
+  onMethodSelect,
+  selectedMethod,
 }: {
   results: Result[];
+  onMethodSelect?: (methodName: string | null) => void;
+  selectedMethod?: string | null;
 }) {
   const [sortKey, setSortKey] = useState<SortKey>("psnr");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
@@ -242,20 +251,35 @@ export function ResultsTable({
               (m) => m.method_name === row.method_name,
             );
             return (
-              <TableRow key={row.method_name}>
+              <TableRow
+                key={row.method_name}
+                className={`cursor-pointer hover:bg-muted/50 transition-colors group ${
+                  selectedMethod === row.method_name
+                    ? "bg-primary/5 border-l-4 border-l-primary"
+                    : ""
+                }`}
+                onClick={() => {
+                  if (selectedMethod === row.method_name) {
+                    onMethodSelect?.(null); // Deselect if already selected
+                  } else {
+                    onMethodSelect?.(row.method_name); // Select if not selected
+                  }
+                }}
+              >
                 <TableCell className="font-medium">
-                    {methodMeta ? (
-                      <a
-                        href={methodMeta.method_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-foreground hover:text-foreground/80 underline underline-offset-2"
-                      >
-                        {methodMeta.method_display_name}
-                      </a>
-                    ) : (
-                      row.method_name
-                    )}
+                  {methodMeta ? (
+                    <a
+                      href={methodMeta.method_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-foreground hover:text-foreground/80 underline underline-offset-2"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {methodMeta.method_display_name}
+                    </a>
+                  ) : (
+                    row.method_name
+                  )}
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">

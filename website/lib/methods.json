@@ -1,12 +1,7 @@
 [
   {
-    "method_name": "ever",
-    "method_display_name": "EVER",
-    "method_url": "https://github.com/example/ever"
-  },
-  {
-    "method_name": "nerfstudio",
-    "method_display_name": "NeRFStudio",
-    "method_url": "https://github.com/example/nerfstudio"
+    "method_name": "EDGS",
+    "method_display_name": "EDGS",
+    "method_url": "https://github.com/example/edgs"
   }
 ]
