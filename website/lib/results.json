@@ -30,6 +30,16 @@
     "max_gpu_memory": 5427
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "examples",
+    "scene_name": "kitchen",
+    "psnr": 13.6724853515625,
+    "ssim": 0.46772955854733783,
+    "lpips": 0.8376789887746176,
+    "time": 91.99,
+    "max_gpu_memory": 3893
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "mipnerf360",
     "scene_name": "bicycle",
