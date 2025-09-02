@@ -3,5 +3,10 @@
     "method_name": "EDGS",
     "method_display_name": "EDGS",
     "method_url": "https://github.com/example/edgs"
+  },
+  {
+    "method_name": "ever_training",
+    "method_display_name": "EVER",
+    "method_url": "https://github.com/google/ever"
   }
 ]
