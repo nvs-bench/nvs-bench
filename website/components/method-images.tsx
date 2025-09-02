@@ -10,6 +10,11 @@ interface MethodImagesProps {
   sceneName: string;
 }
 
+interface ImagePair {
+  render: ImageInfo;
+  gt: ImageInfo;
+}
+
 interface ImageInfo {
   url: string;
   filename: string;
@@ -20,16 +25,15 @@ export function MethodImages({
   datasetName,
   sceneName,
 }: MethodImagesProps) {
-  const [images, setImages] = useState<ImageInfo[]>([]);
+  const [imagePairs, setImagePairs] = useState<ImagePair[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [fullscreenImage, setFullscreenImage] = useState<ImageInfo | null>(
-    null,
-  );
+  const [fullscreenPair, setFullscreenPair] = useState<ImagePair | null>(null);
+  const [sliderPosition, setSliderPosition] = useState(50);
 
   useEffect(() => {
     if (!selectedMethod || !datasetName || !sceneName) {
-      setImages([]);
+      setImagePairs([]);
       return;
     }
 
@@ -37,23 +41,41 @@ export function MethodImages({
       setLoading(true);
       setError(null);
       try {
-        // Real GCS URLs - these should be publicly accessible
-        const gcsImages: ImageInfo[] = [
+        // New GCS URLs structure with render and GT images
+        const pairs: ImagePair[] = [
           {
-            url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/test_renders/00000.png`,
-            filename: `00000.png`,
+            render: {
+              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_0.png`,
+              filename: `render_0.png`,
+            },
+            gt: {
+              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_0.png`,
+              filename: `gt_0.png`,
+            },
           },
           {
-            url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/test_renders/00001.png`,
-            filename: `00001.png`,
+            render: {
+              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_1.png`,
+              filename: `render_1.png`,
+            },
+            gt: {
+              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_1.png`,
+              filename: `gt_1.png`,
+            },
           },
           {
-            url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/test_renders/00002.png`,
-            filename: `00002.png`,
+            render: {
+              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_2.png`,
+              filename: `render_2.png`,
+            },
+            gt: {
+              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_2.png`,
+              filename: `gt_2.png`,
+            },
           },
         ];
 
-        setImages(gcsImages);
+        setImagePairs(pairs);
       } catch (err) {
         setError("Failed to load images");
         console.error("Error loading images:", err);
@@ -69,11 +91,11 @@ export function MethodImages({
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setFullscreenImage(null);
+        setFullscreenPair(null);
       }
     };
 
-    if (fullscreenImage) {
+    if (fullscreenPair) {
       document.addEventListener("keydown", handleEscape);
       document.body.style.overflow = "hidden";
     } else {
@@ -84,7 +106,21 @@ export function MethodImages({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "unset";
     };
-  }, [fullscreenImage]);
+  }, [fullscreenPair]);
+
+  const handleImageClick = (pair: ImagePair) => {
+    setFullscreenPair(pair);
+    setSliderPosition(50);
+  };
+
+  const handleSliderMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!fullscreenPair) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    setSliderPosition(Math.max(0, Math.min(100, percentage)));
+  };
 
   const methodMeta = methodsData.find(
     (m: MethodMeta) => m.method_name === selectedMethod,
@@ -127,7 +163,7 @@ export function MethodImages({
         <div className="mb-6">
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-2">
-              {methodMeta?.method_display_name || selectedMethod} Renderings
+              {methodMeta?.method_display_name || selectedMethod} Renderings vs Ground Truth
             </h3>
             <p className="text-muted-foreground">
               Test renders from {datasetName}/{sceneName}
@@ -153,53 +189,79 @@ export function MethodImages({
           </div>
         )}
 
-        {!loading && !error && images.length > 0 && (
+        {!loading && !error && imagePairs.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {images.map((image, index) => (
-              <div key={image.filename} className="group">
-                <button
-                  className="relative overflow-hidden rounded-lg border border-border bg-muted cursor-pointer w-full text-left"
-                  onClick={() => setFullscreenImage(image)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setFullscreenImage(image);
-                    }
-                  }}
-                  type="button"
-                >
-                  <img
-                    src={image.url}
-                    alt={`${selectedMethod} rendering ${index + 1}`}
-                    className="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
-                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <svg
-                      className="w-5 h-5 text-white drop-shadow-lg"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+            {imagePairs.map((pair, index) => (
+              <div key={`${pair.render.filename}-${pair.gt.filename}`} className="flex flex-col">
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-1">
+                    <span className="font-medium">Render</span>
+                  </p>
+                </div>
+                
+                {/* Combined Render and GT Images */}
+                <div className="group">
+                  <button
+                    className="relative overflow-hidden rounded-lg border border-border bg-muted cursor-pointer w-full text-left"
+                    onClick={() => handleImageClick(pair)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleImageClick(pair);
+                      }
+                    }}
+                    type="button"
+                  >
+                    {/* Render Image (top half) */}
+                    <div className="relative h-48 overflow-hidden rounded-t-lg">
+                      <img
+                        src={pair.render.url}
+                        alt={`${selectedMethod} rendering ${index + 1}`}
+                        className="w-full h-full object-cover"
                       />
-                    </svg>
-                  </div>
-                </button>
-                <p className="mt-2 text-sm text-muted-foreground text-center truncate">
-                  {image.filename}
-                </p>
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                    </div>
+                    
+                    {/* GT Image (bottom half) */}
+                    <div className="relative h-48 overflow-hidden rounded-b-lg">
+                      <img
+                        src={pair.gt.url}
+                        alt={`Ground truth ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                    </div>
+                    
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <svg
+                        className="w-5 h-5 text-white drop-shadow-lg"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+                
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-medium">Ground Truth</span>
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         )}
 
-        {!loading && !error && images.length === 0 && (
+        {!loading && !error && imagePairs.length === 0 && (
           <div className="text-center py-12">
             <p className="text-muted-foreground">
               No images found for this method
@@ -208,29 +270,74 @@ export function MethodImages({
         )}
       </div>
 
-      {/* Fullscreen Modal */}
-      {fullscreenImage && (
+      {/* Fullscreen Comparison Modal */}
+      {fullscreenPair && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
-          onClick={() => setFullscreenImage(null)}
+          onClick={() => setFullscreenPair(null)}
         >
-          <div className="relative max-w-[90vw] max-h-[90vh]">
-            <img
-              src={fullscreenImage.url}
-              alt={`${selectedMethod} rendering - ${fullscreenImage.filename}`}
-              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-              onKeyDown={(e) => e.stopPropagation()}
-            />
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full max-w-[90vw] max-h-[90vh] flex items-center justify-center">
+              <div className="relative">
+                {/* Background GT Image (full width) */}
+                <img
+                  src={fullscreenPair.gt.url}
+                  alt="Ground Truth comparison"
+                  className="max-w-full max-h-full object-contain"
+                />
+                
+                {/* Foreground Render Image (clipped by slider) */}
+                <div 
+                  className="absolute inset-0 overflow-hidden"
+                  style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                >
+                  <img
+                    src={fullscreenPair.render.url}
+                    alt="Render comparison"
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+                
+                {/* Interactive Slider Area */}
+                <button 
+                  className="absolute inset-0 cursor-col-resize border-0 bg-transparent p-0"
+                  onClick={(e) => e.stopPropagation()}
+                  onMouseMove={handleSliderMove}
+                  onKeyDown={(e) => e.stopPropagation()}
+                  type="button"
+                />
+                
+                {/* Slider Line */}
+                <div 
+                  className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-10 pointer-events-none"
+                  style={{ left: `${sliderPosition}%` }}
+                >
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Slider handle" role="img">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* Labels */}
+                <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
+                  Render
+                </div>
+                <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
+                  Ground Truth
+                </div>
+              </div>
+            </div>
+            
             <button
-              onClick={() => setFullscreenImage(null)}
+              onClick={() => setFullscreenPair(null)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  setFullscreenImage(null);
+                  setFullscreenPair(null);
                 }
               }}
-              className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors duration-200"
+              className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors duration-200 z-20"
               type="button"
             >
               <svg
@@ -248,9 +355,6 @@ export function MethodImages({
                 />
               </svg>
             </button>
-            <div className="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
-              {fullscreenImage.filename}
-            </div>
           </div>
         </div>
       )}
