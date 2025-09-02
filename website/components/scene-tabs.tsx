@@ -8,15 +8,12 @@ import type { DatasetMeta } from "@/lib/types";
 
 interface SceneTabsProps {
   dataset: DatasetMeta;
+  selectedMethod: string | null;
+  onMethodSelect: (methodName: string | null) => void;
 }
 
-export function SceneTabs({ dataset }: SceneTabsProps) {
-  const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+export function SceneTabs({ dataset, selectedMethod, onMethodSelect }: SceneTabsProps) {
   const [selectedScene, setSelectedScene] = useState<string>("all");
-
-  const handleMethodSelect = (methodName: string | null) => {
-    setSelectedMethod(methodName);
-  };
 
   const handleSceneChange = (scene: string) => {
     setSelectedScene(scene);
@@ -62,7 +59,7 @@ export function SceneTabs({ dataset }: SceneTabsProps) {
             <TabsContent key={scene} value={scene} className="mt-0">
               <ResultsTable
                 results={filteredResults}
-                onMethodSelect={handleMethodSelect}
+                onMethodSelect={onMethodSelect}
                 selectedMethod={selectedMethod}
               />
               <PSNRTimePlot results={filteredResults} />

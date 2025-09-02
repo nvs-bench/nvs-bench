@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DatasetHeader } from "@/components/dataset-header";
 import { PSNRTimePlot } from "@/components/psnr-time-plot";
 import { ResultsTable } from "@/components/results-table";
@@ -8,6 +9,12 @@ import results from "@/lib/results.json";
 import type { DatasetMeta } from "@/lib/types";
 
 export function DatasetTabs() {
+  const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+
+  const handleMethodSelect = (methodName: string | null) => {
+    setSelectedMethod(methodName);
+  };
+
   return (
     <Tabs defaultValue="mipnerf360" className="w-full">
       <div className="mb-4 flex w-full items-center justify-center gap-4">
@@ -32,7 +39,11 @@ export function DatasetTabs() {
           className="mt-0"
         >
           <DatasetHeader selectedDataset={dataset.dataset_name} />
-          <SceneTabs dataset={dataset} />
+          <SceneTabs 
+            dataset={dataset} 
+            selectedMethod={selectedMethod}
+            onMethodSelect={handleMethodSelect}
+          />
         </TabsContent>
       ))}
     </Tabs>
