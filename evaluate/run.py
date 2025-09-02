@@ -46,10 +46,12 @@ def evaluate(method: str, scene: str):
     upload_dir = f"/nvs-bench/output/{scene}/{method}/"
     os.makedirs(upload_dir, exist_ok=True)
     os.makedirs(f"{upload_dir}/test_renders", exist_ok=True)
+    os.makedirs(f"{upload_dir}/website_images", exist_ok=True)
     os.system(f"cp /nvs-bench-output/{scene}/{method}/nvs-bench-result.json {upload_dir}/result.json")
     os.system(
         f"cp -r /nvs-bench-output/{scene}/{method}/test_renders/* {upload_dir}/test_renders/"
     )  # rm or rsync approaches don't work with mountpoint... so we go for this approach
+    os.system(f"cp -r /nvs-bench-output/{scene}/{method}/website_images/* {upload_dir}/website_images/")
     print(f"Uploaded results for {method} on {scene} to {upload_dir}")
     # TODO: Probably will want otherways to upload results. Like from local files if users provide them.
 
