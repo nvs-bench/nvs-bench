@@ -28,7 +28,7 @@ nvs_bench_gcs_bucket = modal.CloudBucketMount(
             "net_type='vgg', normalize=True)"
             '"'
         )
-        .add_local_file("nvs-bench/evaluate.py", "/root/workspace/nvs-bench/evaluate.py")
+        .add_local_file("evaluate/evaluate.py", "/root/workspace/nvs-bench/evaluate.py")
     ),
     volumes={
         "/nvs-bench-data": modal.Volume.from_name("nvs-bench-data", create_if_missing=True),
@@ -45,8 +45,11 @@ def evaluate(method: str, scene: str):
     # Upload result to gcs bucket
     upload_dir = f"/nvs-bench/output/{scene}/{method}/"
     os.makedirs(upload_dir, exist_ok=True)
+    os.makedirs(f"{upload_dir}/test_renders", exist_ok=True)
     os.system(f"cp /nvs-bench-output/{scene}/{method}/nvs-bench-result.json {upload_dir}/result.json")
-    os.system(f"cp -r /nvs-bench-output/{scene}/{method}/test_renders/ {upload_dir}/test_renders/")
+    os.system(
+        f"cp -r /nvs-bench-output/{scene}/{method}/test_renders/* {upload_dir}/test_renders/"
+    )  # rm or rsync approaches don't work with mountpoint... so we go for this approach
     print(f"Uploaded results for {method} on {scene} to {upload_dir}")
     # TODO: Probably will want otherways to upload results. Like from local files if users provide them.
 
