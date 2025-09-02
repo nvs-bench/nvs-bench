@@ -115,7 +115,7 @@ export function MethodImages({
 
   const handleSliderMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!fullscreenPair) return;
-    
+
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const percentage = (x / rect.width) * 100;
@@ -163,7 +163,8 @@ export function MethodImages({
         <div className="mb-6">
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-2">
-              {methodMeta?.method_display_name || selectedMethod} Renderings vs Ground Truth
+              {methodMeta?.method_display_name || selectedMethod} Renderings vs
+              Ground Truth
             </h3>
             <p className="text-muted-foreground">
               Test renders from {datasetName}/{sceneName}
@@ -192,13 +193,16 @@ export function MethodImages({
         {!loading && !error && imagePairs.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {imagePairs.map((pair, index) => (
-              <div key={`${pair.render.filename}-${pair.gt.filename}`} className="flex flex-col">
+              <div
+                key={`${pair.render.filename}-${pair.gt.filename}`}
+                className="flex flex-col"
+              >
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground mb-1">
                     <span className="font-medium">Render</span>
                   </p>
                 </div>
-                
+
                 {/* Combined Render and GT Images */}
                 <div className="group">
                   <button
@@ -221,7 +225,7 @@ export function MethodImages({
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
                     </div>
-                    
+
                     {/* GT Image (bottom half) */}
                     <div className="relative h-48 overflow-hidden rounded-b-lg">
                       <img
@@ -231,7 +235,7 @@ export function MethodImages({
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
                     </div>
-                    
+
                     <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       <svg
                         className="w-5 h-5 text-white drop-shadow-lg"
@@ -250,7 +254,7 @@ export function MethodImages({
                     </div>
                   </button>
                 </div>
-                
+
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground">
                     <span className="font-medium">Ground Truth</span>
@@ -285,9 +289,9 @@ export function MethodImages({
                   alt="Ground Truth comparison"
                   className="max-w-full max-h-full object-contain"
                 />
-                
+
                 {/* Foreground Render Image (clipped by slider) */}
-                <div 
+                <div
                   className="absolute inset-0 overflow-hidden"
                   style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                 >
@@ -297,28 +301,40 @@ export function MethodImages({
                     className="max-w-full max-h-full object-contain"
                   />
                 </div>
-                
+
                 {/* Interactive Slider Area */}
-                <button 
+                <button
                   className="absolute inset-0 cursor-col-resize border-0 bg-transparent p-0"
                   onClick={(e) => e.stopPropagation()}
                   onMouseMove={handleSliderMove}
                   onKeyDown={(e) => e.stopPropagation()}
                   type="button"
                 />
-                
+
                 {/* Slider Line */}
-                <div 
+                <div
                   className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-10 pointer-events-none"
                   style={{ left: `${sliderPosition}%` }}
                 >
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-                    <svg className="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Slider handle" role="img">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                    <svg
+                      className="w-4 h-4 text-gray-800"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-label="Slider handle"
+                      role="img"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
                     </svg>
                   </div>
                 </div>
-                
+
                 {/* Labels */}
                 <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
                   Render
@@ -328,7 +344,7 @@ export function MethodImages({
                 </div>
               </div>
             </div>
-            
+
             <button
               onClick={() => setFullscreenPair(null)}
               onKeyDown={(e) => {
