@@ -4,7 +4,7 @@ set -e
 # Check if data_folder and output_folder arguments are provided
 if [ $# -ne 2 ]; then
     echo "Usage: $0 <data_folder> <output_folder>"
-    echo "Example: $0 /nvs-bench-data/mipnerf360/bicycle /nvs-bench-output/mipnerf360/bicycle/ours"
+    echo "Example: $0 /nvs-bench-data/mipnerf360/bicycle /nvs-bench-output/mipnerf360/bicycle/3dgs"
     exit 1
 fi
 data_folder=$1
