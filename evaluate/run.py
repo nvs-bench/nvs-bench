@@ -38,11 +38,11 @@ def evaluate(method: str, data: str):
     os.makedirs(upload_dir, exist_ok=True)
     os.makedirs(f"{upload_dir}/test_renders", exist_ok=True)
     os.makedirs(f"{upload_dir}/website_images", exist_ok=True)
-    os.system(f"cp /nvs-bench/output/{method}/{data}/nvs-bench-result.json {upload_dir}/result.json")
+    os.system(f"cp /nvs-bench/methods/{method}/{data}/nvs-bench-result.json {upload_dir}/result.json")
     os.system(
-        f"cp -r /nvs-bench/output/{method}/{data}/test_renders/* {upload_dir}/test_renders/"
+        f"cp -r /nvs-bench/methods/{method}/{data}/test_renders/* {upload_dir}/test_renders/"
     )  # rm or rsync approaches don't work with mountpoint... so we go for this approach
-    os.system(f"cp -r /nvs-bench/output/{method}/{data}/website_images/* {upload_dir}/website_images/")
+    os.system(f"cp -r /nvs-bench/methods/{method}/{data}/website_images/* {upload_dir}/website_images/")
     print(f"Uploaded results for {method} on {data} to {upload_dir}")
     # TODO: Probably will want otherways to upload results. Like from local files if users provide them.
 
@@ -96,5 +96,5 @@ def main(method: str, data: str | None = None):
 
     # TODO: Need to add a way to download the files from the volume locally or something...
     # os.system(
-    #     "curl -o website/lib/results.json https://storage.googleapis.com/nvs-bench/output/results.json?t=$(date +%s)"
+    #     "curl -o website/lib/results.json https://storage.googleapis.com/nvs-bench/methods/results.json?t=$(date +%s)"
     # )

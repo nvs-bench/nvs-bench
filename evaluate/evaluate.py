@@ -24,7 +24,7 @@ class Metrics:
 
 def get_image_pair_paths(data: str, method: str) -> list[tuple[Path, Path]]:
     gt_path = Path(f"/nvs-bench/data/{data}/images/")
-    rendered_path = Path(f"/nvs-bench/output/{method}/{data}/test_renders/")
+    rendered_path = Path(f"/nvs-bench/methods/{method}/{data}/test_renders/")
     gt_files = sorted([f for f in gt_path.iterdir() if f.is_file()])
     gt_files = [name for idx, name in enumerate(gt_files) if idx % 8 == 0]
     rendered_files = sorted([f for f in rendered_path.iterdir() if f.is_file()])
@@ -98,7 +98,7 @@ def read_time(data: str, method: str) -> float:
     """
     Reads and prints the training time from a file.
     """
-    time_file = Path(f"/nvs-bench/output/{method}/{data}/time.txt")
+    time_file = Path(f"/nvs-bench/methods/{method}/{data}/time.txt")
     if time_file.exists():
         with open(time_file) as f:
             time = f.read().strip()
@@ -111,7 +111,7 @@ def read_memory(data: str, method: str) -> float:
     """
     Reads and prints the training memory from a file.
     """
-    memory_file = Path(f"/nvs-bench/output/{method}/{data}/max_gpu_memory.txt")
+    memory_file = Path(f"/nvs-bench/methods/{method}/{data}/max_gpu_memory.txt")
     if memory_file.exists():
         with open(memory_file) as f:
             memory = f.read().strip()
@@ -121,7 +121,7 @@ def read_memory(data: str, method: str) -> float:
 
 
 def write_result_to_json(data: str, method: str, metrics: Metrics, time: float):
-    result_json_file_path = f"/nvs-bench/output/{method}/{data}/nvs-bench-result.json"
+    result_json_file_path = f"/nvs-bench/methods/{method}/{data}/nvs-bench-result.json"
 
     result = {
         "method_name": method,
@@ -147,13 +147,13 @@ def save_gt_and_render_image_pairs(data: str, method: str):
     middle_image_pair = image_pair_paths[len(image_pair_paths) // 2]
     last_image_pair = image_pair_paths[-1]
 
-    os.makedirs(f"/nvs-bench/output/{method}/{data}/website_images/", exist_ok=True)
-    os.system(f"cp {first_image_pair[0]} /nvs-bench/output/{method}/{data}/website_images/gt_0.png")
-    os.system(f"cp {first_image_pair[1]} /nvs-bench/output/{method}/{data}/website_images/render_0.png")
-    os.system(f"cp {middle_image_pair[0]} /nvs-bench/output/{method}/{data}/website_images/gt_1.png")
-    os.system(f"cp {middle_image_pair[1]} /nvs-bench/output/{method}/{data}/website_images/render_1.png")
-    os.system(f"cp {last_image_pair[0]} /nvs-bench/output/{method}/{data}/website_images/gt_2.png")
-    os.system(f"cp {last_image_pair[1]} /nvs-bench/output/{method}/{data}/website_images/render_2.png")
+    os.makedirs(f"/nvs-bench/methods/{method}/{data}/website_images/", exist_ok=True)
+    os.system(f"cp {first_image_pair[0]} /nvs-bench/methods/{method}/{data}/website_images/gt_0.png")
+    os.system(f"cp {first_image_pair[1]} /nvs-bench/methods/{method}/{data}/website_images/render_0.png")
+    os.system(f"cp {middle_image_pair[0]} /nvs-bench/methods/{method}/{data}/website_images/gt_1.png")
+    os.system(f"cp {middle_image_pair[1]} /nvs-bench/methods/{method}/{data}/website_images/render_1.png")
+    os.system(f"cp {last_image_pair[0]} /nvs-bench/methods/{method}/{data}/website_images/gt_2.png")
+    os.system(f"cp {last_image_pair[1]} /nvs-bench/methods/{method}/{data}/website_images/render_2.png")
 
 
 if __name__ == "__main__":

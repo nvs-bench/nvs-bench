@@ -45,31 +45,31 @@ export function MethodImages({
         const pairs: ImagePair[] = [
           {
             render: {
-              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_0.png`,
+              url: `https://storage.googleapis.com/nvs-bench/methods/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_0.png`,
               filename: `render_0.png`,
             },
             gt: {
-              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_0.png`,
+              url: `https://storage.googleapis.com/nvs-bench/methods/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_0.png`,
               filename: `gt_0.png`,
             },
           },
           {
             render: {
-              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_1.png`,
+              url: `https://storage.googleapis.com/nvs-bench/methods/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_1.png`,
               filename: `render_1.png`,
             },
             gt: {
-              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_1.png`,
+              url: `https://storage.googleapis.com/nvs-bench/methods/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_1.png`,
               filename: `gt_1.png`,
             },
           },
           {
             render: {
-              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_2.png`,
+              url: `https://storage.googleapis.com/nvs-bench/methods/${datasetName}/${sceneName}/${selectedMethod}/website_images/render_2.png`,
               filename: `render_2.png`,
             },
             gt: {
-              url: `https://storage.googleapis.com/nvs-bench/output/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_2.png`,
+              url: `https://storage.googleapis.com/nvs-bench/methods/${datasetName}/${sceneName}/${selectedMethod}/website_images/gt_2.png`,
               filename: `gt_2.png`,
             },
           },
