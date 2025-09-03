@@ -41,7 +41,7 @@ DOWNLOAD_FOLDER = Path(f"/nvs-bench-downloads/{DATASET}")
 DOWNLOAD_FOLDER.mkdir(parents=True, exist_ok=True)
 os.chdir(DOWNLOAD_FOLDER)
 
-DATASET_FOLDER = Path(f"/nvs-bench-data/{DATASET}")
+DATASET_FOLDER = Path(f"/nvs-bench/data/{DATASET}")
 DATASET_FOLDER.mkdir(parents=True, exist_ok=True)
 
 for scene_name, url in SCENES.items():

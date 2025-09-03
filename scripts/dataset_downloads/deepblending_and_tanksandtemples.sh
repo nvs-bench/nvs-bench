@@ -2,5 +2,5 @@ wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/input/tan
 
 unzip tandt_db.zip
 
-mv db /nvs-bench-data/deepblending/
-mv tandt /nvs-bench-data/tanksandtemples/
+mv db /nvs-bench/data/deepblending/
+mv tandt /nvs-bench/data/tanksandtemples/

@@ -21,12 +21,10 @@ assert method_name != "nvs-bench", (
     "nvs-bench must be called from the method's directory, not the nvs-bench subdirectory. Eg: `modal run nvs-bench/image.py`."
 )
 
-data_volume = Volume.from_name("nvs-bench-data", create_if_missing=True)
-output_volume = Volume.from_name("nvs-bench-output", create_if_missing=True)
+nvs_bench_volume = Volume.from_name("nvs-bench", create_if_missing=True)
 
 modal_volumes: dict[str | PurePosixPath, Volume] = {
-    "/nvs-bench-data": data_volume,
-    "/nvs-bench-output": output_volume,
+    "/nvs-bench": nvs_bench_volume,
 }
 
 image = (

@@ -5,7 +5,7 @@ import modal
 # Create the Modal app
 app = modal.App("nvs-bench-evaluate")
 
-nvs_bench_output_volume = modal.Volume.from_name("nvs-bench-output", create_if_missing=True)
+nvs_bench_volume = modal.Volume.from_name("nvs-bench", create_if_missing=True)
 
 
 @app.function(
@@ -24,27 +24,25 @@ nvs_bench_output_volume = modal.Volume.from_name("nvs-bench-output", create_if_m
         .add_local_file("evaluate/evaluate.py", "/root/workspace/nvs-bench/evaluate.py")
     ),
     volumes={
-        "/nvs-bench-data": modal.Volume.from_name("nvs-bench-data", create_if_missing=True),
-        "/nvs-bench-output": nvs_bench_output_volume,
-        "/nvs-bench-results": modal.Volume.from_name("nvs-bench-results", create_if_missing=True),
+        "/nvs-bench": nvs_bench_volume,
     },
     gpu="T4",
     timeout=3600,
 )
 def evaluate(method: str, data: str):
     os.system(f"python /root/workspace/nvs-bench/evaluate.py --method {method} --data {data}")
-    nvs_bench_output_volume.commit()
+    nvs_bench_volume.commit()
 
     # Upload result to gcs bucket
-    upload_dir = f"/nvs-bench-results/{method}/{data}/"
+    upload_dir = f"/nvs-bench/results/{method}/{data}/"
     os.makedirs(upload_dir, exist_ok=True)
     os.makedirs(f"{upload_dir}/test_renders", exist_ok=True)
     os.makedirs(f"{upload_dir}/website_images", exist_ok=True)
-    os.system(f"cp /nvs-bench-output/{method}/{data}/nvs-bench-result.json {upload_dir}/result.json")
+    os.system(f"cp /nvs-bench/output/{method}/{data}/nvs-bench-result.json {upload_dir}/result.json")
     os.system(
-        f"cp -r /nvs-bench-output/{method}/{data}/test_renders/* {upload_dir}/test_renders/"
+        f"cp -r /nvs-bench/output/{method}/{data}/test_renders/* {upload_dir}/test_renders/"
     )  # rm or rsync approaches don't work with mountpoint... so we go for this approach
-    os.system(f"cp -r /nvs-bench-output/{method}/{data}/website_images/* {upload_dir}/website_images/")
+    os.system(f"cp -r /nvs-bench/output/{method}/{data}/website_images/* {upload_dir}/website_images/")
     print(f"Uploaded results for {method} on {data} to {upload_dir}")
     # TODO: Probably will want otherways to upload results. Like from local files if users provide them.
 
@@ -52,13 +50,13 @@ def evaluate(method: str, data: str):
 @app.function(
     image=modal.Image.debian_slim().apt_install("jq"),
     volumes={
-        "/nvs-bench-results": modal.Volume.from_name("nvs-bench-results", create_if_missing=True),
+        "/nvs-bench": nvs_bench_volume,
     },
 )
 def aggregate_results():
     """Find all result.json files and combine them into one results.json file with proper JSON array format"""
     os.system(
-        "find /nvs-bench-results -name 'result.json' -exec cat {} + | jq -s '.' > /nvs-bench-results/results.json"
+        "find /nvs-bench/results -name 'result.json' -exec cat {} + | jq -s '.' > /nvs-bench/results/results.json"
     )
     print("Combined all result.json files into results.json with proper JSON array format")
 

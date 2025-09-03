@@ -30,9 +30,9 @@ for scene in alameda berlin london nyc; do
     cd /nvs-bench-downloads/zipnerf
 done
 
-rm -rf /nvs-bench-data/zipnerf
-mkdir -p /nvs-bench-data/zipnerf/
-mv /nvs-bench-downloads/zipnerf/alameda /nvs-bench-data/zipnerf/alameda
-mv /nvs-bench-downloads/zipnerf/berlin /nvs-bench-data/zipnerf/berlin
-mv /nvs-bench-downloads/zipnerf/london /nvs-bench-data/zipnerf/london
-mv /nvs-bench-downloads/zipnerf/nyc /nvs-bench-data/zipnerf/nyc
+rm -rf /nvs-bench/data/zipnerf
+mkdir -p /nvs-bench/data/zipnerf/
+mv /nvs-bench-downloads/zipnerf/alameda /nvs-bench/data/zipnerf/alameda
+mv /nvs-bench-downloads/zipnerf/berlin /nvs-bench/data/zipnerf/berlin
+mv /nvs-bench-downloads/zipnerf/london /nvs-bench/data/zipnerf/london
+mv /nvs-bench-downloads/zipnerf/nyc /nvs-bench/data/zipnerf/nyc
