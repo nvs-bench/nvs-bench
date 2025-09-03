@@ -22,9 +22,9 @@ class Metrics:
     lpips: float
 
 
-def get_image_pair_paths(scene: str, method: str) -> list[tuple[Path, Path]]:
-    gt_path = Path(f"/nvs-bench-data/{scene}/images/")
-    rendered_path = Path(f"/nvs-bench-output/{scene}/{method}/test_renders/")
+def get_image_pair_paths(data: str, method: str) -> list[tuple[Path, Path]]:
+    gt_path = Path(f"/nvs-bench-data/{data}/images/")
+    rendered_path = Path(f"/nvs-bench-output/{method}/{data}/test_renders/")
     gt_files = sorted([f for f in gt_path.iterdir() if f.is_file()])
     gt_files = [name for idx, name in enumerate(gt_files) if idx % 8 == 0]
     rendered_files = sorted([f for f in rendered_path.iterdir() if f.is_file()])
@@ -37,7 +37,7 @@ def get_image_pair_paths(scene: str, method: str) -> list[tuple[Path, Path]]:
     return list(zip(gt_files, rendered_files))
 
 
-def evaluate_metrics(scene: str, method: str) -> Metrics:
+def evaluate_metrics(data: str, method: str) -> Metrics:
     """Evaluates rendered images against ground truth images using PSNR, SSIM, and LPIPS."""
 
     # Check if GPU is available
@@ -48,7 +48,7 @@ def evaluate_metrics(scene: str, method: str) -> Metrics:
     ssim_scores = []
     lpips_scores = []
 
-    for i, (gt_file, rendered_file) in tqdm(enumerate(get_image_pair_paths(scene, method))):
+    for i, (gt_file, rendered_file) in tqdm(enumerate(get_image_pair_paths(data, method))):
         # Load single image pair
         gt_image = imageio.imread(gt_file)
         rendered_image = imageio.imread(rendered_file)
@@ -94,11 +94,11 @@ def evaluate_metrics(scene: str, method: str) -> Metrics:
     return Metrics(psnr=avg_psnr, ssim=avg_ssim, lpips=avg_lpips)
 
 
-def read_time(scene: str, method: str) -> float:
+def read_time(data: str, method: str) -> float:
     """
     Reads and prints the training time from a file.
     """
-    time_file = Path(f"/nvs-bench-output/{scene}/{method}/time.txt")
+    time_file = Path(f"/nvs-bench-output/{method}/{data}/time.txt")
     if time_file.exists():
         with open(time_file) as f:
             time = f.read().strip()
@@ -107,11 +107,11 @@ def read_time(scene: str, method: str) -> float:
         raise FileNotFoundError(f"Training time file not found at: {time_file}")
 
 
-def read_memory(scene: str, method: str) -> float:
+def read_memory(data: str, method: str) -> float:
     """
     Reads and prints the training memory from a file.
     """
-    memory_file = Path(f"/nvs-bench-output/{scene}/{method}/max_gpu_memory.txt")
+    memory_file = Path(f"/nvs-bench-output/{method}/{data}/max_gpu_memory.txt")
     if memory_file.exists():
         with open(memory_file) as f:
             memory = f.read().strip()
@@ -120,13 +120,13 @@ def read_memory(scene: str, method: str) -> float:
         raise FileNotFoundError(f"Training memory file not found at: {memory_file}")
 
 
-def write_result_to_json(scene: str, method: str, metrics: Metrics, time: float):
-    result_json_file_path = f"/nvs-bench-output/{scene}/{method}/nvs-bench-result.json"
+def write_result_to_json(data: str, method: str, metrics: Metrics, time: float):
+    result_json_file_path = f"/nvs-bench-output/{method}/{data}/nvs-bench-result.json"
 
     result = {
         "method_name": method,
-        "dataset_name": scene.split("/")[0],
-        "scene_name": scene.split("/")[1],
+        "dataset_name": data.split("/")[0],
+        "scene_name": data.split("/")[1],
         "psnr": metrics.psnr,
         "ssim": metrics.ssim,
         "lpips": metrics.lpips,
@@ -139,31 +139,31 @@ def write_result_to_json(scene: str, method: str, metrics: Metrics, time: float)
         json.dump(result, f)
 
 
-def save_gt_and_render_image_pairs(scene: str, method: str):
-    image_pair_paths = get_image_pair_paths(scene, method)
+def save_gt_and_render_image_pairs(data: str, method: str):
+    image_pair_paths = get_image_pair_paths(data, method)
 
     # Select first, middle and last image pairs
     first_image_pair = image_pair_paths[0]
     middle_image_pair = image_pair_paths[len(image_pair_paths) // 2]
     last_image_pair = image_pair_paths[-1]
 
-    os.makedirs(f"/nvs-bench-output/{scene}/{method}/website_images/", exist_ok=True)
-    os.system(f"cp {first_image_pair[0]} /nvs-bench-output/{scene}/{method}/website_images/gt_0.png")
-    os.system(f"cp {first_image_pair[1]} /nvs-bench-output/{scene}/{method}/website_images/render_0.png")
-    os.system(f"cp {middle_image_pair[0]} /nvs-bench-output/{scene}/{method}/website_images/gt_1.png")
-    os.system(f"cp {middle_image_pair[1]} /nvs-bench-output/{scene}/{method}/website_images/render_1.png")
-    os.system(f"cp {last_image_pair[0]} /nvs-bench-output/{scene}/{method}/website_images/gt_2.png")
-    os.system(f"cp {last_image_pair[1]} /nvs-bench-output/{scene}/{method}/website_images/render_2.png")
+    os.makedirs(f"/nvs-bench-output/{method}/{data}/website_images/", exist_ok=True)
+    os.system(f"cp {first_image_pair[0]} /nvs-bench-output/{method}/{data}/website_images/gt_0.png")
+    os.system(f"cp {first_image_pair[1]} /nvs-bench-output/{method}/{data}/website_images/render_0.png")
+    os.system(f"cp {middle_image_pair[0]} /nvs-bench-output/{method}/{data}/website_images/gt_1.png")
+    os.system(f"cp {middle_image_pair[1]} /nvs-bench-output/{method}/{data}/website_images/render_1.png")
+    os.system(f"cp {last_image_pair[0]} /nvs-bench-output/{method}/{data}/website_images/gt_2.png")
+    os.system(f"cp {last_image_pair[1]} /nvs-bench-output/{method}/{data}/website_images/render_2.png")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate rendered images against ground truth.")
     parser.add_argument("--method", type=str, required=True, help="Method name.")
-    parser.add_argument("--scene", type=str, required=True, help="Scene name.")
+    parser.add_argument("--data", type=str, required=True, help="Data name. eg. mipnerf360/bicycle")
     args = parser.parse_args()
 
-    metrics = evaluate_metrics(args.scene, args.method)
-    time = read_time(args.scene, args.method)
-    memory = read_memory(args.scene, args.method)
-    write_result_to_json(args.scene, args.method, metrics, time)
-    save_gt_and_render_image_pairs(args.scene, args.method)
+    metrics = evaluate_metrics(args.data, args.method)
+    time = read_time(args.data, args.method)
+    memory = read_memory(args.data, args.method)
+    write_result_to_json(args.data, args.method, metrics, time)
+    save_gt_and_render_image_pairs(args.data, args.method)
