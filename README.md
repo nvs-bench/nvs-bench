@@ -14,11 +14,17 @@ Our preferred way of generating them for a new repo consists of three simple fil
 
 # New Methods
 
-Clone the `nvs-bench` boilerplate files into a new method's repo with:
+1) Clone the `nvs-bench` boilerplate files into a new method's repo with:
 ```
 git remote add nvs-bench https://github.com/N-Demir/nvs-bench.git && git subtree add --prefix=nvs-bench nvs-bench boilerplate-branch --squash
 ```
-(Using subtree here should allow for easy pull downs of boilerplate updates)
+(we use `git subtree` to make boilerplate versioning and distribution easier)
+
+2) Fill out 
+- `image.py` with steps needed to install your method on a new machine or use an existing Dockerfile
+- `eval.sh` with the commands for training, rendering, and moving of test renders to the `$output_folder/test_renders` folder
+
+
 
 
 

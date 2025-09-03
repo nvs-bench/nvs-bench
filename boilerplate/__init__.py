@@ -1,2 +1,2 @@
-# Boiletplate versioning
-__version__ = "0.1.0"
+# Boilerplate versioning
+__version__ = "0.1.1"

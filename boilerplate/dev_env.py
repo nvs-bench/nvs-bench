@@ -51,7 +51,12 @@ app = modal.App(
         # Add local files
         .add_local_dir(Path.cwd(), f"/root/{Path.cwd().name}")
     ),
-    volumes=modal_volumes,
+    volumes=modal_volumes
+    | {
+        # For faster boot ups when connecting with one of these IDEs
+        "/root/.cursor-server": modal.Volume.from_name("cursor-server-volume", create_if_missing=True),
+        "/root/.code-server": modal.Volume.from_name("code-server-volume", create_if_missing=True),
+    },
 )
 
 HOSTNAME = "modal-vscode-server"
