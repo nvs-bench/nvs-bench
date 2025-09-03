@@ -6,6 +6,8 @@ for most methods so far.
 - if you already have a Dockerfile and want to keep using it, replace the Image.from_registry() line with Image.from_dockerfile("Dockerfile").
 You might also want to change the `workdir` to keep it consistent with the Dockerfile's.
 - add your installation commands in the bottom section. Modal's syntax almost identically follows dockerfile's.
+  - note that if your install commands needs access to a gpu that's possible
+  - also, avoid using conda and use pip instead (installing and initializing conda in dockerfiles has caused us a lot of problems)
 
 See their docs for more info: https://modal.com/docs/guide/images
 """
