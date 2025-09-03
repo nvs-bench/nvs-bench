@@ -7,7 +7,7 @@ from pathlib import Path
 
 import modal
 
-from .image import image, method_name, modal_volumes, output_volume
+from .image import image, method_name, modal_volumes, nvs_bench_volume
 
 app = modal.App(
     "nvs-bench",
@@ -48,12 +48,12 @@ def log_time(log_file: str):
     gpu="L40S",
 )
 def eval(data: str):
-    data_folder = Path(f"/nvs-bench-data/{data}/")
-    output_folder = Path(f"/nvs-bench-output/{method_name}/{data}/")
+    data_folder = Path(f"/nvs-bench/data/{data}/")
+    output_folder = Path(f"/nvs-bench/output/{method_name}/{data}/")
 
     # Download from gcs (noop if already exists)
-    os.system(f"mkdir -p /nvs-bench-data/{data}/")
-    os.system(f"gsutil -m rsync -r -d gs://nvs-bench/data/{data} /nvs-bench-data/{data}")
+    os.system(f"mkdir -p /nvs-bench/data/{data}/")
+    os.system(f"gsutil -m rsync -r -d gs://nvs-bench/data/{data} /nvs-bench/data/{data}")
 
     # Clean output folder
     shutil.rmtree(output_folder, ignore_errors=True)
@@ -62,7 +62,7 @@ def eval(data: str):
     with log_max_gpu_memory(f"{output_folder}/max_gpu_memory.txt"), log_time(f"{output_folder}/time.txt"):
         os.system(f"bash nvs-bench/eval.sh {data_folder} {output_folder}")
 
-    output_volume.commit()
+    nvs_bench_volume.commit()
 
 
 def full_eval():
