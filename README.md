@@ -12,7 +12,16 @@ Our preferred way of generating them for a new repo consists of three simple fil
 - `nvs_bench.sh` -- Your training / rendering commands
 - `nvs_bench.py` —- (does not need to be edited) Runs training/rendering on a serverless gpu provider (we chose Beam for their RTX 4090s, <$30 free tier, and simple python interface)
 
-# Adding a New Method
+# New Methods
+
+Clone the `nvs-bench` boilerplate files into a new method's repo with:
+```
+git remote add nvs-bench https://github.com/N-Demir/nvs-bench.git && git subtree add --prefix=nvs-bench nvs-bench boilerplate-branch --squash
+```
+(Using subtree here should allow for easy pull downs of boilerplate updates)
+
+
+
 In our experience, very few lines of code need to be changed from the base templates for a new method to integrate with nvs-bench:
 
 - choose a base docker image that matches your desired pytorch and cuda version from: https://hub.docker.com/r/pytorch/pytorch/tags (e.g. pytorch/pytorch:2.4.1-cuda12.4-cudnn9-devel)

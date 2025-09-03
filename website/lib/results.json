@@ -10,6 +10,16 @@
     "max_gpu_memory": 13851
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "deepblending",
+    "scene_name": "drjohnson",
+    "psnr": 27.699716914783824,
+    "ssim": 0.8815346956253052,
+    "lpips": 0.36188497055660596,
+    "time": 5814.69,
+    "max_gpu_memory": 10993
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "deepblending",
     "scene_name": "playroom",
@@ -18,6 +28,16 @@
     "lpips": 0.2637151484859401,
     "time": 1956.25,
     "max_gpu_memory": 11737
+  },
+  {
+    "method_name": "ever_training",
+    "dataset_name": "deepblending",
+    "scene_name": "playroom",
+    "psnr": 28.9935684861808,
+    "ssim": 0.8984817615870772,
+    "lpips": 0.3365638379392953,
+    "time": 4918.4,
+    "max_gpu_memory": 13257
   },
   {
     "method_name": "EDGS",
@@ -50,6 +70,16 @@
     "max_gpu_memory": 15639
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bicycle",
+    "psnr": 23.349628982543944,
+    "ssim": 0.65660862326622,
+    "lpips": 0.36350659012794495,
+    "time": 5674.56,
+    "max_gpu_memory": 21903
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "mipnerf360",
     "scene_name": "bonsai",
@@ -58,6 +88,16 @@
     "lpips": 0.21411567120938688,
     "time": 2196.16,
     "max_gpu_memory": 14967
+  },
+  {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bonsai",
+    "psnr": 30.50778074522276,
+    "ssim": 0.930540919303894,
+    "lpips": 0.2675219649398649,
+    "time": 5907.58,
+    "max_gpu_memory": 8907
   },
   {
     "method_name": "EDGS",
@@ -70,6 +110,16 @@
     "max_gpu_memory": 13651
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "counter",
+    "psnr": 28.2753932317098,
+    "ssim": 0.8994039078553517,
+    "lpips": 0.2590113177895546,
+    "time": 4508.04,
+    "max_gpu_memory": 8359
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "mipnerf360",
     "scene_name": "flowers",
@@ -78,6 +128,16 @@
     "lpips": 0.281561288643967,
     "time": 2392.93,
     "max_gpu_memory": 11071
+  },
+  {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "flowers",
+    "psnr": 19.92395609075373,
+    "ssim": 0.507882608608766,
+    "lpips": 0.451386803930456,
+    "time": 6522.2,
+    "max_gpu_memory": 21317
   },
   {
     "method_name": "EDGS",
@@ -90,6 +150,16 @@
     "max_gpu_memory": 13437
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "garden",
+    "psnr": 25.84235390027364,
+    "ssim": 0.8214540854096413,
+    "lpips": 0.16991657577455044,
+    "time": 6918.95,
+    "max_gpu_memory": 23269
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "mipnerf360",
     "scene_name": "kitchen",
@@ -98,6 +168,16 @@
     "lpips": 0.1338748478463718,
     "time": 2454.29,
     "max_gpu_memory": 14529
+  },
+  {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "kitchen",
+    "psnr": 29.738505990164622,
+    "ssim": 0.9147749509130205,
+    "lpips": 0.17918828683240073,
+    "time": 4764.66,
+    "max_gpu_memory": 8405
   },
   {
     "method_name": "EDGS",
@@ -110,6 +190,16 @@
     "max_gpu_memory": 15403
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "room",
+    "psnr": 30.18156775450095,
+    "ssim": 0.9099598099023868,
+    "lpips": 0.2978202268863336,
+    "time": 5575.29,
+    "max_gpu_memory": 11483
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "mipnerf360",
     "scene_name": "stump",
@@ -118,6 +208,16 @@
     "lpips": 0.20676208287477493,
     "time": 2333.19,
     "max_gpu_memory": 11261
+  },
+  {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "stump",
+    "psnr": 22.333574771881104,
+    "ssim": 0.6095789987593889,
+    "lpips": 0.4102097488939762,
+    "time": 5086.48,
+    "max_gpu_memory": 21319
   },
   {
     "method_name": "EDGS",
@@ -130,6 +230,16 @@
     "max_gpu_memory": 12703
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "mipnerf360",
+    "scene_name": "treehill",
+    "psnr": 22.039465056525337,
+    "ssim": 0.6108477430211173,
+    "lpips": 0.4138814045323266,
+    "time": 5578.84,
+    "max_gpu_memory": 20213
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "tanksandtemples",
     "scene_name": "train",
@@ -140,6 +250,16 @@
     "max_gpu_memory": 8803
   },
   {
+    "method_name": "ever_training",
+    "dataset_name": "tanksandtemples",
+    "scene_name": "train",
+    "psnr": 20.982856223457738,
+    "ssim": 0.8112422055319736,
+    "lpips": 0.23232796631361308,
+    "time": 5000.23,
+    "max_gpu_memory": 22067
+  },
+  {
     "method_name": "EDGS",
     "dataset_name": "tanksandtemples",
     "scene_name": "truck",
@@ -148,5 +268,15 @@
     "lpips": 0.1055141354445368,
     "time": 1991.69,
     "max_gpu_memory": 9469
+  },
+  {
+    "method_name": "ever_training",
+    "dataset_name": "tanksandtemples",
+    "scene_name": "truck",
+    "psnr": 23.95707929134369,
+    "ssim": 0.8565182611346245,
+    "lpips": 0.18584892014041543,
+    "time": 4759.77,
+    "max_gpu_memory": 21709
   }
 ]

@@ -6,3 +6,7 @@
 	path = methods/EDGS
 	url = https://github.com/N-Demir/EDGS.git
 	branch = nvs-bench
+[submodule "methods/3dgrut"]
+	path = methods/3dgrut
+	url = https://github.com/N-Demir/3dgrut.git
+	branch = nvs-bench
