@@ -49,7 +49,7 @@ def log_time(log_file: str):
 )
 def eval(data: str):
     data_folder = Path(f"/nvs-bench-data/{data}/")
-    output_folder = Path(f"/nvs-bench-output/{data}/{method_name}/")
+    output_folder = Path(f"/nvs-bench-output/{method_name}/{data}/")
 
     # Download from gcs (noop if already exists)
     os.system(f"mkdir -p /nvs-bench-data/{data}/")
