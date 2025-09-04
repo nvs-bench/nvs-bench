@@ -1,0 +1,10 @@
+{
+  "method_name": "EDGS",
+  "dataset_name": "tanksandtemples",
+  "scene_name": "train",
+  "psnr": 22.497114683452406,
+  "ssim": 0.8500589100938094,
+  "lpips": 0.17857062424484052,
+  "time": 1471.09,
+  "max_gpu_memory": 8803.0
+}

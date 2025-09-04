@@ -31,7 +31,6 @@ nvs_bench_volume = modal.Volume.from_name("nvs-bench", create_if_missing=True)
 )
 def evaluate(method: str, data: str):
     os.system(f"python /root/workspace/nvs-bench/evaluate.py --method {method} --data {data}")
-    nvs_bench_volume.commit()
 
     # Upload result to gcs bucket
     upload_dir = f"/nvs-bench/results/{method}/{data}/"
@@ -44,28 +43,21 @@ def evaluate(method: str, data: str):
     )  # rm or rsync approaches don't work with mountpoint... so we go for this approach
     os.system(f"cp -r /nvs-bench/methods/{method}/{data}/website_images/* {upload_dir}/website_images/")
     print(f"Uploaded results for {method} on {data} to {upload_dir}")
-    # TODO: Probably will want otherways to upload results. Like from local files if users provide them.
+
+    nvs_bench_volume.commit()
 
 
-@app.function(
-    image=modal.Image.debian_slim().apt_install("jq"),
-    volumes={
-        "/nvs-bench": nvs_bench_volume,
-    },
-)
-def aggregate_results():
-    """Find all result.json files and combine them into one results.json file with proper JSON array format"""
-    os.system(
-        "find /nvs-bench/results -name 'result.json' -exec cat {} + | jq -s '.' > /nvs-bench/results/results.json"
-    )
-    print("Combined all result.json files into results.json with proper JSON array format")
+def download_results(method: str):
+    os.system("mkdir -p results/")
+    os.system(f"modal volume get --force nvs-bench results/{method}/ website/public/results/")
+    os.system(f"find website/public/results/{method} -type d -name 'test_renders' -exec rm -rf {{}} +")
+    os.system("cd website && pnpm run build")
 
 
 @app.local_entrypoint()
 def main(method: str, data: str | None = None):
     if data is not None:
         evaluate.remote(method, data)
-        aggregate_results.remote()
     else:
         BENCHMARK_DATA = [  # noqa: N806
             # Mipnerf360
@@ -92,9 +84,5 @@ def main(method: str, data: str | None = None):
         ]
         # Have to do something a bit unusual to allow modal to iterate over the second kwarg
         list(evaluate.starmap((method, data) for data in BENCHMARK_DATA))
-        aggregate_results.remote()
 
-    # TODO: Need to add a way to download the files from the volume locally or something...
-    # os.system(
-    #     "curl -o website/lib/results.json https://storage.googleapis.com/nvs-bench/methods/results.json?t=$(date +%s)"
-    # )
+    download_results(method)

@@ -2,8 +2,6 @@
 
 import { DatasetTabs } from "@/components/dataset-tabs";
 import { Header } from "@/components/header";
-import { PSNRTimePlot } from "@/components/psnr-time-plot";
-import results from "@/lib/results.json";
 
 export default function Home() {
   return (

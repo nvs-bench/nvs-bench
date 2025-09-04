@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "node scripts/aggregate-results.js",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "biome check",

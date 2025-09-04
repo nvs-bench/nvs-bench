@@ -1,0 +1,10 @@
+{
+  "method_name": "EDGS",
+  "dataset_name": "mipnerf360",
+  "scene_name": "kitchen",
+  "psnr": 32.166676548549106,
+  "ssim": 0.9363427468708583,
+  "lpips": 0.1338748478463718,
+  "time": 2454.29,
+  "max_gpu_memory": 14529.0
+}

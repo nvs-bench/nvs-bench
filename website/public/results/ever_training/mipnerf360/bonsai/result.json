@@ -1,0 +1,1 @@
+{"method_name": "ever_training", "dataset_name": "mipnerf360", "scene_name": "bonsai", "psnr": 30.50778074522276, "ssim": 0.930540919303894, "lpips": 0.2675219649398649, "time": 5907.58, "max_gpu_memory": 8907.0}

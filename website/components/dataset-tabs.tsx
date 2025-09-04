@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { DatasetHeader } from "@/components/dataset-header";
-import { PSNRTimePlot } from "@/components/psnr-time-plot";
-import { ResultsTable } from "@/components/results-table";
 import { SceneTabs } from "@/components/scene-tabs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
-import results from "@/lib/results.json";
 import type { DatasetMeta } from "@/lib/types";
 
 export function DatasetTabs() {
@@ -39,8 +36,8 @@ export function DatasetTabs() {
           className="mt-0"
         >
           <DatasetHeader selectedDataset={dataset.dataset_name} />
-          <SceneTabs 
-            dataset={dataset} 
+          <SceneTabs
+            dataset={dataset}
             selectedMethod={selectedMethod}
             onMethodSelect={handleMethodSelect}
           />

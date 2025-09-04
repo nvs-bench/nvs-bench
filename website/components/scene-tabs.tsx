@@ -12,7 +12,11 @@ interface SceneTabsProps {
   onMethodSelect: (methodName: string | null) => void;
 }
 
-export function SceneTabs({ dataset, selectedMethod, onMethodSelect }: SceneTabsProps) {
+export function SceneTabs({
+  dataset,
+  selectedMethod,
+  onMethodSelect,
+}: SceneTabsProps) {
   const [selectedScene, setSelectedScene] = useState<string>("all");
 
   const handleSceneChange = (scene: string) => {

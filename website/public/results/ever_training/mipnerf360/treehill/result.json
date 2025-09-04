@@ -1,0 +1,1 @@
+{"method_name": "ever_training", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 22.039465056525337, "ssim": 0.6108477430211173, "lpips": 0.4138814045323266, "time": 5578.84, "max_gpu_memory": 20213.0}
