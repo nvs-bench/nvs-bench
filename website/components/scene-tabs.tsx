@@ -9,6 +9,7 @@ import type { DatasetMeta } from "@/lib/types";
 interface SceneTabsProps {
   dataset: DatasetMeta;
   selectedMethod: string | null;
+  selectedScene: string;
   onMethodSelect: (methodName: string | null) => void;
   onSceneChange: (scene: string) => void;
 }
@@ -16,13 +17,11 @@ interface SceneTabsProps {
 export function SceneTabs({
   dataset,
   selectedMethod,
+  selectedScene,
   onMethodSelect,
   onSceneChange,
 }: SceneTabsProps) {
-  const [selectedScene, setSelectedScene] = useState<string>("all");
-
   const handleSceneChange = (scene: string) => {
-    setSelectedScene(scene);
     onSceneChange(scene);
     // Don't clear selected method when changing scenes
   };
@@ -30,7 +29,7 @@ export function SceneTabs({
   return (
     <div className="mb-6">
       <Tabs
-        defaultValue="all"
+        value={selectedScene}
         className="w-full"
         onValueChange={handleSceneChange}
       >

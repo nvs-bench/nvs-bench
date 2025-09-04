@@ -18,8 +18,13 @@ export function DatasetTabs() {
     setSelectedScene(scene);
   };
 
+  const handleDatasetChange = (datasetName: string) => {
+    // Reset scene selection when switching datasets
+    setSelectedScene("all");
+  };
+
   return (
-    <Tabs defaultValue="mipnerf360" className="w-full">
+    <Tabs defaultValue="mipnerf360" className="w-full" onValueChange={handleDatasetChange}>
       <div className="mb-4 flex w-full items-center justify-center gap-4">
         <TabsList className="w-fit gap-3">
           {(datasets as DatasetMeta[]).map((d) => (
@@ -45,6 +50,7 @@ export function DatasetTabs() {
           <SceneTabs
             dataset={dataset}
             selectedMethod={selectedMethod}
+            selectedScene={selectedScene}
             onMethodSelect={handleMethodSelect}
             onSceneChange={handleSceneChange}
           />

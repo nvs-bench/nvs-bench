@@ -15,6 +15,25 @@ interface DatasetImagesProps {
   selectedScene?: string;
 }
 
+interface DatasetImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+function DatasetImage({ src, alt, className = "w-auto h-32 sm:h-36 md:h-40 object-contain block" }: DatasetImageProps) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={800}
+      height={600}
+      className={className}
+      loading="lazy"
+    />
+  );
+}
+
 export function DatasetImages({
   selectedDataset,
   selectedScene,
@@ -26,44 +45,54 @@ export function DatasetImages({
   );
   if (!dataset) return null;
 
-  // If "all" is selected, show images from the first 3 scenes
+  // If "all" is selected, show images from all scenes
   // If a specific scene is selected, show only that scene's images
   // Otherwise, show images from all scenes in the dataset
   const scenesToShow = selectedScene === "all" 
-    ? dataset.scenes.slice(0, 3) 
+    ? dataset.scenes 
     : selectedScene 
     ? [selectedScene] 
     : dataset.scenes;
 
   return (
     <div className="mb-6">
-      <div className="space-y-4">
-        {scenesToShow.map((scene) => (
-          <div key={scene} className="space-y-2">
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-2">
-              {Array.from({ length: 5 }, (_, i) => {
-                const imagePath = `/datasets/${dataset.dataset_name}/${scene}/${i + 1}.jpg`;
-
-                return (
-                  <div
-                    key={`${scene}-${i + 1}`}
-                    className="relative rounded-md overflow-hidden"
-                  >
-                    <Image
-                      src={imagePath}
-                      alt={`Sample ${i + 1} from ${scene}`}
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-contain block max-h-28 sm:max-h-32 md:max-h-36"
-                      loading="lazy"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-      </div>
+      {selectedScene && selectedScene !== "all" ? (
+        // For specific scenes, show 5 images in horizontal scroll
+        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+          {Array.from({ length: 5 }, (_, i) => {
+            const imagePath = `/datasets/${dataset.dataset_name}/${selectedScene}/${i + 1}.jpg`;
+            return (
+              <div
+                key={`${selectedScene}-${i + 1}`}
+                className="relative rounded-md overflow-hidden flex-shrink-0"
+              >
+                <DatasetImage
+                  src={imagePath}
+                  alt={`Sample ${i + 1} from ${selectedScene}`}
+                />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        // For "all" scenes, show 1 image from each scene in horizontal scroll
+        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+          {scenesToShow.map((scene) => {
+            const imagePath = `/datasets/${dataset.dataset_name}/${scene}/1.jpg`;
+            return (
+              <div
+                key={`${scene}-1`}
+                className="relative rounded-md overflow-hidden flex-shrink-0"
+              >
+                <DatasetImage
+                  src={imagePath}
+                  alt={`Sample from ${scene}`}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
