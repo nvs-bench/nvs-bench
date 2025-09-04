@@ -184,8 +184,8 @@ export function DatasetImages({
 
       {/* Fullscreen Modal */}
       {fullscreenImage && (
-        <button
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm border-0 p-0"
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
           onClick={() => setFullscreenImage(null)}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -193,8 +193,6 @@ export function DatasetImages({
               setFullscreenImage(null);
             }
           }}
-          type="button"
-          aria-label="Close fullscreen image"
         >
           <div className="relative w-full h-full flex items-center justify-center">
             <div className="relative w-full h-full max-w-[90vw] max-h-[90vh] flex items-center justify-center">
@@ -232,7 +230,7 @@ export function DatasetImages({
               </svg>
             </button>
           </div>
-        </button>
+        </div>
       )}
     </>
   );
