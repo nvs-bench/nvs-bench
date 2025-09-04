@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import methodsData from "@/lib/methods.json";
-import type { MethodMeta } from "@/lib/types";
+import datasets from "@/lib/datasets.json";
+import type { MethodMeta, DatasetMeta } from "@/lib/types";
 
 interface MethodImagesProps {
   selectedMethod: string | null;
@@ -13,6 +14,7 @@ interface MethodImagesProps {
 interface ImagePair {
   render: ImageInfo;
   gt: ImageInfo;
+  sceneName: string;
 }
 
 interface ImageInfo {
@@ -32,7 +34,7 @@ export function MethodImages({
   const [sliderPosition, setSliderPosition] = useState(50);
 
   useEffect(() => {
-    if (!selectedMethod || !datasetName || !sceneName) {
+    if (!selectedMethod || !datasetName) {
       setImagePairs([]);
       return;
     }
@@ -41,39 +43,70 @@ export function MethodImages({
       setLoading(true);
       setError(null);
       try {
-        // Local paths to public/results folder structure
-        const pairs: ImagePair[] = [
-          {
-            render: {
-              url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/render_0.png`,
-              filename: `render_0.png`,
+        let pairs: ImagePair[] = [];
+
+        if (sceneName === "all") {
+          // When "all" is selected, show images from the first 3 scenes
+          const dataset = (datasets as DatasetMeta[]).find(
+            (d) => d.dataset_name === datasetName
+          );
+          
+          if (dataset) {
+            const firstThreeScenes = dataset.scenes.slice(0, 3);
+            
+            // For each of the first 3 scenes, get the first image pair
+            firstThreeScenes.forEach((scene) => {
+              pairs.push({
+                render: {
+                  url: `/results/${selectedMethod}/${datasetName}/${scene}/website_images/render_0.png`,
+                  filename: `render_0.png`,
+                },
+                gt: {
+                  url: `/results/${selectedMethod}/${datasetName}/${scene}/website_images/gt_0.png`,
+                  filename: `gt_0.png`,
+                },
+                sceneName: scene,
+              });
+            });
+          }
+        } else {
+          // For individual scenes, show all 3 image pairs
+          pairs = [
+            {
+              render: {
+                url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/render_0.png`,
+                filename: `render_0.png`,
+              },
+              gt: {
+                url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/gt_0.png`,
+                filename: `gt_0.png`,
+              },
+              sceneName: sceneName,
             },
-            gt: {
-              url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/gt_0.png`,
-              filename: `gt_0.png`,
+            {
+              render: {
+                url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/render_1.png`,
+                filename: `render_1.png`,
+              },
+              gt: {
+                url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/gt_1.png`,
+                filename: `gt_1.png`,
+              },
+              sceneName: sceneName,
             },
-          },
-          {
-            render: {
-              url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/render_1.png`,
-              filename: `render_1.png`,
+            {
+              render: {
+                url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/render_2.png`,
+                filename: `render_2.png`,
+              },
+              gt: {
+                url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/gt_2.png`,
+                filename: `gt_2.png`,
+              },
+              sceneName: sceneName,
             },
-            gt: {
-              url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/gt_1.png`,
-              filename: `gt_1.png`,
-            },
-          },
-          {
-            render: {
-              url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/render_2.png`,
-              filename: `render_2.png`,
-            },
-            gt: {
-              url: `/results/${selectedMethod}/${datasetName}/${sceneName}/website_images/gt_2.png`,
-              filename: `gt_2.png`,
-            },
-          },
-        ];
+          ];
+        }
 
         setImagePairs(pairs);
       } catch (err) {
@@ -167,7 +200,8 @@ export function MethodImages({
             </h3>
             <p className="text-muted-foreground">
               {methodMeta?.method_display_name || selectedMethod} -{" "}
-              {datasetName}/{sceneName}
+              {datasetName}
+              {sceneName === "all" ? " (First 3 scenes)" : `/${sceneName}`}
             </p>
           </div>
         </div>
@@ -220,7 +254,7 @@ export function MethodImages({
                     <div className="relative h-48 overflow-hidden rounded-t-lg">
                       <img
                         src={pair.render.url}
-                        alt={`${selectedMethod} rendering ${index + 1}`}
+                        alt={`${selectedMethod} rendering ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
@@ -230,7 +264,7 @@ export function MethodImages({
                     <div className="relative h-48 overflow-hidden rounded-b-lg">
                       <img
                         src={pair.gt.url}
-                        alt={`Ground truth ${index + 1}`}
+                        alt={`Ground truth ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
@@ -342,6 +376,11 @@ export function MethodImages({
                 <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
                   Ground Truth
                 </div>
+                {sceneName === "all" && (
+                  <div className="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
+                    Scene: {fullscreenPair.sceneName}
+                  </div>
+                )}
               </div>
             </div>
 
