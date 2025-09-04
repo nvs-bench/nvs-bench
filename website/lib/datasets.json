@@ -20,7 +20,7 @@
   {
     "dataset_name": "tanksandtemples",
     "dataset_display_name": "Tanks & Temples",
-    "dataset_description": "Outdoor captured scenes in realistic conditions. Similar to the 3DGS paper we've selected only the tank and train scenes, but there are many more available.",
+    "dataset_description": "Outdoor captured scenes in realistic conditions. Following the 3DGS paper, we've selected only the tank and train scenes, but there are many more available.",
     "dataset_source_link": "https://www.tanksandtemples.org",
     "dataset_download_link": "https://example.com/tanks-download",
     "scenes": ["truck", "train"]
@@ -28,7 +28,7 @@
   {
     "dataset_name": "deepblending",
     "dataset_display_name": "DeepBlending",
-    "dataset_description": "Indoor captured scenes in realistic conditions. Similar to the 3DGS paper we've selected only the playroom and drjohnson scenes, but there are many more available. Poses generated with COLMAP.",
+    "dataset_description": "Indoor captured scenes in realistic conditions. Following the 3DGS paper, we've selected only the playroom and drjohnson scenes, but there are many more available. Poses generated with COLMAP.",
     "dataset_source_link": "http://visual.cs.ucl.ac.uk/pubs/deepblending/",
     "dataset_download_link": "https://example.com/synthetic-download",
     "scenes": ["playroom", "drjohnson"]
@@ -36,7 +36,7 @@
   {
     "dataset_name": "zipnerf",
     "dataset_display_name": "ZipNerf",
-    "dataset_description": "Large scale high-fidelity indoor captured scenes. 1000+ images per scene. We selected the undistorted images for broader compatability, but the original images were captured with a fisheye lens.",
+    "dataset_description": "Large scale high-fidelity indoor captured scenes. 1000+ images per scene. We've selected the undistorted images for broader compatability, but the original images were captured with a fisheye lens.",
     "dataset_source_link": "https://smerf-3d.github.io/#data",
     "dataset_download_link": "",
     "scenes": ["alameda", "berlin", "london", "nyc"]

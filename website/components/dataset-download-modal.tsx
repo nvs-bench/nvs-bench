@@ -15,20 +15,20 @@ interface DatasetDownloadModalProps {
 const getDownloadInfo = (datasetName: string) => {
   const downloadInfo = {
     mipnerf360: {
-      gsutilCommand: "gsutil -m cp -r gs://nvs-bench-datasets/mipnerf360 ./",
-      originalLink: "https://jonbarron.info/mipnerf360/",
+      gsutilCommand: "mkdir -p data/mipnerf360 && gsutil -m rsync -r -d gs://nvs-bench/data/mipnerf360 data/mipnerf360",
+      originalLink: "https://github.com/N-Demir/nvs-bench/blob/main/scripts/dataset_downloads/mipnerf360.sh",
     },
     tanksandtemples: {
-      gsutilCommand: "gsutil -m cp -r gs://nvs-bench-datasets/tanksandtemples ./",
-      originalLink: "https://www.tanksandtemples.org",
+      gsutilCommand: "mkdir -p data/tanksandtemples && gsutil -m rsync -r -d gs://nvs-bench/data/tanksandtemples data/tanksandtemples",
+      originalLink: "https://github.com/N-Demir/nvs-bench/blob/main/scripts/dataset_downloads/deepblending_and_tanksandtemples.sh",
     },
     deepblending: {
-      gsutilCommand: "gsutil -m cp -r gs://nvs-bench-datasets/deepblending ./",
-      originalLink: "http://visual.cs.ucl.ac.uk/pubs/deepblending/",
+      gsutilCommand: "mkdir -p data/deepblending && gsutil -m rsync -r -d gs://nvs-bench/data/deepblending data/deepblending",
+      originalLink: "https://github.com/N-Demir/nvs-bench/blob/main/scripts/dataset_downloads/deepblending_and_tanksandtemples.sh",
     },
     zipnerf: {
-      gsutilCommand: "gsutil -m cp -r gs://nvs-bench-datasets/zipnerf ./",
-      originalLink: "https://smerf-3d.github.io/#data",
+      gsutilCommand: "mkdir -p data/zipnerf && gsutil -m rsync -r -d gs://nvs-bench/data/zipnerf data/zipnerf",
+      originalLink: "https://github.com/N-Demir/nvs-bench/blob/main/scripts/dataset_downloads/zipnerf.sh",
     },
   }
 
@@ -49,13 +49,10 @@ export function DatasetDownloadModal({ datasetName, children }: DatasetDownloadM
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Download Instructions</DialogTitle>
-          <DialogDescription>
-            Download instructions for the {datasetName} dataset
-          </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            <h4 className="font-medium mb-2">Our Version (Exact Benchmark Dataset)</h4>
+            <h4 className="font-medium mb-2">Our Version</h4>
             <p className="text-sm text-muted-foreground mb-3">
               If you would like to download our version of the dataset (exact one used in the benchmark), 
               first install the{" "}
@@ -67,7 +64,7 @@ export function DatasetDownloadModal({ datasetName, children }: DatasetDownloadM
               >
                 Google Cloud CLI
               </a>
-              , then run the following command:
+                , then run the following command:
             </p>
             <div className="bg-muted p-3 rounded-md">
               <code className="text-sm font-mono">{downloadInfo.gsutilCommand}</code>

@@ -228,7 +228,7 @@ export function MethodImages({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {imagePairs.map((pair, index) => (
               <div
-                key={`${pair.render.filename}-${pair.gt.filename}`}
+                key={`${pair.sceneName}-${pair.render.filename}-${pair.gt.filename}`}
                 className="flex flex-col"
               >
                 <div className="text-center">
