@@ -1,4 +1,5 @@
 import datasets from "@/lib/datasets.json";
+import { DatasetDownloadModal } from "@/components/dataset-download-modal";
 
 interface DatasetMeta {
   dataset_name: string;
@@ -39,14 +40,11 @@ export function DatasetHeader({
           Source
         </a>
         <span className="text-muted-foreground">•</span>
-        <a
-          href={dataset.dataset_download_link}
-          target="_blank"
-          rel="noreferrer"
-          className="underline underline-offset-4"
-        >
-          Download
-        </a>
+        <DatasetDownloadModal datasetName={dataset.dataset_name}>
+          <button type="button" className="underline underline-offset-4 hover:text-foreground">
+            Download
+          </button>
+        </DatasetDownloadModal>
       </div>
     </div>
   );
