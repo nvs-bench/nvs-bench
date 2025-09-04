@@ -37,7 +37,7 @@ export function DatasetHeader({
       <p className="text-lg text-foreground leading-relaxed mb-4">
         {dataset.dataset_description}
       </p>
-      <div className="flex items-center gap-4 text-sm">
+      <div className="flex items-center gap-4 text-sm mb-8">
         <a
           href={dataset.dataset_source_link}
           target="_blank"
