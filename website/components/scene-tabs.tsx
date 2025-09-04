@@ -10,17 +10,20 @@ interface SceneTabsProps {
   dataset: DatasetMeta;
   selectedMethod: string | null;
   onMethodSelect: (methodName: string | null) => void;
+  onSceneChange: (scene: string) => void;
 }
 
 export function SceneTabs({
   dataset,
   selectedMethod,
   onMethodSelect,
+  onSceneChange,
 }: SceneTabsProps) {
   const [selectedScene, setSelectedScene] = useState<string>("all");
 
   const handleSceneChange = (scene: string) => {
     setSelectedScene(scene);
+    onSceneChange(scene);
     // Don't clear selected method when changing scenes
   };
 

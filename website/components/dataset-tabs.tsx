@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DatasetHeader } from "@/components/dataset-header";
+import { DatasetImages } from "@/components/dataset-images";
 import { SceneTabs } from "@/components/scene-tabs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
@@ -7,9 +8,14 @@ import type { DatasetMeta } from "@/lib/types";
 
 export function DatasetTabs() {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+  const [selectedScene, setSelectedScene] = useState<string>("all");
 
   const handleMethodSelect = (methodName: string | null) => {
     setSelectedMethod(methodName);
+  };
+
+  const handleSceneChange = (scene: string) => {
+    setSelectedScene(scene);
   };
 
   return (
@@ -35,11 +41,12 @@ export function DatasetTabs() {
           value={dataset.dataset_name}
           className="mt-0"
         >
-          <DatasetHeader selectedDataset={dataset.dataset_name} />
+          <DatasetHeader selectedDataset={dataset.dataset_name} selectedScene={selectedScene} />
           <SceneTabs
             dataset={dataset}
             selectedMethod={selectedMethod}
             onMethodSelect={handleMethodSelect}
+            onSceneChange={handleSceneChange}
           />
         </TabsContent>
       ))}

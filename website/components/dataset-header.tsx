@@ -1,5 +1,6 @@
 import datasets from "@/lib/datasets.json";
 import { DatasetDownloadModal } from "@/components/dataset-download-modal";
+import { DatasetImages } from "./dataset-images";
 
 interface DatasetMeta {
   dataset_name: string;
@@ -12,8 +13,10 @@ interface DatasetMeta {
 
 export function DatasetHeader({
   selectedDataset,
+  selectedScene,
 }: {
   selectedDataset: string;
+  selectedScene: string;
 }) {
   if (selectedDataset === "all") return null;
 
@@ -27,6 +30,10 @@ export function DatasetHeader({
       <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-2">
         {dataset.dataset_display_name}
       </h2>
+      <DatasetImages
+            selectedDataset={dataset.dataset_name}
+            selectedScene={selectedScene}
+          />
       <p className="text-lg text-foreground leading-relaxed mb-4">
         {dataset.dataset_description}
       </p>
@@ -41,7 +48,10 @@ export function DatasetHeader({
         </a>
         <span className="text-muted-foreground">•</span>
         <DatasetDownloadModal datasetName={dataset.dataset_name}>
-          <button type="button" className="underline underline-offset-4 hover:text-foreground">
+          <button
+            type="button"
+            className="underline underline-offset-4 hover:text-foreground"
+          >
             Download
           </button>
         </DatasetDownloadModal>

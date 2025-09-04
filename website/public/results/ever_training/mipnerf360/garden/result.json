@@ -1,1 +1,10 @@
-{"method_name": "ever_training", "dataset_name": "mipnerf360", "scene_name": "garden", "psnr": 25.84235390027364, "ssim": 0.8214540854096413, "lpips": 0.16991657577455044, "time": 6918.95, "max_gpu_memory": 23269.0}
+{
+  "method_name": "ever_training",
+  "dataset_name": "mipnerf360",
+  "scene_name": "garden",
+  "psnr": 25.84235390027364,
+  "ssim": 0.8214540854096413,
+  "lpips": 0.16991657577455044,
+  "time": 6918.95,
+  "max_gpu_memory": 23269.0
+}

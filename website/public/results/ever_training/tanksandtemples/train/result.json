@@ -1,1 +1,10 @@
-{"method_name": "ever_training", "dataset_name": "tanksandtemples", "scene_name": "train", "psnr": 20.982856223457738, "ssim": 0.8112422055319736, "lpips": 0.23232796631361308, "time": 5000.23, "max_gpu_memory": 22067.0}
+{
+  "method_name": "ever_training",
+  "dataset_name": "tanksandtemples",
+  "scene_name": "train",
+  "psnr": 20.982856223457738,
+  "ssim": 0.8112422055319736,
+  "lpips": 0.23232796631361308,
+  "time": 5000.23,
+  "max_gpu_memory": 22067.0
+}

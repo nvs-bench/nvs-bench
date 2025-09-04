@@ -1,1 +1,10 @@
-{"method_name": "ever_training", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 28.9935684861808, "ssim": 0.8984817615870772, "lpips": 0.3365638379392953, "time": 4918.4, "max_gpu_memory": 13257.0}
+{
+  "method_name": "ever_training",
+  "dataset_name": "deepblending",
+  "scene_name": "playroom",
+  "psnr": 28.9935684861808,
+  "ssim": 0.8984817615870772,
+  "lpips": 0.3365638379392953,
+  "time": 4918.4,
+  "max_gpu_memory": 13257.0
+}

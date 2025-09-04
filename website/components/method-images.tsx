@@ -48,12 +48,12 @@ export function MethodImages({
         if (sceneName === "all") {
           // When "all" is selected, show images from the first 3 scenes
           const dataset = (datasets as DatasetMeta[]).find(
-            (d) => d.dataset_name === datasetName
+            (d) => d.dataset_name === datasetName,
           );
-          
+
           if (dataset) {
             const firstThreeScenes = dataset.scenes.slice(0, 3);
-            
+
             // For each of the first 3 scenes, get the first image pair
             firstThreeScenes.forEach((scene) => {
               pairs.push({
@@ -251,21 +251,27 @@ export function MethodImages({
                     type="button"
                   >
                     {/* Render Image (top half) */}
-                    <div className="relative h-48 overflow-hidden rounded-t-lg">
+                    <div
+                      className="relative overflow-hidden rounded-t-lg"
+                      style={{ maxHeight: "200px" }}
+                    >
                       <img
                         src={pair.render.url}
                         alt={`${selectedMethod} rendering ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto max-h-[200px] object-contain"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
                     </div>
 
                     {/* GT Image (bottom half) */}
-                    <div className="relative h-48 overflow-hidden rounded-b-lg">
+                    <div
+                      className="relative overflow-hidden rounded-b-lg"
+                      style={{ maxHeight: "200px" }}
+                    >
                       <img
                         src={pair.gt.url}
                         alt={`Ground truth ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto max-h-[200px] object-contain"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
                     </div>
@@ -310,9 +316,17 @@ export function MethodImages({
 
       {/* Fullscreen Comparison Modal */}
       {fullscreenPair && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+        <button
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm border-0 p-0"
           onClick={() => setFullscreenPair(null)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setFullscreenPair(null);
+            }
+          }}
+          type="button"
+          aria-label="Close fullscreen comparison"
         >
           <div className="relative w-full h-full flex items-center justify-center">
             <div className="relative w-full h-full max-w-[90vw] max-h-[90vh] flex items-center justify-center">
@@ -342,7 +356,9 @@ export function MethodImages({
                   onClick={(e) => e.stopPropagation()}
                   onMouseMove={handleSliderMove}
                   onKeyDown={(e) => e.stopPropagation()}
+                  onKeyUp={(e) => e.stopPropagation()}
                   type="button"
+                  aria-label="Image comparison slider"
                 />
 
                 {/* Slider Line */}
@@ -411,7 +427,7 @@ export function MethodImages({
               </svg>
             </button>
           </div>
-        </div>
+        </button>
       )}
     </>
   );
