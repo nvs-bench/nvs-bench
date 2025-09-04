@@ -24,7 +24,11 @@ export function DatasetTabs() {
   };
 
   return (
-    <Tabs defaultValue="mipnerf360" className="w-full" onValueChange={handleDatasetChange}>
+    <Tabs
+      defaultValue="mipnerf360"
+      className="w-full"
+      onValueChange={handleDatasetChange}
+    >
       <div className="mb-4 flex w-full items-center justify-center gap-4">
         <TabsList className="w-fit gap-3">
           {(datasets as DatasetMeta[]).map((d) => (
@@ -46,7 +50,10 @@ export function DatasetTabs() {
           value={dataset.dataset_name}
           className="mt-0"
         >
-          <DatasetHeader selectedDataset={dataset.dataset_name} selectedScene={selectedScene} />
+          <DatasetHeader
+            selectedDataset={dataset.dataset_name}
+            selectedScene={selectedScene}
+          />
           <SceneTabs
             dataset={dataset}
             selectedMethod={selectedMethod}

@@ -240,7 +240,7 @@ export function MethodImages({
                 {/* Combined Render and GT Images */}
                 <div className="group">
                   <button
-                    className="relative overflow-hidden rounded-lg border border-border bg-muted cursor-pointer w-full text-left"
+                    className="relative overflow-hidden rounded-lg cursor-pointer w-full text-left"
                     onClick={() => handleImageClick(pair)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
@@ -258,7 +258,7 @@ export function MethodImages({
                       <img
                         src={pair.render.url}
                         alt={`${selectedMethod} rendering ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
-                        className="w-full h-auto max-h-[200px] object-contain"
+                        className="w-full h-auto max-h-[200px] object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
                     </div>
@@ -271,7 +271,7 @@ export function MethodImages({
                       <img
                         src={pair.gt.url}
                         alt={`Ground truth ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
-                        className="w-full h-auto max-h-[200px] object-contain"
+                        className="w-full h-auto max-h-[200px] object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
                     </div>

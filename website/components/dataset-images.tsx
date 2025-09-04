@@ -21,7 +21,11 @@ interface DatasetImageProps {
   className?: string;
 }
 
-function DatasetImage({ src, alt, className = "w-auto h-32 sm:h-36 md:h-40 object-contain block" }: DatasetImageProps) {
+function DatasetImage({
+  src,
+  alt,
+  className = "w-auto h-32 sm:h-36 md:h-40 object-contain block",
+}: DatasetImageProps) {
   return (
     <Image
       src={src}
@@ -48,11 +52,12 @@ export function DatasetImages({
   // If "all" is selected, show images from all scenes
   // If a specific scene is selected, show only that scene's images
   // Otherwise, show images from all scenes in the dataset
-  const scenesToShow = selectedScene === "all" 
-    ? dataset.scenes 
-    : selectedScene 
-    ? [selectedScene] 
-    : dataset.scenes;
+  const scenesToShow =
+    selectedScene === "all"
+      ? dataset.scenes
+      : selectedScene
+        ? [selectedScene]
+        : dataset.scenes;
 
   return (
     <div className="mb-6">
@@ -84,10 +89,7 @@ export function DatasetImages({
                 key={`${scene}-1`}
                 className="relative rounded-md overflow-hidden flex-shrink-0"
               >
-                <DatasetImage
-                  src={imagePath}
-                  alt={`Sample from ${scene}`}
-                />
+                <DatasetImage src={imagePath} alt={`Sample from ${scene}`} />
               </div>
             );
           })}

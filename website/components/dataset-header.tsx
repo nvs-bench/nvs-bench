@@ -31,9 +31,9 @@ export function DatasetHeader({
         {dataset.dataset_display_name}
       </h2>
       <DatasetImages
-            selectedDataset={dataset.dataset_name}
-            selectedScene={selectedScene}
-          />
+        selectedDataset={dataset.dataset_name}
+        selectedScene={selectedScene}
+      />
       <p className="text-lg text-foreground leading-relaxed mb-4">
         {dataset.dataset_description}
       </p>
