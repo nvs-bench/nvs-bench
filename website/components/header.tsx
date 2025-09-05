@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 export function Header() {
+  const { resolvedTheme } = useTheme();
+  
   return (
     <div className="text-center mb-12">
       <div className="flex items-center justify-center mb-8">
         <Image
-          src="/logo.png"
+          src={resolvedTheme === "dark" ? "/logo_dark.png" : "/logo.png"}
           alt="nvs-bench logo"
           width={300}
           height={120}
