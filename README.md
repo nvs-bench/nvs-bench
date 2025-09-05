@@ -12,6 +12,9 @@ Our preferred way of generating them for a new repo consists of three simple fil
 - `nvs_bench.sh` -- Your training / rendering commands
 - `nvs_bench.py` —- (does not need to be edited) Runs training/rendering on a serverless gpu provider (we chose Beam for their RTX 4090s, <$30 free tier, and simple python interface)
 
+
+A summary of these steps is bundled with the boilerplate files in `boilerplate/README.md`
+
 # New Methods
 
 1) Clone the `nvs-bench` boilerplate files into a new method's repo with:
@@ -41,3 +44,11 @@ With Beam's $30 per month free credits you should have plenty to iterate and try
 Note: beam's dockerfiles don't have layers cached yet but that is supposed to be coming soon.
 
 TODO: Write down some stuff about evaluation steps
+
+Evaluation:
+
+Once the `test_renders` are uploaded for a method and data, you can run an evaluation run on modal which will calulate the metrics and download the results locally to be viewed on the website locally and merged into this repo.
+
+```
+modal run -m evaluate.run --method 3dgrut --data examples/kitchen
+```
