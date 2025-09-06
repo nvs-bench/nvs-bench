@@ -39,9 +39,12 @@ You then have two ways to run the method on cloud gpus:
 - vscode/cursor remote development server
 - remote job/function
 
-With Beam's $30 per month free credits you should have plenty to iterate and try out new methods
+With Modal's $30 per month free credits you should have plenty to iterate and try out new methods
 
 Note: beam's dockerfiles don't have layers cached yet but that is supposed to be coming soon.
+Note 2: `modal run` will terminate if you close your laptop / lose connection. To avoid that, you can run `modal run -d` which will continue to run the modal functions remotely even if something happens locally (recommended when training and evaluating on benchmark).
+
+
 
 TODO: Write down some stuff about evaluation steps
 
@@ -52,3 +55,7 @@ Once the `test_renders` are uploaded for a method and data, you can run an evalu
 ```
 modal run -m evaluate.run --method 3dgrut --data examples/kitchen
 ```
+
+Note: your method's name is determined by your repo's name
+
+To see your method's results add it to `website/lib/methods.json` and run `make run-website` (or from the `website/` folder `pnpm dev`)
