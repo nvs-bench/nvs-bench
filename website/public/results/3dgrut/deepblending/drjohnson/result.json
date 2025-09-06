@@ -1,0 +1,1 @@
+{"method_name": "3dgrut", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.79044099287553, "ssim": 0.9045983516808712, "lpips": 0.3182239406036608, "time": 853.57, "max_gpu_memory": 13915.0}

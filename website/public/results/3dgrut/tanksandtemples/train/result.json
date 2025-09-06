@@ -1,0 +1,1 @@
+{"method_name": "3dgrut", "dataset_name": "tanksandtemples", "scene_name": "train", "psnr": 22.25693644975361, "ssim": 0.8291596519319635, "lpips": 0.23522752405781494, "time": 728.9, "max_gpu_memory": 10859.0}

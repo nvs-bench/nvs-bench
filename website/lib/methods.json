@@ -8,5 +8,10 @@
     "method_name": "ever_training",
     "method_display_name": "EVER",
     "method_url": "https://github.com/google/ever"
+  },
+  {
+    "method_name": "3dgrut",
+    "method_display_name": "3DGRUT",
+    "method_url": "https://github.com/N-Demir/3dgrut/tree/nvs-bench"
   }
 ]
