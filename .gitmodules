@@ -10,3 +10,6 @@
 	path = methods/3dgrut
 	url = https://github.com/N-Demir/3dgrut.git
 	branch = nvs-bench
+[submodule "methods/gaussian-splatting"]
+	path = methods/gaussian-splatting
+	url = https://github.com/N-Demir/gaussian-splatting

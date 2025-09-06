@@ -59,3 +59,8 @@ modal run -m evaluate.run --method 3dgrut --data examples/kitchen
 Note: your method's name is determined by your repo's name
 
 To see your method's results add it to `website/lib/methods.json` and run `make run-website` (or from the `website/` folder `pnpm dev`)
+
+To get your method checked in make a pull request on this repo after adding it as a submodule
+```
+git submodule add -b <source-branch> https://github.com/<your-repo> methods/<your-method-name>
+```
