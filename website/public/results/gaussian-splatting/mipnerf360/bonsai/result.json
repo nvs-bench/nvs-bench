@@ -1,0 +1,1 @@
+{"method_name": "gaussian-splatting", "dataset_name": "mipnerf360", "scene_name": "bonsai", "psnr": 32.349005724932695, "ssim": 0.941563143923476, "lpips": 0.2523344481313551, "time": 1456.03, "max_gpu_memory": 11831.0}
