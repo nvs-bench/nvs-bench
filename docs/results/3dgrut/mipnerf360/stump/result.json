@@ -1,1 +1,0 @@
-{"method_name": "3dgrut", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 26.91859471797943, "ssim": 0.7877099849283695, "lpips": 0.2563045583665371, "time": 781.2, "max_gpu_memory": 13265.0}

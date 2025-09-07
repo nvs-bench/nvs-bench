@@ -1,1 +1,0 @@
-{"method_name": "3dgrut", "dataset_name": "mipnerf360", "scene_name": "flowers", "psnr": 21.81312795118852, "ssim": 0.610818169333718, "lpips": 0.37181180580095813, "time": 864.52, "max_gpu_memory": 13367.0}

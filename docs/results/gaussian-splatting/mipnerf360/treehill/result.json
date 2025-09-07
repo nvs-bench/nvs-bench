@@ -1,1 +1,0 @@
-{"method_name": "gaussian-splatting", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 22.610661294725205, "ssim": 0.6293371187316047, "lpips": 0.3753229363097085, "time": 1304.09, "max_gpu_memory": 10949.0}

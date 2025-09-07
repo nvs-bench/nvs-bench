@@ -1,1 +1,0 @@
-{"method_name": "gaussian-splatting", "dataset_name": "tanksandtemples", "scene_name": "truck", "psnr": 25.485901474952698, "ssim": 0.8822823595255613, "lpips": 0.1711051701568067, "time": 1171.42, "max_gpu_memory": 7407.0}

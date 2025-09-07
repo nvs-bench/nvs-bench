@@ -1,1 +1,0 @@
-{"method_name": "gaussian-splatting", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 25.249429016113282, "ssim": 0.763312222957611, "lpips": 0.23709648251533508, "time": 1800.41, "max_gpu_memory": 14225.0}

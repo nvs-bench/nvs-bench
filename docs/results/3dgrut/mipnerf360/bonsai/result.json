@@ -1,1 +1,0 @@
-{"method_name": "3dgrut", "dataset_name": "mipnerf360", "scene_name": "bonsai", "psnr": 32.277459325017155, "ssim": 0.9431646852879911, "lpips": 0.24843247476461772, "time": 1030.6, "max_gpu_memory": 14503.0}

@@ -1,1 +1,0 @@
-{"method_name": "gaussian-splatting", "dataset_name": "mipnerf360", "scene_name": "flowers", "psnr": 21.549915833906695, "ssim": 0.6006561802192167, "lpips": 0.36665362932465295, "time": 1433.04, "max_gpu_memory": 10007.0}

@@ -1,1 +1,0 @@
-{"method_name": "gaussian-splatting", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 30.220315012438544, "ssim": 0.9072955250740051, "lpips": 0.30282922346016455, "time": 1284.84, "max_gpu_memory": 9383.0}

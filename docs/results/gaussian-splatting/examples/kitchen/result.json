@@ -1,1 +1,0 @@
-{"method_name": "gaussian-splatting", "dataset_name": "examples", "scene_name": "kitchen", "psnr": 10.339940388997396, "ssim": 0.3801174859205882, "lpips": 0.7952298124631246, "time": 33.11, "max_gpu_memory": 1365.0}

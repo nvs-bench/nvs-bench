@@ -1,1 +1,0 @@
-{"method_name": "3dgrut", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 31.728356552124023, "ssim": 0.9268262709890093, "lpips": 0.1655074417591095, "time": 1650.72, "max_gpu_memory": 14201.0}
