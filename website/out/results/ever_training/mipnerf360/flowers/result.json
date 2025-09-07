@@ -1,0 +1,10 @@
+{
+  "method_name": "ever_training",
+  "dataset_name": "mipnerf360",
+  "scene_name": "flowers",
+  "psnr": 19.92395609075373,
+  "ssim": 0.507882608608766,
+  "lpips": 0.451386803930456,
+  "time": 6522.2,
+  "max_gpu_memory": 21317.0
+}

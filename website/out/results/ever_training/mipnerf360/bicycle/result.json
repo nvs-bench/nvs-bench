@@ -1,0 +1,10 @@
+{
+  "method_name": "ever_training",
+  "dataset_name": "mipnerf360",
+  "scene_name": "bicycle",
+  "psnr": 23.349628982543944,
+  "ssim": 0.65660862326622,
+  "lpips": 0.36350659012794495,
+  "time": 5674.56,
+  "max_gpu_memory": 21903.0
+}

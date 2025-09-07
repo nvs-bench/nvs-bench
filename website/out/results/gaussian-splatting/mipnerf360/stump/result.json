@@ -1,0 +1,1 @@
+{"method_name": "gaussian-splatting", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 26.682319402694702, "ssim": 0.7690432965755463, "lpips": 0.249879059381783, "time": 1738.65, "max_gpu_memory": 12329.0}

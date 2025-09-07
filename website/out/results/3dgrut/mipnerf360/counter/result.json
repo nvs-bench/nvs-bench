@@ -1,0 +1,1 @@
+{"method_name": "3dgrut", "dataset_name": "mipnerf360", "scene_name": "counter", "psnr": 29.30522918701172, "ssim": 0.9140191892782847, "lpips": 0.24393552243709565, "time": 1176.47, "max_gpu_memory": 14945.0}

@@ -1,0 +1,10 @@
+{
+  "method_name": "ever_training",
+  "dataset_name": "deepblending",
+  "scene_name": "drjohnson",
+  "psnr": 27.699716914783824,
+  "ssim": 0.8815346956253052,
+  "lpips": 0.36188497055660596,
+  "time": 5814.69,
+  "max_gpu_memory": 10993.0
+}

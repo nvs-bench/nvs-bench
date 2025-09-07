@@ -1,0 +1,10 @@
+{
+  "method_name": "ever_training",
+  "dataset_name": "mipnerf360",
+  "scene_name": "counter",
+  "psnr": 28.2753932317098,
+  "ssim": 0.8994039078553517,
+  "lpips": 0.2590113177895546,
+  "time": 4508.04,
+  "max_gpu_memory": 8359.0
+}

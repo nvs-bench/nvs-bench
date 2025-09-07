@@ -1,0 +1,10 @@
+{
+  "method_name": "ever_training",
+  "dataset_name": "mipnerf360",
+  "scene_name": "room",
+  "psnr": 30.18156775450095,
+  "ssim": 0.9099598099023868,
+  "lpips": 0.2978202268863336,
+  "time": 5575.29,
+  "max_gpu_memory": 11483.0
+}

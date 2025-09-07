@@ -1,0 +1,10 @@
+{
+  "method_name": "ever_training",
+  "dataset_name": "tanksandtemples",
+  "scene_name": "truck",
+  "psnr": 23.95707929134369,
+  "ssim": 0.8565182611346245,
+  "lpips": 0.18584892014041543,
+  "time": 4759.77,
+  "max_gpu_memory": 21709.0
+}

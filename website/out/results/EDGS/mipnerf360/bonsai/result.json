@@ -1,0 +1,10 @@
+{
+  "method_name": "EDGS",
+  "dataset_name": "mipnerf360",
+  "scene_name": "bonsai",
+  "psnr": 32.073912105044805,
+  "ssim": 0.9432638255325524,
+  "lpips": 0.21411567120938688,
+  "time": 2196.16,
+  "max_gpu_memory": 14967.0
+}
