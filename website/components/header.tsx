@@ -32,10 +32,10 @@ export function Header() {
 
       <div className="flex justify-center mb-8">
         <Button
-          variant="default"
+          variant="outline"
           size="sm"
           asChild
-          className="gap-2 bg-black hover:bg-gray-800 text-white border border-gray-700 rounded-full px-6"
+          className="gap-2 rounded-full px-6"
         >
           <a
             href="https://github.com/nvs-bench/nvs-bench"
