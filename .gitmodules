@@ -13,3 +13,6 @@
 [submodule "methods/gaussian-splatting"]
 	path = methods/gaussian-splatting
 	url = https://github.com/N-Demir/gaussian-splatting
+[submodule "methods/triangle-splatting"]
+	path = methods/triangle-splatting
+	url = https://github.com/N-Demir/triangle-splatting
