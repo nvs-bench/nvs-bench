@@ -1,0 +1,1 @@
+{"method_name": "3DGS-LM", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 25.214286575317384, "ssim": 0.7616968321800232, "lpips": 0.2484428608417511, "time": 1545.97, "max_gpu_memory": 80955.0}
