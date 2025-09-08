@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   # Build job
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -84,24 +84,6 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./website/out
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v4
-      #   with:
-      #     p
       - name: Deploy to nvs-bench.github.io repo
         uses: peaceiris/actions-gh-pages@v4
         with:
