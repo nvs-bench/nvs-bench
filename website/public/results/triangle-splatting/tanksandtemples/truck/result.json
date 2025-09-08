@@ -1,0 +1,1 @@
+{"method_name": "triangle-splatting", "dataset_name": "tanksandtemples", "scene_name": "truck", "psnr": 25.05241686105728, "ssim": 0.8781898412853479, "lpips": 0.13967970106750727, "time": 2902.2, "max_gpu_memory": 17517.0}

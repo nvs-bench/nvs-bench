@@ -1,0 +1,1 @@
+{"method_name": "triangle-splatting", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 28.940593785253064, "ssim": 0.8891688297534811, "lpips": 0.29304211920705336, "time": 2202.68, "max_gpu_memory": 17015.0}

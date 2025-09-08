@@ -1,0 +1,1 @@
+{"method_name": "triangle-splatting", "dataset_name": "mipnerf360", "scene_name": "counter", "psnr": 28.77056802113851, "ssim": 0.9062459111213684, "lpips": 0.21866767406463622, "time": 4063.51, "max_gpu_memory": 18897.0}

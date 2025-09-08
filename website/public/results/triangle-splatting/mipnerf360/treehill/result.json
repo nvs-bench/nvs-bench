@@ -1,0 +1,1 @@
+{"method_name": "triangle-splatting", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 21.80812888675266, "ssim": 0.5971807986497879, "lpips": 0.34303739335801864, "time": 2684.85, "max_gpu_memory": 14941.0}

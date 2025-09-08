@@ -18,5 +18,10 @@
     "method_name": "gaussian-splatting",
     "method_display_name": "3DGS",
     "method_url": "https://github.com/N-Demir/gaussian-splatting"
+  },
+  {
+    "method_name": "triangle-splatting",
+    "method_display_name": "Triangle Splatting",
+    "method_url": "https://github.com/N-Demir/triangle-splatting"
   }
 ]
