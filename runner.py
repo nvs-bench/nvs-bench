@@ -84,11 +84,12 @@ def full_eval():
         # DeepBlending
         "deepblending/playroom",
         "deepblending/drjohnson",
-        # ZipNerf
-        "zipnerf/alameda",
-        "zipnerf/berlin",
-        "zipnerf/london",
-        "zipnerf/nyc",
+        # TODO: Need to update the downsampling factor for zipnerf datasets
+        # # ZipNerf
+        # "zipnerf/alameda",
+        # "zipnerf/berlin",
+        # "zipnerf/london",
+        # "zipnerf/nyc",
     ]
 
     eval.for_each(BENCHMARK_DATA)
