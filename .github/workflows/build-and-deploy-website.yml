@@ -87,7 +87,7 @@ jobs:
       - name: Deploy to nvs-bench.github.io repo
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          personal_token: ${{ secrets.PERSONAL_TOKEN }} # Found out later that you might not need to set this and can instead use an automatically generated GITHUB_TOKEN... but it works!
           external_repository: nvs-bench/nvs-bench.github.io
           publish_branch: main
-          publish_dir: ./website/out
+          publish_dir: ./website/out # Not sure why we need an explicit directory when the working directory is supposed to already be set for us
