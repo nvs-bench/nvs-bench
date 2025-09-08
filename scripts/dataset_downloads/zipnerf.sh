@@ -23,9 +23,12 @@ unzip -o berlin.zip -d /nvs-bench-downloads/zipnerf
 unzip -o london.zip -d /nvs-bench-downloads/zipnerf
 unzip -o nyc.zip -d /nvs-bench-downloads/zipnerf
 
-# Remove the downresolution images
+# Downsample factor 4 based on 3dgrut (these are large scenes after all)
+DATA_FACTOR=4
+
 for scene in alameda berlin london nyc; do
     cd /nvs-bench-downloads/zipnerf/$scene
+    rm -rf images && mv images_$DATA_FACTOR images
     rm -rf images_[0-9]*
     cd /nvs-bench-downloads/zipnerf
 done
