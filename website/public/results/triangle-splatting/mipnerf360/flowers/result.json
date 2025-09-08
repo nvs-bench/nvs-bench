@@ -1,0 +1,1 @@
+{"method_name": "triangle-splatting", "dataset_name": "mipnerf360", "scene_name": "flowers", "psnr": 20.64736808430065, "ssim": 0.5979617928916757, "lpips": 0.3239638290622018, "time": 2706.09, "max_gpu_memory": 16667.0}
