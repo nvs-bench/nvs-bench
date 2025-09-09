@@ -19,3 +19,6 @@
 [submodule "methods/gsplat"]
 	path = methods/gsplat
 	url = https://github.com/N-Demir/gsplat
+[submodule "methods/LichtFeld-Studio"]
+	path = methods/LichtFeld-Studio
+	url = https://github.com/MrNeRF/LichtFeld-Studio.git
