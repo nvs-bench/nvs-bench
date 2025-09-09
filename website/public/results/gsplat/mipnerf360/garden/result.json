@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "garden", "psnr": 26.98853325843811, "ssim": 0.8483131205042204, "lpips": 0.1590282041579485, "time": 583.04, "max_gpu_memory": 2355.0}

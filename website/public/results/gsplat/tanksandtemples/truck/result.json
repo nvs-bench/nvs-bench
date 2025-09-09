@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "tanksandtemples", "scene_name": "truck", "psnr": 26.078341484069824, "ssim": 0.8907390981912613, "lpips": 0.1490550513844937, "time": 677.89, "max_gpu_memory": 2155.0}

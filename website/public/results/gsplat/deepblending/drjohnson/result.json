@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.667642882376008, "ssim": 0.9051841298739115, "lpips": 0.31190469003084936, "time": 590.28, "max_gpu_memory": 2227.0}

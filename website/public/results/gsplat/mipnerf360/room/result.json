@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "room", "psnr": 32.1683483612843, "ssim": 0.9248732511813824, "lpips": 0.25803142862442213, "time": 870.15, "max_gpu_memory": 2323.0}

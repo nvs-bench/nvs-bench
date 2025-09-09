@@ -23,5 +23,10 @@
     "method_name": "triangle-splatting",
     "method_display_name": "Triangle Splatting",
     "method_url": "https://github.com/N-Demir/triangle-splatting"
+  },
+  {
+    "method_name": "gsplat",
+    "method_display_name": "gsplat",
+    "method_url": "https://github.com/N-Demir/gsplat"
   }
 ]
