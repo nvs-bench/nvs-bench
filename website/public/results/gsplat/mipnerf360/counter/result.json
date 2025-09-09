@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "counter", "psnr": 29.393397839864097, "ssim": 0.9158336162567139, "lpips": 0.23713845113913218, "time": 1085.46, "max_gpu_memory": 2367.0}

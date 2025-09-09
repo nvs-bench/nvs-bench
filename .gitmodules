@@ -16,3 +16,6 @@
 [submodule "methods/triangle-splatting"]
 	path = methods/triangle-splatting
 	url = https://github.com/N-Demir/triangle-splatting
+[submodule "methods/gsplat"]
+	path = methods/gsplat
+	url = https://github.com/N-Demir/gsplat

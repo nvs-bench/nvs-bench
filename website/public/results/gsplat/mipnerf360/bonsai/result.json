@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "bonsai", "psnr": 32.58753219810692, "ssim": 0.9462217946310301, "lpips": 0.23545432976774266, "time": 845.49, "max_gpu_memory": 2325.0}

@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 25.25087821960449, "ssim": 0.7645122671127319, "lpips": 0.25435582399368284, "time": 553.41, "max_gpu_memory": 2225.0}
