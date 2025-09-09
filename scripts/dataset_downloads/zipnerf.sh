@@ -37,3 +37,5 @@ mv /nvs-bench/temp_downloads/zipnerf/alameda /nvs-bench/data/zipnerf/alameda
 mv /nvs-bench/temp_downloads/zipnerf/berlin /nvs-bench/data/zipnerf/berlin
 mv /nvs-bench/temp_downloads/zipnerf/london /nvs-bench/data/zipnerf/london
 mv /nvs-bench/temp_downloads/zipnerf/nyc /nvs-bench/data/zipnerf/nyc
+
+gsutil -m rsync -r -d /nvs-bench/data/zipnerf gs://nvs-bench/data/zipnerf

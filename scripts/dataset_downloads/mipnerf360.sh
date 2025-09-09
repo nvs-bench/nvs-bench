@@ -42,3 +42,5 @@ mv /nvs-bench/temp_downloads/mipnerf360/room /nvs-bench/data/mipnerf360/room
 mv /nvs-bench/temp_downloads/mipnerf360/counter /nvs-bench/data/mipnerf360/counter
 mv /nvs-bench/temp_downloads/mipnerf360/kitchen /nvs-bench/data/mipnerf360/kitchen
 mv /nvs-bench/temp_downloads/mipnerf360/bonsai /nvs-bench/data/mipnerf360/bonsai
+
+gsutil -m rsync -r -d /nvs-bench/data/mipnerf360 gs://nvs-bench/data/mipnerf360

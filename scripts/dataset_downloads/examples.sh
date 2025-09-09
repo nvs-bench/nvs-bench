@@ -13,3 +13,5 @@ for scene in examples_original/*/; do
 done
 
 rm -fr examples_original
+
+gsutil -m rsync -r -d /nvs-bench/data/examples gs://nvs-bench/data/examples
