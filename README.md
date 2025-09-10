@@ -12,11 +12,11 @@ Then, fill out:
 - `image.py`
 - `eval.sh`
 
-I would first test with the `examples/kitchen` data (only has ~30 images) and 10 training iterations to make sure the method integration works end to end before trying to run on the whole benchmark.
+I would first test with 10 training iterations to make sure the method integration works end to end before trying to run on the whole benchmark.
 
 # Running
 To run:
-`modal run -m nvs-bench.runner --data examples/kitchen`
+`modal run -m nvs-bench.runner --data mipnerf360/kitchen`
 
 and then to run on the full benchmark:
 `modal run -m nvs-bench.runner`
