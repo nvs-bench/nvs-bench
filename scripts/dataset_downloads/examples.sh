@@ -1,5 +1,5 @@
 #! /bin/bash
-# This dataset is just used for testing the end to end functionality of the pipeline on new techniques
+set -e
 
 # TODO: Download it from online
 
@@ -13,3 +13,5 @@ for scene in examples_original/*/; do
 done
 
 rm -fr examples_original
+
+gsutil -m rsync -r -d /nvs-bench/data/examples gs://nvs-bench/data/examples
