@@ -1,0 +1,1 @@
+{"method_name": "LichtFeld-Studio", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 26.071337023089008, "ssim": 0.8321818675725691, "lpips": 0.3205749590791041, "time": 214.39, "max_gpu_memory": 3047.0}

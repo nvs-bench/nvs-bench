@@ -74,12 +74,10 @@ def evaluate_metrics(data: str, method: str) -> Metrics:
             ssim = ssim[0]
         ssim_scores.append(ssim.item())
 
-        # Calculate LPIPS
-        gt_tensor_lpips = gt_tensor / 255.0
-        rendered_tensor_lpips = rendered_tensor / 255.0
-        lpips = learned_perceptual_image_patch_similarity(
-            gt_tensor_lpips, rendered_tensor_lpips, net_type="vgg", normalize=True
-        )
+        # Calculate LPIPS (inputs normalized from [0, 255] to [-1, 1] range)
+        gt_tensor_lpips = (gt_tensor / 255.0) * 2.0 - 1.0
+        rendered_tensor_lpips = (rendered_tensor / 255.0) * 2.0 - 1.0
+        lpips = learned_perceptual_image_patch_similarity(gt_tensor_lpips, rendered_tensor_lpips, net_type="vgg")
         lpips_scores.append(lpips.item())
 
         # Clear GPU cache after each image to prevent memory accumulation

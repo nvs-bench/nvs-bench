@@ -1,0 +1,1 @@
+{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "bonsai", "psnr": 32.62744455079775, "ssim": 0.945817726689416, "lpips": 0.2404582488375741, "time": 380.72, "max_gpu_memory": 7243.0}
