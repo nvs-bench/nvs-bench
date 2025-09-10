@@ -17,19 +17,10 @@ if [ ! -f nyc.zip ]; then
     wget https://storage.googleapis.com/gresearch/refraw360/zipnerf-undistorted/nyc.zip
 fi
 
-# Only extract if folders don't already exist
-if [ ! -d "/nvs-bench/temp_downloads/zipnerf/alameda" ]; then
-    unzip -o alameda.zip -d /nvs-bench/temp_downloads/zipnerf
-fi
-if [ ! -d "/nvs-bench/temp_downloads/zipnerf/berlin" ]; then
-    unzip -o berlin.zip -d /nvs-bench/temp_downloads/zipnerf
-fi
-if [ ! -d "/nvs-bench/temp_downloads/zipnerf/london" ]; then
-    unzip -o london.zip -d /nvs-bench/temp_downloads/zipnerf
-fi
-if [ ! -d "/nvs-bench/temp_downloads/zipnerf/nyc" ]; then
-    unzip -o nyc.zip -d /nvs-bench/temp_downloads/zipnerf
-fi
+unzip -o alameda.zip -d /nvs-bench/temp_downloads/zipnerf
+unzip -o berlin.zip -d /nvs-bench/temp_downloads/zipnerf
+unzip -o london.zip -d /nvs-bench/temp_downloads/zipnerf
+unzip -o nyc.zip -d /nvs-bench/temp_downloads/zipnerf
 
 # Downsample factor 4 based on 3dgrut (these are large scenes after all)
 DATA_FACTOR=4
