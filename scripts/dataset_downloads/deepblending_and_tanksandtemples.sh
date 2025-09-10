@@ -1,3 +1,6 @@
+#! /bin/bash
+set -e
+
 mkdir -p /nvs-bench/temp_downloads/deepblending_and_tanksandtemples
 cd /nvs-bench/temp_downloads/deepblending_and_tanksandtemples
 

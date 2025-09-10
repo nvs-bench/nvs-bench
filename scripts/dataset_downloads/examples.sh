@@ -1,5 +1,5 @@
 #! /bin/bash
-# This dataset is just used for testing the end to end functionality of the pipeline on new techniques
+set -e
 
 # TODO: Download it from online
 

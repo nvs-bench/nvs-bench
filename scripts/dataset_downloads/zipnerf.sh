@@ -1,4 +1,5 @@
 #! /bin/bash
+set -e
 
 mkdir -p /nvs-bench/temp_downloads/zipnerf
 cd /nvs-bench/temp_downloads/zipnerf
