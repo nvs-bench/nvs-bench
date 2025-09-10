@@ -1,0 +1,1 @@
+{"method_name": "LichtFeld-Studio", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 30.41060730506634, "ssim": 0.9115950917375499, "lpips": 0.31052272998053454, "time": 251.23, "max_gpu_memory": 5237.0}

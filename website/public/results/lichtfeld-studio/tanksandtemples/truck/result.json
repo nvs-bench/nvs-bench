@@ -1,0 +1,1 @@
+{"method_name": "LichtFeld-Studio", "dataset_name": "tanksandtemples", "scene_name": "truck", "psnr": 25.971927285194397, "ssim": 0.8900670818984509, "lpips": 0.1510432141367346, "time": 222.54, "max_gpu_memory": 3663.0}

@@ -1,0 +1,1 @@
+{"method_name": "LichtFeld-Studio", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 21.943617425206618, "ssim": 0.7384071079542011, "lpips": 0.37800259318219903, "time": 219.45, "max_gpu_memory": 3129.0}
