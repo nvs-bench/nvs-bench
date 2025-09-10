@@ -49,6 +49,6 @@ def main(data_script: str | None = None):
             "mipnerf360",
             "deepblending_and_tanksandtemples",
         ]
-        list(run.starmap(DATA_SCRIPTS, return_exceptions=True))
+        list(run.map(DATA_SCRIPTS, return_exceptions=True))
     else:
         run.remote(data_script)
