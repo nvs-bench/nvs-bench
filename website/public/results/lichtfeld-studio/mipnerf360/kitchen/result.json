@@ -1,0 +1,1 @@
+{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 27.240108163016185, "ssim": 0.7769955111401422, "lpips": 0.26141255114759715, "time": 415.85, "max_gpu_memory": 6963.0}

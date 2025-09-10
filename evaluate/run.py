@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 import modal
 
@@ -30,28 +31,40 @@ nvs_bench_volume = modal.Volume.from_name("nvs-bench", create_if_missing=True)
     timeout=3600,
 )
 def evaluate(method: str, data: str):
-    os.system(f"python /root/workspace/nvs-bench/evaluate.py --method {method} --data {data}")
+    subprocess.run(
+        f"python /root/workspace/nvs-bench/evaluate.py --method {method} --data {data}", shell=True, check=True
+    )
 
     # Upload result to gcs bucket
     upload_dir = f"/nvs-bench/results/{method}/{data}/"
     os.makedirs(upload_dir, exist_ok=True)
     os.makedirs(f"{upload_dir}/test_renders", exist_ok=True)
     os.makedirs(f"{upload_dir}/website_images", exist_ok=True)
-    os.system(f"cp /nvs-bench/methods/{method}/{data}/nvs-bench-result.json {upload_dir}/result.json")
-    os.system(
-        f"cp -r /nvs-bench/methods/{method}/{data}/test_renders/* {upload_dir}/test_renders/"
+    subprocess.run(
+        f"cp /nvs-bench/methods/{method}/{data}/nvs-bench-result.json {upload_dir}/result.json", shell=True, check=True
+    )
+    subprocess.run(
+        f"cp -r /nvs-bench/methods/{method}/{data}/test_renders/* {upload_dir}/test_renders/", shell=True, check=True
     )  # rm or rsync approaches don't work with mountpoint... so we go for this approach
-    os.system(f"cp -r /nvs-bench/methods/{method}/{data}/website_images/* {upload_dir}/website_images/")
+    subprocess.run(
+        f"cp -r /nvs-bench/methods/{method}/{data}/website_images/* {upload_dir}/website_images/",
+        shell=True,
+        check=True,
+    )
     print(f"Uploaded results for {method} on {data} to {upload_dir}")
 
     nvs_bench_volume.commit()
 
 
 def download_results(method: str):
-    os.system("mkdir -p results/")
-    os.system(f"modal volume get --force nvs-bench results/{method}/ website/public/results/")
-    os.system(f"find website/public/results/{method} -type d -name 'test_renders' -exec rm -rf {{}} +")
-    os.system("cd website && pnpm run build")
+    subprocess.run("mkdir -p results/", shell=True, check=True)
+    subprocess.run(
+        f"modal volume get --force nvs-bench results/{method}/ website/public/results/", shell=True, check=True
+    )
+    subprocess.run(
+        f"find website/public/results/{method} -type d -name 'test_renders' -exec rm -rf {{}} +", shell=True, check=True
+    )
+    subprocess.run("cd website && pnpm run build", shell=True, check=True)
 
 
 @app.local_entrypoint()
@@ -83,6 +96,6 @@ def main(method: str, data: str | None = None):
             "zipnerf/nyc",
         ]
         # Have to do something a bit unusual to allow modal to iterate over the second kwarg
-        list(evaluate.starmap((method, data) for data in BENCHMARK_DATA))
+        list(evaluate.starmap([(method, data) for data in BENCHMARK_DATA], return_exceptions=True))
 
     download_results(method)

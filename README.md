@@ -53,7 +53,7 @@ Evaluation:
 Once the `test_renders` are uploaded for a method and data, you can run an evaluation run on modal which will calulate the metrics and download the results locally to be viewed on the website locally and merged into this repo.
 
 ```
-modal run -m evaluate.run --method 3dgrut --data examples/kitchen
+modal run -m evaluate.run --method 3dgrut --data mipnerf360/stump
 ```
 
 Note: your method's name is determined by your repo's name

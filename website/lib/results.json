@@ -21,16 +21,6 @@
   },
   {
     "method_name": "3dgrut",
-    "dataset_name": "examples",
-    "scene_name": "kitchen",
-    "psnr": 6.176567077636719,
-    "ssim": 0.05126378064354261,
-    "lpips": 0.7845544616381327,
-    "time": 36.17,
-    "max_gpu_memory": 4987
-  },
-  {
-    "method_name": "3dgrut",
     "dataset_name": "mipnerf360",
     "scene_name": "bicycle",
     "psnr": 25.251452331542968,
@@ -451,16 +441,6 @@
   },
   {
     "method_name": "gaussian-splatting",
-    "dataset_name": "examples",
-    "scene_name": "kitchen",
-    "psnr": 10.339940388997396,
-    "ssim": 0.3801174859205882,
-    "lpips": 0.7952298124631246,
-    "time": 33.11,
-    "max_gpu_memory": 1365
-  },
-  {
-    "method_name": "gaussian-splatting",
     "dataset_name": "mipnerf360",
     "scene_name": "bicycle",
     "psnr": 25.249429016113282,
@@ -591,16 +571,6 @@
   },
   {
     "method_name": "gsplat",
-    "dataset_name": "examples",
-    "scene_name": "kitchen",
-    "psnr": 6.002004623413086,
-    "ssim": 0.040597169970472656,
-    "lpips": 0.7823065121968588,
-    "time": 14.73,
-    "max_gpu_memory": 1121
-  },
-  {
-    "method_name": "gsplat",
     "dataset_name": "mipnerf360",
     "scene_name": "bicycle",
     "psnr": 25.25087821960449,
@@ -710,6 +680,96 @@
     "max_gpu_memory": 2155
   },
   {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bicycle",
+    "psnr": 25.278246002197264,
+    "ssim": 0.7707086086273194,
+    "lpips": 0.25427186727523804,
+    "time": 304.73,
+    "max_gpu_memory": 5137
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bonsai",
+    "psnr": 32.31060440475876,
+    "ssim": 0.9447038866378166,
+    "lpips": 0.2412965285616952,
+    "time": 380.11,
+    "max_gpu_memory": 7223
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "counter",
+    "psnr": 27.04548937479655,
+    "ssim": 0.8457023143768311,
+    "lpips": 0.2934480865796407,
+    "time": 406.88,
+    "max_gpu_memory": 6923
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "flowers",
+    "psnr": 21.85590900074352,
+    "ssim": 0.6164570057933981,
+    "lpips": 0.36439266123554925,
+    "time": 325.54,
+    "max_gpu_memory": 5077
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "garden",
+    "psnr": 27.222112894058228,
+    "ssim": 0.8542866085966428,
+    "lpips": 0.1557721688101689,
+    "time": 336.74,
+    "max_gpu_memory": 5283
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "kitchen",
+    "psnr": 27.240108163016185,
+    "ssim": 0.7769955111401422,
+    "lpips": 0.26141255114759715,
+    "time": 415.85,
+    "max_gpu_memory": 6963
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "room",
+    "psnr": 32.017968642405975,
+    "ssim": 0.9249981809885074,
+    "lpips": 0.2659896887265719,
+    "time": 370.14,
+    "max_gpu_memory": 6943
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "stump",
+    "psnr": 24.898292064666748,
+    "ssim": 0.6823964826762676,
+    "lpips": 0.321080157533288,
+    "time": 289.38,
+    "max_gpu_memory": 5179
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "treehill",
+    "psnr": 22.956578784518772,
+    "ssim": 0.6473981208271451,
+    "lpips": 0.38539493415090775,
+    "time": 308.12,
+    "max_gpu_memory": 5097
+  },
+  {
     "method_name": "triangle-splatting",
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
@@ -728,16 +788,6 @@
     "lpips": 0.29304211920705336,
     "time": 2202.68,
     "max_gpu_memory": 17015
-  },
-  {
-    "method_name": "triangle-splatting",
-    "dataset_name": "examples",
-    "scene_name": "kitchen",
-    "psnr": 16.835893313090008,
-    "ssim": 0.4922025998433431,
-    "lpips": 0.699597696463267,
-    "time": 68.96,
-    "max_gpu_memory": 1839
   },
   {
     "method_name": "triangle-splatting",

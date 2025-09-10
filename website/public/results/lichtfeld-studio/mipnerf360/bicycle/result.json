@@ -1,0 +1,1 @@
+{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 25.278246002197264, "ssim": 0.7707086086273194, "lpips": 0.25427186727523804, "time": 304.73, "max_gpu_memory": 5137.0}
