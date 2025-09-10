@@ -1,1 +1,0 @@
-{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "flowers", "psnr": 21.85590900074352, "ssim": 0.6164570057933981, "lpips": 0.36439266123554925, "time": 325.54, "max_gpu_memory": 5077.0}

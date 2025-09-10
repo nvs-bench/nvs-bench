@@ -1,1 +1,0 @@
-{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "room", "psnr": 32.017968642405975, "ssim": 0.9249981809885074, "lpips": 0.2659896887265719, "time": 370.14, "max_gpu_memory": 6943.0}

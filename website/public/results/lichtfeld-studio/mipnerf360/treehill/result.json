@@ -1,1 +1,0 @@
-{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 22.956578784518772, "ssim": 0.6473981208271451, "lpips": 0.38539493415090775, "time": 308.12, "max_gpu_memory": 5097.0}
