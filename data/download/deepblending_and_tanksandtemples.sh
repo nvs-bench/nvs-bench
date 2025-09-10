@@ -16,7 +16,7 @@ mv db /nvs-bench/data/deepblending/
 
 # for every scene in deepblending/
 for scene in /nvs-bench/data/deepblending/*; do
-    python data/utils/format_image_names.py $scene
+    python /root/data/utils/format_image_names.py $scene
 done
 
 rm -rf /nvs-bench/data/tanksandtemples/
@@ -25,7 +25,7 @@ mv tandt /nvs-bench/data/tanksandtemples/
 
 # for every scene in tanksandtemples/
 for scene in /nvs-bench/data/tanksandtemples/*; do
-    python data/utils/format_image_names.py $scene
+    python /root/data/utils/format_image_names.py $scene
 done
 
 gsutil -m rsync -r -d /nvs-bench/data/deepblending gs://nvs-bench/data/deepblending 

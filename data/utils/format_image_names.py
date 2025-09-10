@@ -16,7 +16,7 @@ import argparse
 import shutil
 from pathlib import Path
 
-from utils.read_write_model import Image, read_model, write_model
+from read_write_model import Image, read_model, write_model
 
 
 def format_image_names(data_path: str | Path):

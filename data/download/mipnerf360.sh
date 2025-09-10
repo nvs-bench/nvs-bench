@@ -27,7 +27,7 @@ for scene in bicycle flowers garden stump treehill room counter kitchen bonsai; 
     esac
     rm -rf images_[0-9]*
 
-    python data/utils/format_image_names.py /nvs-bench/temp_downloads/mipnerf360/$scene
+    python /root/data/utils/format_image_names.py /nvs-bench/temp_downloads/mipnerf360/$scene
 
     cd /nvs-bench/temp_downloads/mipnerf360
 done

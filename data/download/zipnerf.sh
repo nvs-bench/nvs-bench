@@ -39,7 +39,7 @@ for scene in alameda berlin london nyc; do
     rm -rf images && mv images_$DATA_FACTOR images
     rm -rf images_[0-9]*
 
-    python data/utils/format_image_names.py /nvs-bench/temp_downloads/zipnerf/$scene
+    python /root/data/utils/format_image_names.py /nvs-bench/temp_downloads/zipnerf/$scene
 
     cd /nvs-bench/temp_downloads/zipnerf
 done
