@@ -68,4 +68,5 @@ if __name__ == "__main__":
     parser.add_argument("data_path", help="Path to the dataset directory containing images/ and sparse/0/ folders")
     args = parser.parse_args()
 
+    print(f"Formatting image names in {args.data_path}")
     format_image_names(args.data_path)
