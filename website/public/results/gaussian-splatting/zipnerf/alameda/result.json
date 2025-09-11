@@ -1,0 +1,1 @@
+{"method_name": "gaussian-splatting", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.73558095413419, "ssim": 0.7572424492803037, "lpips": 0.35247614389191023, "time": 1026.31, "max_gpu_memory": 10813.0}

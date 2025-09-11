@@ -1,0 +1,1 @@
+{"method_name": "EDGS", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 27.432399934337987, "ssim": 0.8739359056757342, "lpips": 0.23646613366661534, "time": 1062.43, "max_gpu_memory": 10475.0}

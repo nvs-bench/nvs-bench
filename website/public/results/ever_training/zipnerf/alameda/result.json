@@ -1,0 +1,1 @@
+{"method_name": "ever_training", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 21.97278462247365, "ssim": 0.7616885522818235, "lpips": 0.33492066982429697, "time": 5766.89, "max_gpu_memory": 24185.0}
