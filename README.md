@@ -1,6 +1,5 @@
 # Instructions
-
-See `nvs-bench/README.md` for more detailed instructions. This file is meant to be a sparknotes / reference after using the `git subtree` command to copy the boilerplate files into your method's repo
+See `nvs-bench/README.md` for more detailed instructions. This file is meant to be a sparknotes / reference after using the `git subtree` command to copy the boilerplate files into your method's repo.
 
 # Installation
 Copying these files into a new method's repo with `git subtree`
@@ -21,4 +20,10 @@ To run:
 and then to run on the full benchmark:
 `modal run -m nvs-bench.runner`
 
-# Evaluate
+# Evaluating
+Switch to https://github.com/nvs-bench/nvs-bench and see the instructions there!
+
+# Getting the Latest Changes
+Pull the latest version of the boilerplate files with
+`git subtree pull --prefix=nvs-bench nvs-bench boilerplate-branch --squash`
+this will pull the latest changes, squash them into a single commit, and merge them with your boilerplate files
