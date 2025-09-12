@@ -103,19 +103,26 @@ export function MetricsTimePlot({ results, selectedMetric, onMetricChange }: Met
   return (
     <div className="mt-12 bg-card border border-border rounded-lg p-6 shadow-sm">
       <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-center gap-3 mb-4">
           <h3 className="text-2xl font-bold text-foreground">
             Training Time vs{" "}
           </h3>
-          <select
-            value={selectedMetric}
-            onChange={(e) => onMetricChange(e.target.value as MetricType)}
-            className="px-3 py-1 border border-border rounded-md bg-background text-foreground text-xl font-bold focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            <option value="psnr">PSNR</option>
-            <option value="ssim">SSIM</option>
-            <option value="lpips">LPIPS</option>
-          </select>
+          <div className="bg-muted text-muted-foreground inline-flex h-9 items-center justify-center rounded-lg p-[3px]">
+            {(["psnr", "ssim", "lpips"] as MetricType[]).map((metric) => (
+              <button
+                key={metric}
+                type="button"
+                onClick={() => onMetricChange(metric)}
+                className={`inline-flex h-[calc(100%-1px)] items-center justify-center rounded-md border border-transparent px-3 py-1 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  selectedMetric === metric
+                    ? "bg-background text-foreground shadow-sm border-input"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {metric.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
