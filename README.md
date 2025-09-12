@@ -1,5 +1,5 @@
 # Instructions
-See `nvs-bench/README.md` for more detailed instructions. This file is meant to be a sparknotes / reference after using the `git subtree` command to copy the boilerplate files into your method's repo.
+See `nvs-bench/README.md` for more detailed instructions. This file is meant to be a quick reference after using the `git subtree` command to copy the boilerplate files into your method's repo.
 
 # Installation
 Copying these files into a new method's repo with `git subtree`
