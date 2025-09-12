@@ -103,12 +103,14 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
               dataKey="timeMinutes"
               name="Time (minutes)"
               label={{
-                value: "Training Time (minutes)",
+                value: "Training Time (m)",
                 angle: -90,
                 position: "left",
                 style: { textAnchor: "middle" },
               }}
               tickFormatter={(value) => `${value.toFixed(0)}m`}
+              domain={[0, 100]}
+              reversed={true}
               fontSize={12}
             />
 
@@ -131,7 +133,7 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
               fill="currentColor"
               className="text-muted-foreground"
             >
-              ↘ better
+              ↗ better
             </text>
           </ComposedChart>
         </ResponsiveContainer>
