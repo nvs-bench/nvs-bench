@@ -191,13 +191,13 @@ export function DatasetHeader({
           All Scenes
         </h2>
         <AllDatasetImages />
-        <p className="text-lg text-foreground leading-relaxed mb-8">
-          This benchmark aggregates the 17 most commonly evaluated on scenes in NVS research papers and 
+        <p className="text-lg text-foreground leading-relaxed mb-4">
+          The benchmark aggregates the 17 most commonly used scenes in the NVS research community and standardizes them. 
         </p>
         <DatasetDownloadModal datasetName="all">
           <button
             type="button"
-            className="underline underline-offset-4 hover:text-foreground"
+            className="underline underline-offset-4 hover:text-foreground mb-4 text-sm"
           >
             Download
           </button>
