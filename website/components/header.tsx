@@ -54,7 +54,7 @@ export function Header() {
         </p>
         
         <p>
-          Add your method on <a href="https://github.com/nvs-bench/nvs-bench" className="underline underline-offset-4 hover:text-foreground">Github</a>.
+          Add a new method on <a href="https://github.com/nvs-bench/nvs-bench" className="underline underline-offset-4 hover:text-foreground">Github</a>.
         </p>
       </div>
     </div>
