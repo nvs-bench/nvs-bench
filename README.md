@@ -1,66 +1,53 @@
-# [wip] Novel-View Synthesis Benchmark
-Reproducible, standardized
+# Novel-View Synthesis Benchmark
+<p align="center">
+  <img src="website/public/logo.png" alt="NVS-Bench Logo" width="400"/>
+</p>
 
 
-Evaluating a new method is as simple as rendering images on the test splits of the benchmark datasets (already have them? skip to **upload**) and running `evaluate.py`
-
-NVS-bench also provides a framework for taking any repo and running it on serverless GPUs (via Beam). If you're using vscode/cursor you can even open up a native dev experience backed by cloud gpus for quick development!
-
-Our preferred way of generating them for a new repo consists of three simple files (located in `boilerplate/`):
-
-- `Dockerfile` —- Your installation instructions
-- `nvs_bench.sh` -- Your training / rendering commands
-- `nvs_bench.py` —- (does not need to be edited) Runs training/rendering on a serverless gpu provider (we chose Beam for their RTX 4090s, <$30 free tier, and simple python interface)
+**nvs-bench** is a standardized and easily reproducible novel-view synthesis (3D Gaussian Splats, NeRFs etc…) benchmark that anyone can setup on a new method in **~5 minutes** and **~10 lines of code**. It started from the following observations: 
+- The NVS research community commonly evaluates on the same datasets.
+- These datasets have different sourcing and preprocessing steps. 
+- All methods expect the same input format and can output rendered images.
+- Rendered images are all you need for evaluation.
 
 
-A summary of these steps is bundled with the boilerplate files in `boilerplate/README.md`
+It uses Modal to take any method and run it on serverless GPUs. If you're using vscode/cursor you can even open up a native dev experience backed by cloud gpus. Or, try the methods out in a browser with a hoster jupyter lab, vscode, or modal's new notebook experience. Their generous free tier ($30 a month) should be plenty.
+
+The main files for adding a new method are in `boilerplate/`:
+
+- `image.py` —- (Needs to be filled in) Your installation instructions, similar to a Dockerfile.
+- `eval.sh` -- (Needs to be filled in) Your training / rendering commands.
+- `run.py` —- Runs `eval.sh` with an image built from `image.py` on Modal.
+- `dev_env.py` -- if you have vscode/cursor, opens up a remote gpu-backed dev environment.
+
+A summary of how to use these files is in `boilerplate/README.md` and each file should have plenty of instructional comments as well.
+
+The boiler plate files are copied via `git subtree` into an `nvs-bench/` folder in the target method's repo. See some examples under `methods/`
 
 # New Methods
-
 1) Clone the `nvs-bench` boilerplate files into a new method's repo with:
 ```
-git remote add nvs-bench https://github.com/N-Demir/nvs-bench.git && git subtree add --prefix=nvs-bench nvs-bench boilerplate-branch --squash
+git remote add nvs-bench https://github.com/nvs-bench/nvs-bench.git && git subtree add --prefix=nvs-bench nvs-bench boilerplate-branch --squash
 ```
 (we use `git subtree` to make boilerplate versioning and distribution easier)
 
 2) Fill out 
-- `image.py` with steps needed to install your method on a new machine or use an existing Dockerfile
-- `eval.sh` with the commands for training, rendering, and moving of test renders to the `$output_folder/test_renders` folder
+- `image.py` with steps needed to install your method on a new machine or use an existing Dockerfile.
+- `eval.sh` with the commands for training, rendering, and moving of test renders to the necessary `$output_folder/test_renders` folder.
 
-Then try it out yourself then (see [Running](#Running))! Modal provides $30 of free credits per month.
+## Running
+Then, [install modal](https://modal.com/docs/guide#getting-started) and run it with `modal run -m nvs_bench.run --data <mipnerf360/bicycle>`
 
-To add your method to the leaderboard clone this repo and add your method as a submodule with:
-`git submodule add -b <your-repos-branch> https://github.com/<your-repo>.git methods/<your-method-name>`
+You also have the options of starting a remote dev vscode/cursor environment backed by cloud gpus by running `modal run -m nvs_bench.dev_env`
 
-Then, run the evaluation script (TODO: Fill this out better) which will run your method across the benchmark scenes and download the results locally. See TODO: Website running on how to view your results on the website locally. Then open up a PR! It should have: 1) a method submodule pointing to your runnable code 2) results in websites/public 3) an entry in websites/lib/methods.json
-
-# Running
-You then have two ways to run the method on cloud gpus:
-- vscode/cursor remote development server
-- remote job/function
-
-With Modal's $30 per month free credits you should have plenty to iterate and try out new methods
-
-Note: beam's dockerfiles don't have layers cached yet but that is supposed to be coming soon.
-Note 2: `modal run` will terminate if you close your laptop / lose connection. To avoid that, you can run `modal run -d` which will continue to run the modal functions remotely even if something happens locally (recommended when training and evaluating on benchmark).
+## Evaluating
+To evaluate, clone this repo locally (sorry, for now it will take a while because of all the website assets) and run `modal run -m evaluate.run --method <your-methods-name>` (the method name is automatically the folder `nvs_bench.run` ran from).
 
 
+## Submitting Results
+Evaluating should download the results locally, which you can view by running the website with `cd website/ && pnpm dev` (may need to install pnpm first).
 
-TODO: Write down some stuff about evaluation steps
-
-Evaluation:
-
-Once the `test_renders` are uploaded for a method and data, you can run an evaluation run on modal which will calulate the metrics and download the results locally to be viewed on the website locally and merged into this repo.
-
-```
-modal run -m evaluate.run --method 3dgrut --data mipnerf360/stump
-```
-
-Note: your method's name is determined by your repo's name
-
-To see your method's results add it to `website/lib/methods.json` and run `make run-website` (or from the `website/` folder `pnpm dev`)
-
-To get your method checked in make a pull request on this repo after adding it as a submodule
-```
-git submodule add -b <source-branch> https://github.com/<your-repo> methods/<your-method-name>
-```
+To submit results, open up a PR with the following:
+- the generated files from `evaluate.run`
+- your method's info filled out in `website/lib/methods.json`
+- the method repo added as a submodule to this repo with `git submodule add <git-url-to-your-rep> nvs-bench/`
