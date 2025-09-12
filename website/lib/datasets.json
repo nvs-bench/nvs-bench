@@ -36,7 +36,7 @@
   {
     "dataset_name": "zipnerf",
     "dataset_display_name": "ZipNerf",
-    "dataset_description": "Large scale high-fidelity indoor captured scenes. 1000+ images per scene. We've selected the undistorted images for broader compatability, but the original images were captured with a fisheye lens.",
+    "dataset_description": "Large scale high-fidelity indoor captured scenes. 1000+ images per scene. We've selected the undistorted images for broader compatability, but the original images were captured with a fisheye lens. Due to the size, and following 3DGUT's lead, we've selected the 4x resolution images.",
     "dataset_source_link": "https://smerf-3d.github.io/#data",
     "dataset_download_link": "",
     "scenes": ["alameda", "berlin", "london", "nyc"]
