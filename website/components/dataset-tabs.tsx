@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DatasetHeader } from "@/components/dataset-header";
 import { SceneTabs } from "@/components/scene-tabs";
+import { MethodImages } from "@/components/method-images";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
 import type { DatasetMeta } from "@/lib/types";
@@ -69,6 +70,11 @@ export function DatasetTabs() {
           selectedMethod={selectedMethod}
         />
         <PSNRTimePlot results={results} />
+        <MethodImages
+          selectedMethod={selectedMethod}
+          datasetName="all"
+          sceneName="all"
+        />
       </TabsContent>
 
       {/* Individual dataset content */}
