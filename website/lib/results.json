@@ -1193,40 +1193,40 @@
     "method_name": "triangle-splatting",
     "dataset_name": "zipnerf",
     "scene_name": "alameda",
-    "psnr": 11.594363043385167,
-    "ssim": 0.2542620424850745,
-    "lpips": 0.7208921994481768,
-    "time": 528,
-    "max_gpu_memory": 7095
+    "psnr": 22.206130546358875,
+    "ssim": 0.7481165279715841,
+    "lpips": 0.35141011502610925,
+    "time": 1627.08,
+    "max_gpu_memory": 18295
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "zipnerf",
     "scene_name": "berlin",
-    "psnr": 10.633629703017139,
-    "ssim": 0.2849910235594189,
-    "lpips": 0.761487447710895,
-    "time": 841.18,
-    "max_gpu_memory": 11495
+    "psnr": 27.11321619831065,
+    "ssim": 0.883598077864874,
+    "lpips": 0.3405031269347226,
+    "time": 2528.35,
+    "max_gpu_memory": 21791
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "zipnerf",
     "scene_name": "london",
-    "psnr": 13.833003149641321,
-    "ssim": 0.2822772779363267,
-    "lpips": 0.7741845196865974,
-    "time": 577.51,
-    "max_gpu_memory": 7327
+    "psnr": 26.52091891106139,
+    "ssim": 0.8281213235347828,
+    "lpips": 0.32178272864920027,
+    "time": 1477.47,
+    "max_gpu_memory": 18641
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "zipnerf",
     "scene_name": "nyc",
-    "psnr": 11.135685043950234,
-    "ssim": 0.25859452964317414,
-    "lpips": 0.7435443872405637,
-    "time": 805.63,
-    "max_gpu_memory": 4407
+    "psnr": 27.02692194907896,
+    "ssim": 0.8439875254707951,
+    "lpips": 0.28212040770919095,
+    "time": 1732.08,
+    "max_gpu_memory": 16197
   }
 ]

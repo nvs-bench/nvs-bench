@@ -59,6 +59,10 @@ export function DatasetTabs() {
 
       {/* All datasets content */}
       <TabsContent value="all" className="mt-0">
+        <DatasetHeader
+          selectedDataset="all"
+          selectedScene={selectedScene}
+        />
         <ResultsTable
           results={results}
           onMethodSelect={handleMethodSelect}
