@@ -192,7 +192,7 @@ export function DatasetHeader({
         </h2>
         <AllDatasetImages />
         <p className="text-lg text-foreground leading-relaxed mb-4">
-          The benchmark aggregates the 17 most commonly used scenes in the NVS research community and standardizes them. 
+        The benchmark combines the 17 most commonly evaluated on scenes. The scenes range from 100s to 1000s of images and span a variety of scenarios: object-orbits, multi-room flythroughs, indoor and outdoor, fixed and variable lighting. Image resolutions have been pre-selected (<code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">images_*/</code> → <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">images/</code>) and names 1-indexed. Poses are kept from their sources. 
         </p>
         <DatasetDownloadModal datasetName="all">
           <button
