@@ -1,14 +1,12 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   CartesianGrid,
-  Cell,
   ComposedChart,
   LabelList,
   ResponsiveContainer,
   Scatter,
-  Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
@@ -19,10 +17,14 @@ interface PSNRTimePlotProps {
   results: Result[];
 }
 
+type MetricType = "psnr" | "ssim" | "lpips";
+
 // Interface for averaged results (same as in results table)
 interface AveragedResult {
   method_name: string;
   psnr: number;
+  ssim: number;
+  lpips: number;
   time: number;
 }
 
@@ -35,18 +37,25 @@ function calculateMethodAverages(results: Result[]): AveragedResult[] {
     if (!methodGroups.has(result.method_name)) {
       methodGroups.set(result.method_name, []);
     }
-    methodGroups.get(result.method_name)!.push(result);
+    const group = methodGroups.get(result.method_name);
+    if (group) {
+      group.push(result);
+    }
   });
 
   // Calculate averages for each method
   return Array.from(methodGroups.entries()).map(
     ([methodName, methodResults]) => {
       const totalPsnr = methodResults.reduce((sum, r) => sum + r.psnr, 0);
+      const totalSsim = methodResults.reduce((sum, r) => sum + r.ssim, 0);
+      const totalLpips = methodResults.reduce((sum, r) => sum + r.lpips, 0);
       const totalTime = methodResults.reduce((sum, r) => sum + r.time, 0);
 
       return {
         method_name: methodName,
         psnr: totalPsnr / methodResults.length,
+        ssim: totalSsim / methodResults.length,
+        lpips: totalLpips / methodResults.length,
         time: totalTime / methodResults.length,
       };
     },
@@ -54,6 +63,8 @@ function calculateMethodAverages(results: Result[]): AveragedResult[] {
 }
 
 export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
+  const [selectedMetric, setSelectedMetric] = useState<MetricType>("psnr");
+
   // Calculate averages for methods using the same logic as results table
   const averagedResults = useMemo(() => {
     return calculateMethodAverages(results);
@@ -64,19 +75,47 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
     const methodMeta = methodsData.find(
       (m: MethodMeta) => m.method_name === result.method_name,
     );
+    
     return {
       methodDisplayName: methodMeta?.method_display_name || result.method_name,
-      psnr: result.psnr,
+      metric: result[selectedMetric],
       timeMinutes: result.time / 60, // Convert to minutes for better readability
     };
   });
 
+  // Get metric display info
+  const getMetricInfo = (metric: MetricType) => {
+    switch (metric) {
+      case "psnr":
+        return { label: "PSNR (dB)", domain: [20, 35], higherIsBetter: true };
+      case "ssim":
+        return { label: "SSIM", domain: [0.7, 1.0], higherIsBetter: true };
+      case "lpips":
+        return { label: "LPIPS", domain: [0, 0.5], higherIsBetter: false };
+      default:
+        return { label: "PSNR (dB)", domain: [20, 35], higherIsBetter: true };
+    }
+  };
+
+  const metricInfo = getMetricInfo(selectedMetric);
+
   return (
     <div className="mt-12 bg-card border border-border rounded-lg p-6 shadow-sm">
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-foreground mb-2">
-          Training Time vs PSNR
-        </h3>
+        <div className="flex items-center gap-3 mb-2">
+          <h3 className="text-2xl font-bold text-foreground">
+            Training Time vs{" "}
+          </h3>
+          <select
+            value={selectedMetric}
+            onChange={(e) => setSelectedMetric(e.target.value as MetricType)}
+            className="px-3 py-1 border border-border rounded-md bg-background text-foreground text-xl font-bold focus:outline-none focus:ring-2 focus:ring-ring"
+          >
+            <option value="psnr">PSNR</option>
+            <option value="ssim">SSIM</option>
+            <option value="lpips">LPIPS</option>
+          </select>
+        </div>
       </div>
 
       <div className="h-96 w-full">
@@ -92,11 +131,15 @@ export function PSNRTimePlot({ results }: PSNRTimePlotProps) {
             <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
             <XAxis
               type="number"
-              dataKey="psnr"
-              name="PSNR"
-              label={{ value: "PSNR (dB)", position: "bottom", offset: 0 }}
-              domain={[20, 35]}
+              dataKey="metric"
+              name={metricInfo.label}
+              label={{ value: metricInfo.label, position: "bottom", offset: 0 }}
+              domain={metricInfo.domain}
+              reversed={selectedMetric === "lpips"}
               fontSize={12}
+              tickFormatter={(value) => {
+                return value.toFixed(selectedMetric === "psnr" ? 1 : 2);
+              }}
             />
             <YAxis
               type="number"
