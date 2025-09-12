@@ -6,13 +6,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
 import type { DatasetMeta } from "@/lib/types";
 import { ResultsTable } from "@/components/results-table";
-import { PSNRTimePlot } from "@/components/psnr-time-plot";
+import { MetricsTimePlot } from "@/components/metrics-time-plot";
 import results from "@/lib/results.json";
+
+type MetricType = "psnr" | "ssim" | "lpips";
 
 export function DatasetTabs() {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [selectedScene, setSelectedScene] = useState<string>("all");
   const [selectedDataset, setSelectedDataset] = useState<string>("all");
+  const [selectedMetric, setSelectedMetric] = useState<MetricType>("psnr");
 
   const handleMethodSelect = (methodName: string | null) => {
     setSelectedMethod(methodName);
@@ -26,6 +29,10 @@ export function DatasetTabs() {
     setSelectedDataset(datasetName);
     // Reset scene selection when switching datasets
     setSelectedScene("all");
+  };
+
+  const handleMetricChange = (metric: MetricType) => {
+    setSelectedMetric(metric);
   };
 
   return (
@@ -69,7 +76,11 @@ export function DatasetTabs() {
           onMethodSelect={handleMethodSelect}
           selectedMethod={selectedMethod}
         />
-        <PSNRTimePlot results={results} />
+        <MetricsTimePlot 
+          results={results} 
+          selectedMetric={selectedMetric}
+          onMetricChange={handleMetricChange}
+        />
         <MethodImages
           selectedMethod={selectedMethod}
           datasetName="all"
@@ -92,8 +103,10 @@ export function DatasetTabs() {
             dataset={dataset}
             selectedMethod={selectedMethod}
             selectedScene={selectedScene}
+            selectedMetric={selectedMetric}
             onMethodSelect={handleMethodSelect}
             onSceneChange={handleSceneChange}
+            onMetricChange={handleMetricChange}
           />
         </TabsContent>
       ))}

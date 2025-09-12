@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   CartesianGrid,
   ComposedChart,
@@ -15,6 +15,8 @@ import type { MethodMeta, Result } from "@/lib/types";
 
 interface MetricsTimePlotProps {
   results: Result[];
+  selectedMetric: MetricType;
+  onMetricChange: (metric: MetricType) => void;
 }
 
 type MetricType = "psnr" | "ssim" | "lpips";
@@ -62,8 +64,7 @@ function calculateMethodAverages(results: Result[]): AveragedResult[] {
   );
 }
 
-export function MetricsTimePlot({ results }: MetricsTimePlotProps) {
-  const [selectedMetric, setSelectedMetric] = useState<MetricType>("psnr");
+export function MetricsTimePlot({ results, selectedMetric, onMetricChange }: MetricsTimePlotProps) {
 
   // Calculate averages for methods using the same logic as results table
   const averagedResults = useMemo(() => {
@@ -108,7 +109,7 @@ export function MetricsTimePlot({ results }: MetricsTimePlotProps) {
           </h3>
           <select
             value={selectedMetric}
-            onChange={(e) => setSelectedMetric(e.target.value as MetricType)}
+            onChange={(e) => onMetricChange(e.target.value as MetricType)}
             className="px-3 py-1 border border-border rounded-md bg-background text-foreground text-xl font-bold focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <option value="psnr">PSNR</option>
