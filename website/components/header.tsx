@@ -48,8 +48,14 @@ export function Header() {
         </Button>
       </div>
 
-      <div className="max-w-4xl mx-auto text-lg text-foreground leading-relaxed">
-        Some text explaining what this is
+      <div className="max-w-3xl mx-auto text-lg text-foreground leading-relaxed">
+        <p className="mb-4">
+        <strong>nvs-bench</strong> is a standardized and easily reproducible novel-view synthesis (3D Gaussian Splats, NeRFs etc…) benchmark that anyone can setup on a new method in <strong>~5 minutes</strong> and <strong>~10 lines of code</strong>. It started from the following observations: The NVS research community commonly evaluates on the same datasets, but these datasets have different sourcing and preprocessing steps. All methods expect the same input format and can output rendered images. And, rendered images are all you need for evaluation.
+        </p>
+        
+        <p>
+          Add a new method on <a href="https://github.com/nvs-bench/nvs-bench" className="underline underline-offset-4 hover:text-foreground">Github</a>.
+        </p>
       </div>
     </div>
   );

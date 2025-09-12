@@ -1,0 +1,1 @@
+{"method_name": "triangle-splatting", "dataset_name": "zipnerf", "scene_name": "berlin", "psnr": 27.11321619831065, "ssim": 0.883598077864874, "lpips": 0.3405031269347226, "time": 2528.35, "max_gpu_memory": 21791.0}

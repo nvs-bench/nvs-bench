@@ -1,10 +1,1 @@
-{
-  "method_name": "EDGS",
-  "dataset_name": "mipnerf360",
-  "scene_name": "flowers",
-  "psnr": 21.403995687311347,
-  "ssim": 0.6416305019096895,
-  "lpips": 0.281561288643967,
-  "time": 2392.93,
-  "max_gpu_memory": 11071.0
-}
+{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "flowers", "psnr": 21.403995687311347, "ssim": 0.6416305019096895, "lpips": 0.281561288643967, "time": 2392.93, "max_gpu_memory": 11071.0}

@@ -188,7 +188,15 @@ export function ResultsTable({
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortKey(key);
-      setSortOrder("desc");
+      // Set default sort order based on whether higher is better for this column
+      const higherIsBetterMap: Record<SortKey, boolean> = {
+        psnr: true,
+        ssim: true,
+        lpips: false,
+        time: false,
+        max_gpu_memory: false,
+      };
+      setSortOrder(higherIsBetterMap[key] ? "desc" : "asc");
     }
   }
 

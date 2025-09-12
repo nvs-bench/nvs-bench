@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { DatasetHeader } from "@/components/dataset-header";
-import { DatasetImages } from "@/components/dataset-images";
 import { SceneTabs } from "@/components/scene-tabs";
+import { MethodImages } from "@/components/method-images";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import datasets from "@/lib/datasets.json";
 import type { DatasetMeta } from "@/lib/types";
+import { ResultsTable } from "@/components/results-table";
+import { MetricsTimePlot } from "@/components/metrics-time-plot";
+import results from "@/lib/results.json";
+
+type MetricType = "psnr" | "ssim" | "lpips";
 
 export function DatasetTabs() {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [selectedScene, setSelectedScene] = useState<string>("all");
+  const [selectedDataset, setSelectedDataset] = useState<string>("all");
+  const [selectedMetric, setSelectedMetric] = useState<MetricType>("psnr");
 
   const handleMethodSelect = (methodName: string | null) => {
     setSelectedMethod(methodName);
@@ -19,17 +26,32 @@ export function DatasetTabs() {
   };
 
   const handleDatasetChange = (datasetName: string) => {
+    setSelectedDataset(datasetName);
     // Reset scene selection when switching datasets
     setSelectedScene("all");
   };
 
+  const handleMetricChange = (metric: MetricType) => {
+    setSelectedMetric(metric);
+  };
+
   return (
     <Tabs
-      defaultValue="mipnerf360"
+      value={selectedDataset}
+      defaultValue="all"
       className="w-full"
       onValueChange={handleDatasetChange}
     >
       <div className="mb-4 flex w-full items-center justify-center gap-4">
+        <TabsList className="w-fit">
+          <TabsTrigger
+            value="all"
+            className="px-6 py-2 text-sm font-semibold"
+          >
+            All
+          </TabsTrigger>
+        </TabsList>
+        <div className="h-9 w-px bg-muted" />
         <TabsList className="w-fit gap-3">
           {(datasets as DatasetMeta[]).map((d) => (
             <TabsTrigger
@@ -42,6 +64,29 @@ export function DatasetTabs() {
           ))}
         </TabsList>
       </div>
+
+      {/* All datasets content */}
+      <TabsContent value="all" className="mt-0">
+        <DatasetHeader
+          selectedDataset="all"
+          selectedScene={selectedScene}
+        />
+        <ResultsTable
+          results={results}
+          onMethodSelect={handleMethodSelect}
+          selectedMethod={selectedMethod}
+        />
+        <MetricsTimePlot 
+          results={results} 
+          selectedMetric={selectedMetric}
+          onMetricChange={handleMetricChange}
+        />
+        <MethodImages
+          selectedMethod={selectedMethod}
+          datasetName="all"
+          sceneName="all"
+        />
+      </TabsContent>
 
       {/* Individual dataset content */}
       {(datasets as DatasetMeta[]).map((dataset) => (
@@ -58,8 +103,10 @@ export function DatasetTabs() {
             dataset={dataset}
             selectedMethod={selectedMethod}
             selectedScene={selectedScene}
+            selectedMetric={selectedMetric}
             onMethodSelect={handleMethodSelect}
             onSceneChange={handleSceneChange}
+            onMetricChange={handleMetricChange}
           />
         </TabsContent>
       ))}

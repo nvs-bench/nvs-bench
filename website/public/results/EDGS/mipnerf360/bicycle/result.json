@@ -1,10 +1,1 @@
-{
-  "method_name": "EDGS",
-  "dataset_name": "mipnerf360",
-  "scene_name": "bicycle",
-  "psnr": 25.560425567626954,
-  "ssim": 0.7970340013504028,
-  "lpips": 0.17232766449451448,
-  "time": 3051.44,
-  "max_gpu_memory": 15639.0
-}
+{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 25.560425567626954, "ssim": 0.7970340013504028, "lpips": 0.17232766449451448, "time": 3051.44, "max_gpu_memory": 15639.0}

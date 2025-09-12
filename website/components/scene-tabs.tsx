@@ -1,25 +1,30 @@
-import { useState } from "react";
 import { MethodImages } from "@/components/method-images";
-import { PSNRTimePlot } from "@/components/psnr-time-plot";
+import { MetricsTimePlot } from "@/components/metrics-time-plot";
 import { ResultsTable } from "@/components/results-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import results from "@/lib/results.json";
 import type { DatasetMeta } from "@/lib/types";
 
+type MetricType = "psnr" | "ssim" | "lpips";
+
 interface SceneTabsProps {
   dataset: DatasetMeta;
   selectedMethod: string | null;
   selectedScene: string;
+  selectedMetric: MetricType;
   onMethodSelect: (methodName: string | null) => void;
   onSceneChange: (scene: string) => void;
+  onMetricChange: (metric: MetricType) => void;
 }
 
 export function SceneTabs({
   dataset,
   selectedMethod,
   selectedScene,
+  selectedMetric,
   onMethodSelect,
   onSceneChange,
+  onMetricChange,
 }: SceneTabsProps) {
   const handleSceneChange = (scene: string) => {
     onSceneChange(scene);
@@ -68,7 +73,11 @@ export function SceneTabs({
                 onMethodSelect={onMethodSelect}
                 selectedMethod={selectedMethod}
               />
-              <PSNRTimePlot results={filteredResults} />
+              <MetricsTimePlot 
+                results={filteredResults} 
+                selectedMetric={selectedMetric}
+                onMetricChange={onMetricChange}
+              />
               <MethodImages
                 selectedMethod={selectedMethod}
                 datasetName={dataset.dataset_name}

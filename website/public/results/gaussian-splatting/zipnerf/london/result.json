@@ -1,0 +1,1 @@
+{"method_name": "gaussian-splatting", "dataset_name": "zipnerf", "scene_name": "london", "psnr": 26.260667354502576, "ssim": 0.8227534555374307, "lpips": 0.3560755167869811, "time": 852.51, "max_gpu_memory": 10269.0}

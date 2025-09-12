@@ -1,0 +1,1 @@
+{"method_name": "gsplat", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 25.800538555268318, "ssim": 0.8242679569990404, "lpips": 0.3274124204631775, "time": 558.18, "max_gpu_memory": 2157.0}

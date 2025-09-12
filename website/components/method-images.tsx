@@ -47,27 +47,47 @@ export function MethodImages({
 
         if (sceneName === "all") {
           // When "all" is selected, show images from the first 3 scenes
-          const dataset = (datasets as DatasetMeta[]).find(
-            (d) => d.dataset_name === datasetName,
-          );
-
-          if (dataset) {
-            const firstThreeScenes = dataset.scenes.slice(0, 3);
-
-            // For each of the first 3 scenes, get the first image pair
-            firstThreeScenes.forEach((scene) => {
+          if (datasetName === "all") {
+            // For "All" dataset, show first scene from first 3 datasets
+            const firstThreeDatasets = (datasets as DatasetMeta[]).slice(0, 3);
+            firstThreeDatasets.forEach((dataset) => {
+              const firstScene = dataset.scenes[0];
               pairs.push({
                 render: {
-                  url: `/results/${selectedMethod}/${datasetName}/${scene}/website_images/render_0.png`,
+                  url: `/results/${selectedMethod}/${dataset.dataset_name}/${firstScene}/website_images/render_0.png`,
                   filename: `render_0.png`,
                 },
                 gt: {
-                  url: `/results/${selectedMethod}/${datasetName}/${scene}/website_images/gt_0.png`,
+                  url: `/results/${selectedMethod}/${dataset.dataset_name}/${firstScene}/website_images/gt_0.png`,
                   filename: `gt_0.png`,
                 },
-                sceneName: scene,
+                sceneName: `${dataset.dataset_display_name} - ${firstScene}`,
               });
             });
+          } else {
+            // For individual dataset "all" scenes, show first 3 scenes
+            const dataset = (datasets as DatasetMeta[]).find(
+              (d) => d.dataset_name === datasetName,
+            );
+
+            if (dataset) {
+              const firstThreeScenes = dataset.scenes.slice(0, 3);
+
+              // For each of the first 3 scenes, get the first image pair
+              firstThreeScenes.forEach((scene) => {
+                pairs.push({
+                  render: {
+                    url: `/results/${selectedMethod}/${datasetName}/${scene}/website_images/render_0.png`,
+                    filename: `render_0.png`,
+                  },
+                  gt: {
+                    url: `/results/${selectedMethod}/${datasetName}/${scene}/website_images/gt_0.png`,
+                    filename: `gt_0.png`,
+                  },
+                  sceneName: scene,
+                });
+              });
+            }
           }
         } else {
           // For individual scenes, show all 3 image pairs
@@ -200,8 +220,13 @@ export function MethodImages({
             </h3>
             <p className="text-muted-foreground">
               {methodMeta?.method_display_name || selectedMethod} -{" "}
-              {datasetName}
-              {sceneName === "all" ? " (First 3 scenes)" : `/${sceneName}`}
+              {datasetName === "all" && sceneName === "all" 
+                ? "All Datasets (First scene from first 3 datasets)"
+                : datasetName === "all" 
+                ? `All Datasets/${sceneName}`
+                : sceneName === "all" 
+                ? `${datasetName} (First 3 scenes)` 
+                : `${datasetName}/${sceneName}`}
             </p>
           </div>
         </div>
@@ -257,7 +282,7 @@ export function MethodImages({
                     >
                       <img
                         src={pair.render.url}
-                        alt={`${selectedMethod} rendering ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
+                        alt={`${selectedMethod} rendering ${datasetName === "all" ? `${pair.sceneName} ` : sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
                         className="w-full h-auto max-h-[200px] object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
@@ -270,7 +295,7 @@ export function MethodImages({
                     >
                       <img
                         src={pair.gt.url}
-                        alt={`Ground truth ${sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
+                        alt={`Ground truth ${datasetName === "all" ? `${pair.sceneName} ` : sceneName === "all" ? `${pair.sceneName} ` : ""}${index + 1}`}
                         className="w-full h-auto max-h-[200px] object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
@@ -390,9 +415,9 @@ export function MethodImages({
                 <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
                   Ground Truth
                 </div>
-                {sceneName === "all" && (
+                {(sceneName === "all" || datasetName === "all") && (
                   <div className="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm">
-                    Scene: {fullscreenPair.sceneName}
+                    {datasetName === "all" ? "Dataset & Scene" : "Scene"}: {fullscreenPair.sceneName}
                   </div>
                 )}
               </div>

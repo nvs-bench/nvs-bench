@@ -14,6 +14,6 @@ output_folder=$2
 # 1) Train 
 #   python train.py --data $data_folder --output $output_folder --eval
 # 2) Render the test split
-#   python render.py --data $data_folder/test --output $output_folder --eval
+#   python render.py --data $data_folder --output $output_folder --eval
 # 3) Move the renders into `$output_folder/test_renders`
 #   mv $output_folder/test/ours_30000/renders $output_folder/test_renders
