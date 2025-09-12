@@ -25,7 +25,7 @@ A summary of how to use these files is in `boilerplate/README.md` and each file 
 The boilerplate files are copied via `git subtree` into an `nvs-bench/` folder in the target method's repo. See some examples under `methods/`
 
 # New Methods
-## Installing nvs-bench
+## Installing
 1) Clone the `nvs-bench` boilerplate files into a new method's repo with:
 ```
 git remote add nvs-bench https://github.com/nvs-bench/nvs-bench.git && git subtree add --prefix=nvs-bench nvs-bench boilerplate-branch --squash
