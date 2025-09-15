@@ -2,36 +2,36 @@
   {
     "method_name": "EDGS",
     "method_display_name": "EDGS",
-    "method_url": "https://github.com/example/edgs"
+    "method_url": "https://github.com/N-Demir/EDGS/blob/nvs-bench/nvs-bench/eval.sh"
   },
   {
     "method_name": "ever_training",
     "method_display_name": "EVER",
-    "method_url": "https://github.com/google/ever"
+    "method_url": "https://github.com/N-Demir/ever_training/blob/nvs-bench/nvs-bench/eval.sh"
   },
   {
     "method_name": "3dgrut",
     "method_display_name": "3DGRUT",
-    "method_url": "https://github.com/N-Demir/3dgrut/tree/nvs-bench"
+    "method_url": "https://github.com/N-Demir/3dgrut/blob/nvs-bench/nvs-bench/eval.sh"
   },
   {
     "method_name": "gaussian-splatting",
     "method_display_name": "3DGS",
-    "method_url": "https://github.com/N-Demir/gaussian-splatting"
+    "method_url": "https://github.com/N-Demir/gaussian-splatting/blob/main/nvs-bench/eval.sh"
   },
   {
     "method_name": "triangle-splatting",
     "method_display_name": "3DTS",
-    "method_url": "https://github.com/N-Demir/triangle-splatting"
+    "method_url": "https://github.com/N-Demir/triangle-splatting/blob/main/nvs-bench/eval.sh"
   },
   {
     "method_name": "gsplat",
     "method_display_name": "gsplat",
-    "method_url": "https://github.com/N-Demir/gsplat"
+    "method_url": "https://github.com/N-Demir/gsplat/blob/main/nvs-bench/eval.sh"
   },
   {
     "method_name": "LichtFeld-Studio",
     "method_display_name": "LichtFeld-Studio",
-    "method_url": "https://github.com/N-Demir/gsplat"
+    "method_url": "https://github.com/N-Demir/LichtFeld-Studio/blob/master/nvs-bench/eval.sh"
   }
 ]
