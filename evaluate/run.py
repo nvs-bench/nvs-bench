@@ -73,22 +73,22 @@ def main(method: str, data: str | None = None):
         evaluate.remote(method, data)
     else:
         BENCHMARK_DATA = [  # noqa: N806
-            # # Mipnerf360
-            # "mipnerf360/bicycle",
-            # "mipnerf360/treehill",
-            # "mipnerf360/stump",
-            # "mipnerf360/room",
-            # "mipnerf360/kitchen",
-            # "mipnerf360/garden",
-            # "mipnerf360/flowers",
-            # "mipnerf360/counter",
-            # "mipnerf360/bonsai",
-            # # Tanks and Temples
-            # "tanksandtemples/truck",
-            # "tanksandtemples/train",
-            # # DeepBlending
-            # "deepblending/playroom",
-            # "deepblending/drjohnson",
+            # Mipnerf360
+            "mipnerf360/bicycle",
+            "mipnerf360/treehill",
+            "mipnerf360/stump",
+            "mipnerf360/room",
+            "mipnerf360/kitchen",
+            "mipnerf360/garden",
+            "mipnerf360/flowers",
+            "mipnerf360/counter",
+            "mipnerf360/bonsai",
+            # Tanks and Temples
+            "tanksandtemples/truck",
+            "tanksandtemples/train",
+            # DeepBlending
+            "deepblending/playroom",
+            "deepblending/drjohnson",
             # ZipNerf
             "zipnerf/alameda",
             "zipnerf/berlin",
