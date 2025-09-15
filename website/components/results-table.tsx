@@ -164,8 +164,8 @@ export function ResultsTable({
   onMethodSelect?: (methodName: string | null) => void;
   selectedMethod?: string | null;
 }) {
-  const [sortKey, setSortKey] = useState<SortKey>("psnr");
-  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [sortKey, setSortKey] = useState<SortKey>("lpips");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
 
   // Calculate averages for methods
   const averagedResults = useMemo(() => {
