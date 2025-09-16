@@ -1,7 +1,9 @@
+import json
 import os
 import subprocess
 
 import modal
+from tqdm import tqdm
 
 # Create the Modal app
 app = modal.App("nvs-bench-evaluate")
@@ -56,6 +58,47 @@ def evaluate(method: str, data: str):
     nvs_bench_volume.commit()
 
 
+def get_all_methods():
+    """Get all method names from the modal volume nvs-bench methods/ folder.
+
+    Runs 'modal volume ls nvs-bench methods --json' to get a JSON listing of all directories
+    in the methods/ folder, then extracts the method names from the directory paths.
+
+    Example command output:
+    [
+      {
+        "Filename": "methods/3DGS-LM",
+        "Type": "dir",
+        "Created/Modified": "2025-09-08 13:58 EDT",
+        "Size": "52 B"
+      },
+      {
+        "Filename": "methods/gsplat",
+        "Type": "dir",
+        "Created/Modified": "2025-09-10 21:40 EDT",
+        "Size": "52 B"
+      },
+      ...
+    ]
+
+    Returns a list of method names like ['3DGS-LM', 'gsplat', 'ever_training', ...]
+    """
+    result = subprocess.run(
+        "modal volume ls nvs-bench methods --json", shell=True, check=True, capture_output=True, text=True
+    )
+    volume_data = json.loads(result.stdout)
+
+    # Extract method names from the directory listing
+    methods = []
+    for item in volume_data:
+        if item["Type"] == "dir":
+            # Extract method name from "methods/method_name" format
+            method_name = item["Filename"].split("/")[-1]
+            methods.append(method_name)
+
+    return methods
+
+
 def download_results(method: str):
     subprocess.run("mkdir -p results/", shell=True, check=True)
     subprocess.run(
@@ -68,34 +111,51 @@ def download_results(method: str):
 
 
 @app.local_entrypoint()
-def main(method: str, data: str | None = None):
-    if data is not None:
-        evaluate.remote(method, data)
-    else:
-        BENCHMARK_DATA = [  # noqa: N806
-            # Mipnerf360
-            "mipnerf360/bicycle",
-            "mipnerf360/treehill",
-            "mipnerf360/stump",
-            "mipnerf360/room",
-            "mipnerf360/kitchen",
-            "mipnerf360/garden",
-            "mipnerf360/flowers",
-            "mipnerf360/counter",
-            "mipnerf360/bonsai",
-            # Tanks and Temples
-            "tanksandtemples/truck",
-            "tanksandtemples/train",
-            # DeepBlending
-            "deepblending/playroom",
-            "deepblending/drjohnson",
-            # ZipNerf
-            "zipnerf/alameda",
-            "zipnerf/berlin",
-            "zipnerf/london",
-            "zipnerf/nyc",
-        ]
-        # Have to do something a bit unusual to allow modal to iterate over the second kwarg
-        list(evaluate.starmap([(method, data) for data in BENCHMARK_DATA], return_exceptions=True))
+def main(method: str | None = None, data: str | None = None):
+    BENCHMARK_DATA = [  # noqa: N806
+        # Mipnerf360
+        "mipnerf360/bicycle",
+        "mipnerf360/treehill",
+        "mipnerf360/stump",
+        "mipnerf360/room",
+        "mipnerf360/kitchen",
+        "mipnerf360/garden",
+        "mipnerf360/flowers",
+        "mipnerf360/counter",
+        "mipnerf360/bonsai",
+        # Tanks and Temples
+        "tanksandtemples/truck",
+        "tanksandtemples/train",
+        # DeepBlending
+        "deepblending/playroom",
+        "deepblending/drjohnson",
+        # ZipNerf
+        "zipnerf/alameda",
+        "zipnerf/berlin",
+        "zipnerf/london",
+        "zipnerf/nyc",
+    ]
 
-    download_results(method)
+    # Determine which methods to evaluate
+    if method is None:
+        methods = get_all_methods()
+        print("Running evaluation on all methods with outputs in modal://nvs-bench/methods/")
+    else:
+        methods = [method]
+
+    # Run evaluation for each method
+    for method_name in tqdm(methods):
+        print(f"Evaluating method: {method_name}")
+
+        if data is not None:
+            evaluate.remote(method_name, data)
+        else:
+            list(evaluate.starmap([(method_name, data) for data in BENCHMARK_DATA], return_exceptions=True))
+
+        # Download results
+        try:
+            download_results(method_name)
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to download results for method {method_name}: {e}")
+            if method is not None:  # Only continue if evaluating all methods
+                continue
