@@ -1,1 +1,1 @@
-{"method_name": "3dgrut", "dataset_name": "mipnerf360", "scene_name": "room", "psnr": 31.903575505965794, "ssim": 0.9245680356637026, "lpips": 0.2721817397918457, "time": 1083.96, "max_gpu_memory": 15341.0}
+{"method_name": "3dgrut", "dataset_name": "mipnerf360", "scene_name": "room", "psnr": 31.903575505965794, "ssim": 0.925970849318382, "lpips": 0.2721817397918457, "time": 1083.96, "max_gpu_memory": 15341.0}

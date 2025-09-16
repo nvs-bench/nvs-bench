@@ -1,1 +1,1 @@
-{"method_name": "EDGS", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.598645296963777, "ssim": 0.9000345974257498, "lpips": 0.28136728478200507, "time": 2474.51, "max_gpu_memory": 13851.0}
+{"method_name": "EDGS", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.598645296963777, "ssim": 0.9034716378558766, "lpips": 0.28136728478200507, "time": 2474.51, "max_gpu_memory": 13851.0}

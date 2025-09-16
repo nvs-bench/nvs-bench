@@ -1,1 +1,1 @@
-{"method_name": "ever_training", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 27.605014739498014, "ssim": 0.8652135797085301, "lpips": 0.26234176682849086, "time": 5435.74, "max_gpu_memory": 21621.0}
+{"method_name": "ever_training", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 27.605014739498014, "ssim": 0.8682295872319129, "lpips": 0.26234176682849086, "time": 5435.74, "max_gpu_memory": 21621.0}

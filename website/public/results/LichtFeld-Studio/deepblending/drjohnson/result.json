@@ -1,1 +1,1 @@
-{"method_name": "LichtFeld-Studio", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.63146435130726, "ssim": 0.9062702384862033, "lpips": 0.3162002382856427, "time": 260.85, "max_gpu_memory": 5737.0}
+{"method_name": "LichtFeld-Studio", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.63146435130726, "ssim": 0.909526815920165, "lpips": 0.3162002382856427, "time": 260.85, "max_gpu_memory": 5737.0}

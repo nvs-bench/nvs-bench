@@ -1,1 +1,1 @@
-{"method_name": "triangle-splatting", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 31.25251410348075, "ssim": 0.9262016330446515, "lpips": 0.14258778201682226, "time": 4156.84, "max_gpu_memory": 19427.0}
+{"method_name": "triangle-splatting", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 31.25251410348075, "ssim": 0.9262137923921857, "lpips": 0.14258778201682226, "time": 4156.84, "max_gpu_memory": 19427.0}

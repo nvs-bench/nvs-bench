@@ -1,1 +1,1 @@
-{"method_name": "ever_training", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 22.333574771881104, "ssim": 0.6095789987593889, "lpips": 0.4102097488939762, "time": 5086.48, "max_gpu_memory": 21319.0}
+{"method_name": "ever_training", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 22.333574771881104, "ssim": 0.6098161209374666, "lpips": 0.4102097488939762, "time": 5086.48, "max_gpu_memory": 21319.0}

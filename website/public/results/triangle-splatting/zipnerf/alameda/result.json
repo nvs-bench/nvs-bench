@@ -1,1 +1,1 @@
-{"method_name": "triangle-splatting", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.206130546358875, "ssim": 0.7481165279715841, "lpips": 0.35141011502610925, "time": 1627.08, "max_gpu_memory": 18295.0}
+{"method_name": "triangle-splatting", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.206130546358875, "ssim": 0.7482723369851091, "lpips": 0.35141011502610925, "time": 1627.08, "max_gpu_memory": 18295.0}

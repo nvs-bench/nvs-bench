@@ -1,1 +1,1 @@
-{"method_name": "EDGS", "dataset_name": "zipnerf", "scene_name": "london", "psnr": 26.66888856279089, "ssim": 0.850883849123691, "lpips": 0.2908857267587743, "time": 1113.55, "max_gpu_memory": 14179.0}
+{"method_name": "EDGS", "dataset_name": "zipnerf", "scene_name": "london", "psnr": 26.66888856279089, "ssim": 0.8544827697124887, "lpips": 0.2908857267587743, "time": 1113.55, "max_gpu_memory": 14179.0}

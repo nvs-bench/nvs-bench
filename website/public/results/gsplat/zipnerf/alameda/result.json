@@ -1,1 +1,1 @@
-{"method_name": "gsplat", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.143359839092202, "ssim": 0.7406692731490333, "lpips": 0.3734948452441923, "time": 892.51, "max_gpu_memory": 2305.0}
+{"method_name": "gsplat", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.143359839092202, "ssim": 0.7408266787155433, "lpips": 0.3734948452441923, "time": 892.51, "max_gpu_memory": 2305.0}

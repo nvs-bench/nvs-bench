@@ -1,1 +1,1 @@
-{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 27.06457269191742, "ssim": 0.7910303473472595, "lpips": 0.24855148792266846, "time": 307.58, "max_gpu_memory": 4997.0}
+{"method_name": "LichtFeld-Studio", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 27.06457269191742, "ssim": 0.7918971069157124, "lpips": 0.24855148792266846, "time": 307.58, "max_gpu_memory": 4997.0}

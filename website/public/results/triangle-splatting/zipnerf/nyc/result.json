@@ -1,1 +1,1 @@
-{"method_name": "triangle-splatting", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 27.02692194907896, "ssim": 0.8439875254707951, "lpips": 0.28212040770919095, "time": 1732.08, "max_gpu_memory": 16197.0}
+{"method_name": "triangle-splatting", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 27.02692194907896, "ssim": 0.8470745351045362, "lpips": 0.28212040770919095, "time": 1732.08, "max_gpu_memory": 16197.0}

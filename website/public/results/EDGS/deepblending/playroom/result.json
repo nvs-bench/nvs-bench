@@ -1,1 +1,1 @@
-{"method_name": "EDGS", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 30.414092228330414, "ssim": 0.9039021956509558, "lpips": 0.2637151484859401, "time": 1956.25, "max_gpu_memory": 11737.0}
+{"method_name": "EDGS", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 30.414092228330414, "ssim": 0.9046220471119059, "lpips": 0.2637151484859401, "time": 1956.25, "max_gpu_memory": 11737.0}

@@ -1,1 +1,1 @@
-{"method_name": "gsplat", "dataset_name": "tanksandtemples", "scene_name": "train", "psnr": 22.563902352985583, "ssim": 0.8313047180050298, "lpips": 0.22155325742144333, "time": 499.69, "max_gpu_memory": 2125.0}
+{"method_name": "gsplat", "dataset_name": "tanksandtemples", "scene_name": "train", "psnr": 22.563902352985583, "ssim": 0.8313652198565634, "lpips": 0.22155325742144333, "time": 499.69, "max_gpu_memory": 2125.0}

@@ -68,7 +68,7 @@ def evaluate_metrics(data: str, method: str) -> Metrics:
         # Calculate SSIM
         gt_tensor_ssim = gt_tensor / 255.0
         rendered_tensor_ssim = rendered_tensor / 255.0
-        ssim = structural_similarity_index_measure(rendered_tensor_ssim, gt_tensor_ssim)
+        ssim = structural_similarity_index_measure(rendered_tensor_ssim, gt_tensor_ssim, data_range=(0.0, 1.0))
         # Handle SSIM tuple return
         if isinstance(ssim, tuple):
             ssim = ssim[0]

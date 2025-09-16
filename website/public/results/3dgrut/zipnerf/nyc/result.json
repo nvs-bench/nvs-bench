@@ -1,1 +1,1 @@
-{"method_name": "3dgrut", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 26.7768736193257, "ssim": 0.8402709451413923, "lpips": 0.3099766400071882, "time": 750.9, "max_gpu_memory": 10771.0}
+{"method_name": "3dgrut", "dataset_name": "zipnerf", "scene_name": "nyc", "psnr": 26.7768736193257, "ssim": 0.8432468723866248, "lpips": 0.3099766400071882, "time": 750.9, "max_gpu_memory": 10771.0}

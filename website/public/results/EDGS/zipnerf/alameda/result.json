@@ -1,1 +1,1 @@
-{"method_name": "EDGS", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.91009762759582, "ssim": 0.7811422900120784, "lpips": 0.3061289830553916, "time": 1104.7, "max_gpu_memory": 14049.0}
+{"method_name": "EDGS", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.91009762759582, "ssim": 0.7813014172463922, "lpips": 0.3061289830553916, "time": 1104.7, "max_gpu_memory": 14049.0}

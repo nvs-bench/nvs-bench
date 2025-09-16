@@ -1,1 +1,1 @@
-{"method_name": "gsplat", "dataset_name": "zipnerf", "scene_name": "london", "psnr": 25.124986522755723, "ssim": 0.7952867299952405, "lpips": 0.38656510710716246, "time": 569.43, "max_gpu_memory": 2461.0}
+{"method_name": "gsplat", "dataset_name": "zipnerf", "scene_name": "london", "psnr": 25.124986522755723, "ssim": 0.7993847971266889, "lpips": 0.38656510710716246, "time": 569.43, "max_gpu_memory": 2461.0}

@@ -4,7 +4,7 @@
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
     "psnr": 29.79044099287553,
-    "ssim": 0.9045983516808712,
+    "ssim": 0.9079476179498615,
     "lpips": 0.3182239406036608,
     "time": 853.57,
     "max_gpu_memory": 13915
@@ -14,7 +14,7 @@
     "dataset_name": "deepblending",
     "scene_name": "playroom",
     "psnr": 30.66068175743366,
-    "ssim": 0.9125757176300575,
+    "ssim": 0.9131926462568086,
     "lpips": 0.3165363669395447,
     "time": 744.47,
     "max_gpu_memory": 13537
@@ -84,7 +84,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "kitchen",
     "psnr": 31.728356552124023,
-    "ssim": 0.9268262709890093,
+    "ssim": 0.9268344674791609,
     "lpips": 0.1655074417591095,
     "time": 1650.72,
     "max_gpu_memory": 14201
@@ -94,7 +94,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "room",
     "psnr": 31.903575505965794,
-    "ssim": 0.9245680356637026,
+    "ssim": 0.925970849318382,
     "lpips": 0.2721817397918457,
     "time": 1083.96,
     "max_gpu_memory": 15341
@@ -104,7 +104,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "stump",
     "psnr": 26.91859471797943,
-    "ssim": 0.7877099849283695,
+    "ssim": 0.7894326187670231,
     "lpips": 0.2563045583665371,
     "time": 781.2,
     "max_gpu_memory": 13265
@@ -114,7 +114,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "treehill",
     "psnr": 23.039045757717556,
-    "ssim": 0.641271154085795,
+    "ssim": 0.64245781633589,
     "lpips": 0.39378609756628674,
     "time": 769.2,
     "max_gpu_memory": 13229
@@ -124,7 +124,7 @@
     "dataset_name": "tanksandtemples",
     "scene_name": "train",
     "psnr": 22.25693644975361,
-    "ssim": 0.8291596519319635,
+    "ssim": 0.8292240469079268,
     "lpips": 0.23522752405781494,
     "time": 728.9,
     "max_gpu_memory": 10859
@@ -144,7 +144,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "alameda",
     "psnr": 22.19830575406826,
-    "ssim": 0.7395886189651929,
+    "ssim": 0.7396723292939674,
     "lpips": 0.38275694311489156,
     "time": 751.18,
     "max_gpu_memory": 9501
@@ -154,7 +154,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "berlin",
     "psnr": 26.769568044672567,
-    "ssim": 0.8756249742533164,
+    "ssim": 0.8789366067401947,
     "lpips": 0.35243413695898007,
     "time": 861.49,
     "max_gpu_memory": 10389
@@ -164,7 +164,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "london",
     "psnr": 25.75425173171023,
-    "ssim": 0.8046640226181517,
+    "ssim": 0.809065428439607,
     "lpips": 0.3819341724857371,
     "time": 798.66,
     "max_gpu_memory": 11183
@@ -174,7 +174,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "nyc",
     "psnr": 26.7768736193257,
-    "ssim": 0.8402709451413923,
+    "ssim": 0.8432468723866248,
     "lpips": 0.3099766400071882,
     "time": 750.9,
     "max_gpu_memory": 10771
@@ -184,7 +184,7 @@
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
     "psnr": 29.598645296963777,
-    "ssim": 0.9000345974257498,
+    "ssim": 0.9034716378558766,
     "lpips": 0.28136728478200507,
     "time": 2474.51,
     "max_gpu_memory": 13851
@@ -194,7 +194,7 @@
     "dataset_name": "deepblending",
     "scene_name": "playroom",
     "psnr": 30.414092228330414,
-    "ssim": 0.9039021956509558,
+    "ssim": 0.9046220471119059,
     "lpips": 0.2637151484859401,
     "time": 1956.25,
     "max_gpu_memory": 11737
@@ -254,7 +254,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "kitchen",
     "psnr": 32.166676548549106,
-    "ssim": 0.9363427468708583,
+    "ssim": 0.9363503013338361,
     "lpips": 0.1338748478463718,
     "time": 2454.29,
     "max_gpu_memory": 14529
@@ -264,7 +264,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "room",
     "psnr": 31.935297941550232,
-    "ssim": 0.9308118652074765,
+    "ssim": 0.9323126780681121,
     "lpips": 0.23906240096459022,
     "time": 2253.15,
     "max_gpu_memory": 15403
@@ -274,7 +274,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "stump",
     "psnr": 27.069658160209656,
-    "ssim": 0.7946319542825222,
+    "ssim": 0.7950905002653599,
     "lpips": 0.20676208287477493,
     "time": 2333.19,
     "max_gpu_memory": 11261
@@ -284,7 +284,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "treehill",
     "psnr": 22.232695897420246,
-    "ssim": 0.6449055936601427,
+    "ssim": 0.6454986996120877,
     "lpips": 0.2826637393898434,
     "time": 2502.46,
     "max_gpu_memory": 12703
@@ -294,7 +294,7 @@
     "dataset_name": "tanksandtemples",
     "scene_name": "train",
     "psnr": 22.497114683452406,
-    "ssim": 0.8500589100938094,
+    "ssim": 0.8500980672083402,
     "lpips": 0.17857062424484052,
     "time": 1471.09,
     "max_gpu_memory": 8803
@@ -314,7 +314,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "alameda",
     "psnr": 22.91009762759582,
-    "ssim": 0.7811422900120784,
+    "ssim": 0.7813014172463922,
     "lpips": 0.3061289830553916,
     "time": 1104.7,
     "max_gpu_memory": 14049
@@ -324,7 +324,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "berlin",
     "psnr": 27.723428595002996,
-    "ssim": 0.9042972348354481,
+    "ssim": 0.9068400535003218,
     "lpips": 0.286843649609379,
     "time": 1249.54,
     "max_gpu_memory": 19729
@@ -334,7 +334,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "london",
     "psnr": 26.66888856279089,
-    "ssim": 0.850883849123691,
+    "ssim": 0.8544827697124887,
     "lpips": 0.2908857267587743,
     "time": 1113.55,
     "max_gpu_memory": 14179
@@ -344,17 +344,187 @@
     "dataset_name": "zipnerf",
     "scene_name": "nyc",
     "psnr": 27.432399934337987,
-    "ssim": 0.8739359056757342,
+    "ssim": 0.8763951452509049,
     "lpips": 0.23646613366661534,
     "time": 1062.43,
     "max_gpu_memory": 10475
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "deepblending",
+    "scene_name": "drjohnson",
+    "psnr": 29.63146435130726,
+    "ssim": 0.909526815920165,
+    "lpips": 0.3162002382856427,
+    "time": 260.85,
+    "max_gpu_memory": 5737
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "deepblending",
+    "scene_name": "playroom",
+    "psnr": 30.41060730506634,
+    "ssim": 0.9122880512270434,
+    "lpips": 0.31052272998053454,
+    "time": 251.23,
+    "max_gpu_memory": 5237
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bicycle",
+    "psnr": 25.407960205078126,
+    "ssim": 0.7717686867713929,
+    "lpips": 0.25502065479755404,
+    "time": 357.09,
+    "max_gpu_memory": 4997
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bonsai",
+    "psnr": 32.62744455079775,
+    "ssim": 0.945817726689416,
+    "lpips": 0.2404582488375741,
+    "time": 380.72,
+    "max_gpu_memory": 7243
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "counter",
+    "psnr": 29.40773474375407,
+    "ssim": 0.9160678764184316,
+    "lpips": 0.23877319594224294,
+    "time": 385.02,
+    "max_gpu_memory": 6923
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "flowers",
+    "psnr": 21.850079449740324,
+    "ssim": 0.6175901320847598,
+    "lpips": 0.36317806216803467,
+    "time": 335.36,
+    "max_gpu_memory": 5177
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "garden",
+    "psnr": 27.2326180934906,
+    "ssim": 0.8542604620258013,
+    "lpips": 0.15596480729679266,
+    "time": 381.06,
+    "max_gpu_memory": 5503
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "kitchen",
+    "psnr": 31.266651807512556,
+    "ssim": 0.92920378105981,
+    "lpips": 0.15376183667353222,
+    "time": 476.31,
+    "max_gpu_memory": 7003
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "room",
+    "psnr": 32.00574067922739,
+    "ssim": 0.9256899204009619,
+    "lpips": 0.266118728579619,
+    "time": 406.14,
+    "max_gpu_memory": 7063
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "stump",
+    "psnr": 27.06457269191742,
+    "ssim": 0.7918971069157124,
+    "lpips": 0.24855148792266846,
+    "time": 307.58,
+    "max_gpu_memory": 4997
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "mipnerf360",
+    "scene_name": "treehill",
+    "psnr": 22.892174826727974,
+    "ssim": 0.647911505566703,
+    "lpips": 0.3873220814598931,
+    "time": 361.22,
+    "max_gpu_memory": 5157
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "tanksandtemples",
+    "scene_name": "train",
+    "psnr": 22.479786847767077,
+    "ssim": 0.8370390252063149,
+    "lpips": 0.22137494228388133,
+    "time": 216.3,
+    "max_gpu_memory": 3783
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "tanksandtemples",
+    "scene_name": "truck",
+    "psnr": 25.971927285194397,
+    "ssim": 0.8900670818984509,
+    "lpips": 0.1510432141367346,
+    "time": 222.54,
+    "max_gpu_memory": 3663
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "zipnerf",
+    "scene_name": "alameda",
+    "psnr": 21.943617425206618,
+    "ssim": 0.738542776777997,
+    "lpips": 0.37800259318219903,
+    "time": 219.45,
+    "max_gpu_memory": 3129
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "zipnerf",
+    "scene_name": "berlin",
+    "psnr": 25.8411960198135,
+    "ssim": 0.8650903477870598,
+    "lpips": 0.36529368106965665,
+    "time": 295.06,
+    "max_gpu_memory": 4023
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "zipnerf",
+    "scene_name": "london",
+    "psnr": 25.29931352087792,
+    "ssim": 0.8028208093440279,
+    "lpips": 0.3814724511922674,
+    "time": 219.7,
+    "max_gpu_memory": 3211
+  },
+  {
+    "method_name": "LichtFeld-Studio",
+    "dataset_name": "zipnerf",
+    "scene_name": "nyc",
+    "psnr": 26.071337023089008,
+    "ssim": 0.8348838379306178,
+    "lpips": 0.3205749590791041,
+    "time": 214.39,
+    "max_gpu_memory": 3047
   },
   {
     "method_name": "ever_training",
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
     "psnr": 27.699716914783824,
-    "ssim": 0.8815346956253052,
+    "ssim": 0.8846685687700907,
     "lpips": 0.36188497055660596,
     "time": 5814.69,
     "max_gpu_memory": 10993
@@ -364,7 +534,7 @@
     "dataset_name": "deepblending",
     "scene_name": "playroom",
     "psnr": 28.9935684861808,
-    "ssim": 0.8984817615870772,
+    "ssim": 0.8989243671811861,
     "lpips": 0.3365638379392953,
     "time": 4918.4,
     "max_gpu_memory": 13257
@@ -424,7 +594,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "kitchen",
     "psnr": 29.738505990164622,
-    "ssim": 0.9147749509130205,
+    "ssim": 0.9147893633161273,
     "lpips": 0.17918828683240073,
     "time": 4764.66,
     "max_gpu_memory": 8405
@@ -434,7 +604,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "room",
     "psnr": 30.18156775450095,
-    "ssim": 0.9099598099023868,
+    "ssim": 0.9109441699125828,
     "lpips": 0.2978202268863336,
     "time": 5575.29,
     "max_gpu_memory": 11483
@@ -444,7 +614,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "stump",
     "psnr": 22.333574771881104,
-    "ssim": 0.6095789987593889,
+    "ssim": 0.6098161209374666,
     "lpips": 0.4102097488939762,
     "time": 5086.48,
     "max_gpu_memory": 21319
@@ -464,7 +634,7 @@
     "dataset_name": "tanksandtemples",
     "scene_name": "train",
     "psnr": 20.982856223457738,
-    "ssim": 0.8112422055319736,
+    "ssim": 0.8112654387950897,
     "lpips": 0.23232796631361308,
     "time": 5000.23,
     "max_gpu_memory": 22067
@@ -484,7 +654,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "alameda",
     "psnr": 21.97278462247365,
-    "ssim": 0.7616885522818235,
+    "ssim": 0.7617874354261407,
     "lpips": 0.33492066982429697,
     "time": 5766.89,
     "max_gpu_memory": 24185
@@ -494,7 +664,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "berlin",
     "psnr": 27.22139750082026,
-    "ssim": 0.9012411350295657,
+    "ssim": 0.9041455353378619,
     "lpips": 0.31060607731342316,
     "time": 8087.94,
     "max_gpu_memory": 21695
@@ -504,7 +674,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "london",
     "psnr": 25.94189138615385,
-    "ssim": 0.8283371445980477,
+    "ssim": 0.8319762260355847,
     "lpips": 0.32819475594987263,
     "time": 4747.37,
     "max_gpu_memory": 20191
@@ -514,7 +684,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "nyc",
     "psnr": 27.605014739498014,
-    "ssim": 0.8652135797085301,
+    "ssim": 0.8682295872319129,
     "lpips": 0.26234176682849086,
     "time": 5435.74,
     "max_gpu_memory": 21621
@@ -524,7 +694,7 @@
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
     "psnr": 29.523704239816375,
-    "ssim": 0.9000975290934244,
+    "ssim": 0.9037978414333228,
     "lpips": 0.3062570776903268,
     "time": 2347.65,
     "max_gpu_memory": 15777
@@ -534,7 +704,7 @@
     "dataset_name": "deepblending",
     "scene_name": "playroom",
     "psnr": 30.220315012438544,
-    "ssim": 0.9072955250740051,
+    "ssim": 0.9079396210867783,
     "lpips": 0.30282922346016455,
     "time": 1284.84,
     "max_gpu_memory": 9383
@@ -604,7 +774,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "kitchen",
     "psnr": 31.370793206351145,
-    "ssim": 0.9268678086144584,
+    "ssim": 0.926880487373897,
     "lpips": 0.15385918191501072,
     "time": 1908.02,
     "max_gpu_memory": 14499
@@ -614,7 +784,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "room",
     "psnr": 31.675277514335438,
-    "ssim": 0.9183985850749872,
+    "ssim": 0.9200944564281366,
     "lpips": 0.2841307746294217,
     "time": 1586.61,
     "max_gpu_memory": 14737
@@ -624,7 +794,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "stump",
     "psnr": 26.682319402694702,
-    "ssim": 0.7690432965755463,
+    "ssim": 0.7693248242139816,
     "lpips": 0.249879059381783,
     "time": 1738.65,
     "max_gpu_memory": 12329
@@ -634,7 +804,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "treehill",
     "psnr": 22.610661294725205,
-    "ssim": 0.6293371187316047,
+    "ssim": 0.6302363640732236,
     "lpips": 0.3753229363097085,
     "time": 1304.09,
     "max_gpu_memory": 10949
@@ -644,7 +814,7 @@
     "dataset_name": "tanksandtemples",
     "scene_name": "train",
     "psnr": 22.045705694901315,
-    "ssim": 0.8166346408818898,
+    "ssim": 0.8167079185184679,
     "lpips": 0.2358515117513506,
     "time": 1086.71,
     "max_gpu_memory": 7321
@@ -664,7 +834,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "alameda",
     "psnr": 22.73558095413419,
-    "ssim": 0.7572424492803037,
+    "ssim": 0.7574096256137444,
     "lpips": 0.35247614389191023,
     "time": 1026.31,
     "max_gpu_memory": 10813
@@ -674,7 +844,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "berlin",
     "psnr": 27.46858977262305,
-    "ssim": 0.891905943552653,
+    "ssim": 0.8949468419665382,
     "lpips": 0.32356719026174496,
     "time": 1338.36,
     "max_gpu_memory": 17775
@@ -684,7 +854,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "london",
     "psnr": 26.260667354502576,
-    "ssim": 0.8227534555374307,
+    "ssim": 0.8271950584776858,
     "lpips": 0.3560755167869811,
     "time": 852.51,
     "max_gpu_memory": 10269
@@ -694,7 +864,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "nyc",
     "psnr": 27.119749792160526,
-    "ssim": 0.8579913272011664,
+    "ssim": 0.8607122119395963,
     "lpips": 0.2777128390246822,
     "time": 806.28,
     "max_gpu_memory": 7753
@@ -704,7 +874,7 @@
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
     "psnr": 29.667642882376008,
-    "ssim": 0.9051841298739115,
+    "ssim": 0.9079687396685282,
     "lpips": 0.31190469003084936,
     "time": 590.28,
     "max_gpu_memory": 2227
@@ -714,7 +884,7 @@
     "dataset_name": "deepblending",
     "scene_name": "playroom",
     "psnr": 29.998376254377693,
-    "ssim": 0.9092129674451105,
+    "ssim": 0.9097662711965626,
     "lpips": 0.30635181994273747,
     "time": 558.42,
     "max_gpu_memory": 2233
@@ -784,7 +954,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "kitchen",
     "psnr": 31.478000586373465,
-    "ssim": 0.9293778147016253,
+    "ssim": 0.929389522756849,
     "lpips": 0.15413631136928285,
     "time": 1115.79,
     "max_gpu_memory": 2343
@@ -794,7 +964,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "room",
     "psnr": 32.1683483612843,
-    "ssim": 0.9248732511813824,
+    "ssim": 0.9262346319663219,
     "lpips": 0.25803142862442213,
     "time": 870.15,
     "max_gpu_memory": 2323
@@ -804,7 +974,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "stump",
     "psnr": 26.643088459968567,
-    "ssim": 0.7771999388933182,
+    "ssim": 0.7781709618866444,
     "lpips": 0.2575184656307101,
     "time": 561.25,
     "max_gpu_memory": 2301
@@ -814,7 +984,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "treehill",
     "psnr": 23.048648622300888,
-    "ssim": 0.6460334294372134,
+    "ssim": 0.6471293999089135,
     "lpips": 0.37632324463791317,
     "time": 588.11,
     "max_gpu_memory": 2217
@@ -824,7 +994,7 @@
     "dataset_name": "tanksandtemples",
     "scene_name": "train",
     "psnr": 22.563902352985583,
-    "ssim": 0.8313047180050298,
+    "ssim": 0.8313652198565634,
     "lpips": 0.22155325742144333,
     "time": 499.69,
     "max_gpu_memory": 2125
@@ -844,7 +1014,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "alameda",
     "psnr": 22.143359839092202,
-    "ssim": 0.7406692731490333,
+    "ssim": 0.7408266787155433,
     "lpips": 0.3734948452441923,
     "time": 892.51,
     "max_gpu_memory": 2305
@@ -854,7 +1024,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "berlin",
     "psnr": 24.245474280503693,
-    "ssim": 0.83343336380348,
+    "ssim": 0.8368328387144381,
     "lpips": 0.40099222658487854,
     "time": 634.6,
     "max_gpu_memory": 2431
@@ -864,7 +1034,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "london",
     "psnr": 25.124986522755723,
-    "ssim": 0.7952867299952405,
+    "ssim": 0.7993847971266889,
     "lpips": 0.38656510710716246,
     "time": 569.43,
     "max_gpu_memory": 2461
@@ -874,187 +1044,17 @@
     "dataset_name": "zipnerf",
     "scene_name": "nyc",
     "psnr": 25.800538555268318,
-    "ssim": 0.8242679569990404,
+    "ssim": 0.8273262934338662,
     "lpips": 0.3274124204631775,
     "time": 558.18,
     "max_gpu_memory": 2157
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "deepblending",
-    "scene_name": "drjohnson",
-    "psnr": 29.63146435130726,
-    "ssim": 0.9062702384862033,
-    "lpips": 0.3162002382856427,
-    "time": 260.85,
-    "max_gpu_memory": 5737
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "deepblending",
-    "scene_name": "playroom",
-    "psnr": 30.41060730506634,
-    "ssim": 0.9115950917375499,
-    "lpips": 0.31052272998053454,
-    "time": 251.23,
-    "max_gpu_memory": 5237
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "bicycle",
-    "psnr": 25.407960205078126,
-    "ssim": 0.7717686867713929,
-    "lpips": 0.25502065479755404,
-    "time": 357.09,
-    "max_gpu_memory": 4997
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "bonsai",
-    "psnr": 32.62744455079775,
-    "ssim": 0.945817726689416,
-    "lpips": 0.2404582488375741,
-    "time": 380.72,
-    "max_gpu_memory": 7243
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "counter",
-    "psnr": 29.40773474375407,
-    "ssim": 0.9160678764184316,
-    "lpips": 0.23877319594224294,
-    "time": 385.02,
-    "max_gpu_memory": 6923
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "flowers",
-    "psnr": 21.850079449740324,
-    "ssim": 0.6175901320847598,
-    "lpips": 0.36317806216803467,
-    "time": 335.36,
-    "max_gpu_memory": 5177
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "garden",
-    "psnr": 27.2326180934906,
-    "ssim": 0.8542604620258013,
-    "lpips": 0.15596480729679266,
-    "time": 381.06,
-    "max_gpu_memory": 5503
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "kitchen",
-    "psnr": 31.266651807512556,
-    "ssim": 0.9291918192590986,
-    "lpips": 0.15376183667353222,
-    "time": 476.31,
-    "max_gpu_memory": 7003
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "room",
-    "psnr": 32.00574067922739,
-    "ssim": 0.9241445905123001,
-    "lpips": 0.266118728579619,
-    "time": 406.14,
-    "max_gpu_memory": 7063
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "stump",
-    "psnr": 27.06457269191742,
-    "ssim": 0.7910303473472595,
-    "lpips": 0.24855148792266846,
-    "time": 307.58,
-    "max_gpu_memory": 4997
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "mipnerf360",
-    "scene_name": "treehill",
-    "psnr": 22.892174826727974,
-    "ssim": 0.6468707886007097,
-    "lpips": 0.3873220814598931,
-    "time": 361.22,
-    "max_gpu_memory": 5157
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "tanksandtemples",
-    "scene_name": "train",
-    "psnr": 22.479786847767077,
-    "ssim": 0.8369843677470559,
-    "lpips": 0.22137494228388133,
-    "time": 216.3,
-    "max_gpu_memory": 3783
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "tanksandtemples",
-    "scene_name": "truck",
-    "psnr": 25.971927285194397,
-    "ssim": 0.8900670818984509,
-    "lpips": 0.1510432141367346,
-    "time": 222.54,
-    "max_gpu_memory": 3663
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "zipnerf",
-    "scene_name": "alameda",
-    "psnr": 21.943617425206618,
-    "ssim": 0.7384071079542011,
-    "lpips": 0.37800259318219903,
-    "time": 219.45,
-    "max_gpu_memory": 3129
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "zipnerf",
-    "scene_name": "berlin",
-    "psnr": 25.8411960198135,
-    "ssim": 0.8618949954471891,
-    "lpips": 0.36529368106965665,
-    "time": 295.06,
-    "max_gpu_memory": 4023
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "zipnerf",
-    "scene_name": "london",
-    "psnr": 25.29931352087792,
-    "ssim": 0.7985252162243458,
-    "lpips": 0.3814724511922674,
-    "time": 219.7,
-    "max_gpu_memory": 3211
-  },
-  {
-    "method_name": "LichtFeld-Studio",
-    "dataset_name": "zipnerf",
-    "scene_name": "nyc",
-    "psnr": 26.071337023089008,
-    "ssim": 0.8321818675725691,
-    "lpips": 0.3205749590791041,
-    "time": 214.39,
-    "max_gpu_memory": 3047
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
     "psnr": 28.808984872066613,
-    "ssim": 0.885785496596134,
+    "ssim": 0.889597621831027,
     "lpips": 0.32192573086781934,
     "time": 3040.25,
     "max_gpu_memory": 17073
@@ -1064,7 +1064,7 @@
     "dataset_name": "deepblending",
     "scene_name": "playroom",
     "psnr": 28.940593785253064,
-    "ssim": 0.8891688297534811,
+    "ssim": 0.8892636134706694,
     "lpips": 0.29304211920705336,
     "time": 2202.68,
     "max_gpu_memory": 17015
@@ -1134,7 +1134,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "kitchen",
     "psnr": 31.25251410348075,
-    "ssim": 0.9262016330446515,
+    "ssim": 0.9262137923921857,
     "lpips": 0.14258778201682226,
     "time": 4156.84,
     "max_gpu_memory": 19427
@@ -1144,7 +1144,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "room",
     "psnr": 30.88353034777519,
-    "ssim": 0.9211030892836742,
+    "ssim": 0.9222687559250073,
     "lpips": 0.2396486542927913,
     "time": 3577.63,
     "max_gpu_memory": 19693
@@ -1154,7 +1154,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "stump",
     "psnr": 26.00195610523224,
-    "ssim": 0.7464328855276108,
+    "ssim": 0.7466209046542645,
     "lpips": 0.2574667567387223,
     "time": 2161.66,
     "max_gpu_memory": 14835
@@ -1164,7 +1164,7 @@
     "dataset_name": "mipnerf360",
     "scene_name": "treehill",
     "psnr": 21.80812888675266,
-    "ssim": 0.5971807986497879,
+    "ssim": 0.5973820802238252,
     "lpips": 0.34303739335801864,
     "time": 2684.85,
     "max_gpu_memory": 14941
@@ -1174,7 +1174,7 @@
     "dataset_name": "tanksandtemples",
     "scene_name": "train",
     "psnr": 21.130361155459756,
-    "ssim": 0.8004146830031746,
+    "ssim": 0.800424022109885,
     "lpips": 0.24127002530976346,
     "time": 2431.73,
     "max_gpu_memory": 16555
@@ -1194,7 +1194,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "alameda",
     "psnr": 22.206130546358875,
-    "ssim": 0.7481165279715841,
+    "ssim": 0.7482723369851091,
     "lpips": 0.35141011502610925,
     "time": 1627.08,
     "max_gpu_memory": 18295
@@ -1204,7 +1204,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "berlin",
     "psnr": 27.11321619831065,
-    "ssim": 0.883598077864874,
+    "ssim": 0.8866909931576441,
     "lpips": 0.3405031269347226,
     "time": 2528.35,
     "max_gpu_memory": 21791
@@ -1214,7 +1214,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "london",
     "psnr": 26.52091891106139,
-    "ssim": 0.8281213235347828,
+    "ssim": 0.8320975133713255,
     "lpips": 0.32178272864920027,
     "time": 1477.47,
     "max_gpu_memory": 18641
@@ -1224,7 +1224,7 @@
     "dataset_name": "zipnerf",
     "scene_name": "nyc",
     "psnr": 27.02692194907896,
-    "ssim": 0.8439875254707951,
+    "ssim": 0.8470745351045362,
     "lpips": 0.28212040770919095,
     "time": 1732.08,
     "max_gpu_memory": 16197

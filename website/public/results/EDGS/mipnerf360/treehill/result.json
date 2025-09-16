@@ -1,1 +1,1 @@
-{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 22.232695897420246, "ssim": 0.6449055936601427, "lpips": 0.2826637393898434, "time": 2502.46, "max_gpu_memory": 12703.0}
+{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 22.232695897420246, "ssim": 0.6454986996120877, "lpips": 0.2826637393898434, "time": 2502.46, "max_gpu_memory": 12703.0}

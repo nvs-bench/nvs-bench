@@ -1,1 +1,1 @@
-{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 26.643088459968567, "ssim": 0.7771999388933182, "lpips": 0.2575184656307101, "time": 561.25, "max_gpu_memory": 2301.0}
+{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 26.643088459968567, "ssim": 0.7781709618866444, "lpips": 0.2575184656307101, "time": 561.25, "max_gpu_memory": 2301.0}

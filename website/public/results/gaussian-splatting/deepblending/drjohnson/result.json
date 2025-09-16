@@ -1,1 +1,1 @@
-{"method_name": "gaussian-splatting", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.523704239816375, "ssim": 0.9000975290934244, "lpips": 0.3062570776903268, "time": 2347.65, "max_gpu_memory": 15777.0}
+{"method_name": "gaussian-splatting", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 29.523704239816375, "ssim": 0.9037978414333228, "lpips": 0.3062570776903268, "time": 2347.65, "max_gpu_memory": 15777.0}
