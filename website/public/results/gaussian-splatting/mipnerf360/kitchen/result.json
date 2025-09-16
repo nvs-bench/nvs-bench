@@ -1,1 +1,1 @@
-{"method_name": "gaussian-splatting", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 31.370793206351145, "ssim": 0.9268678086144584, "lpips": 0.15385918191501072, "time": 1908.02, "max_gpu_memory": 14499.0}
+{"method_name": "gaussian-splatting", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 31.370793206351145, "ssim": 0.926880487373897, "lpips": 0.15385918191501072, "time": 1908.02, "max_gpu_memory": 14499.0}

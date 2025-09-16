@@ -1,1 +1,1 @@
-{"method_name": "gsplat", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 29.998376254377693, "ssim": 0.9092129674451105, "lpips": 0.30635181994273747, "time": 558.42, "max_gpu_memory": 2233.0}
+{"method_name": "gsplat", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 29.998376254377693, "ssim": 0.9097662711965626, "lpips": 0.30635181994273747, "time": 558.42, "max_gpu_memory": 2233.0}

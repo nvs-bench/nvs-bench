@@ -1,1 +1,1 @@
-{"method_name": "ever_training", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 29.738505990164622, "ssim": 0.9147749509130205, "lpips": 0.17918828683240073, "time": 4764.66, "max_gpu_memory": 8405.0}
+{"method_name": "ever_training", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 29.738505990164622, "ssim": 0.9147893633161273, "lpips": 0.17918828683240073, "time": 4764.66, "max_gpu_memory": 8405.0}

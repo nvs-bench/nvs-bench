@@ -1,1 +1,1 @@
-{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 23.048648622300888, "ssim": 0.6460334294372134, "lpips": 0.37632324463791317, "time": 588.11, "max_gpu_memory": 2217.0}
+{"method_name": "gsplat", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 23.048648622300888, "ssim": 0.6471293999089135, "lpips": 0.37632324463791317, "time": 588.11, "max_gpu_memory": 2217.0}

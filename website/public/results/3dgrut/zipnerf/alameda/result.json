@@ -1,1 +1,1 @@
-{"method_name": "3dgrut", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.19830575406826, "ssim": 0.7395886189651929, "lpips": 0.38275694311489156, "time": 751.18, "max_gpu_memory": 9501.0}
+{"method_name": "3dgrut", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.19830575406826, "ssim": 0.7396723292939674, "lpips": 0.38275694311489156, "time": 751.18, "max_gpu_memory": 9501.0}

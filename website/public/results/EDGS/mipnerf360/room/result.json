@@ -1,1 +1,1 @@
-{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "room", "psnr": 31.935297941550232, "ssim": 0.9308118652074765, "lpips": 0.23906240096459022, "time": 2253.15, "max_gpu_memory": 15403.0}
+{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "room", "psnr": 31.935297941550232, "ssim": 0.9323126780681121, "lpips": 0.23906240096459022, "time": 2253.15, "max_gpu_memory": 15403.0}

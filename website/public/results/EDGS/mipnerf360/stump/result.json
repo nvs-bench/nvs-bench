@@ -1,1 +1,1 @@
-{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 27.069658160209656, "ssim": 0.7946319542825222, "lpips": 0.20676208287477493, "time": 2333.19, "max_gpu_memory": 11261.0}
+{"method_name": "EDGS", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 27.069658160209656, "ssim": 0.7950905002653599, "lpips": 0.20676208287477493, "time": 2333.19, "max_gpu_memory": 11261.0}

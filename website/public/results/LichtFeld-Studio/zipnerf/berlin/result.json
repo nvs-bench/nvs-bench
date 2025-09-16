@@ -1,1 +1,1 @@
-{"method_name": "LichtFeld-Studio", "dataset_name": "zipnerf", "scene_name": "berlin", "psnr": 25.8411960198135, "ssim": 0.8618949954471891, "lpips": 0.36529368106965665, "time": 295.06, "max_gpu_memory": 4023.0}
+{"method_name": "LichtFeld-Studio", "dataset_name": "zipnerf", "scene_name": "berlin", "psnr": 25.8411960198135, "ssim": 0.8650903477870598, "lpips": 0.36529368106965665, "time": 295.06, "max_gpu_memory": 4023.0}

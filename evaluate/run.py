@@ -58,56 +58,69 @@ def evaluate(method: str, data: str):
     nvs_bench_volume.commit()
 
 
-def get_all_methods():
-    """Get all method names from the modal volume nvs-bench methods/ folder.
+def list_modal_subdirs(path: str, volume: str = "nvs-bench"):
+    """List all subdirectories in a given path in the modal volume.
 
-    Runs 'modal volume ls nvs-bench methods --json' to get a JSON listing of all directories
-    in the methods/ folder, then extracts the method names from the directory paths.
+    Args:
+        path: The path to list subdirectories from (e.g., 'methods', 'results/method', 'results/method/dataset')
 
-    Example command output:
-    [
-      {
-        "Filename": "methods/3DGS-LM",
-        "Type": "dir",
-        "Created/Modified": "2025-09-08 13:58 EDT",
-        "Size": "52 B"
-      },
-      {
-        "Filename": "methods/gsplat",
-        "Type": "dir",
-        "Created/Modified": "2025-09-10 21:40 EDT",
-        "Size": "52 B"
-      },
-      ...
-    ]
-
-    Returns a list of method names like ['3DGS-LM', 'gsplat', 'ever_training', ...]
+    Returns:
+        List of subdirectory names
     """
     result = subprocess.run(
-        "modal volume ls nvs-bench methods --json", shell=True, check=True, capture_output=True, text=True
+        f"modal volume ls {volume} {path} --json", shell=True, check=True, capture_output=True, text=True
     )
     volume_data = json.loads(result.stdout)
 
-    # Extract method names from the directory listing
-    methods = []
+    # Extract subdirectory names from the directory listing
+    subdirs = []
     for item in volume_data:
         if item["Type"] == "dir":
-            # Extract method name from "methods/method_name" format
-            method_name = item["Filename"].split("/")[-1]
-            methods.append(method_name)
+            # Extract the last part of the path as the subdirectory name
+            subdir_name = item["Filename"].split("/")[-1]
+            subdirs.append(subdir_name)
 
-    return methods
+    return subdirs
 
 
-def download_results(method: str):
-    subprocess.run("mkdir -p results/", shell=True, check=True)
-    subprocess.run(
-        f"modal volume get --force nvs-bench results/{method}/ website/public/results/", shell=True, check=True
-    )
-    subprocess.run(
-        f"find website/public/results/{method} -type d -name 'test_renders' -exec rm -rf {{}} +", shell=True, check=True
-    )
-    subprocess.run("cd website && pnpm run build", shell=True, check=True)
+def download_results(method: str, data: str | None = None):
+    """Download only website_images and result.json files for a specific method."""
+    subprocess.run("mkdir -p website/public/results/", shell=True, check=True)
+
+    # Get all datasets for this method
+    datasets = list_modal_subdirs(f"results/{method}") if data is None else [data.split("/")[0]]
+    print(f"Found datasets for {method}: {datasets}")
+
+    for dataset in datasets:
+        # Get all scenes for this dataset
+        scenes = list_modal_subdirs(f"results/{method}/{dataset}") if data is None else [data.split("/")[1]]
+        print(f"Found scenes for {method}/{dataset}: {scenes}")
+
+        for scene in scenes:
+            try:
+                # Create the local directory structure
+                local_dir = f"website/public/results/{method}/{dataset}/{scene}"
+                subprocess.run(f"mkdir -p {local_dir}", shell=True, check=True)
+
+                # Download only the result.json file
+                result_json_path = f"results/{method}/{dataset}/{scene}/result.json"
+                subprocess.run(
+                    f"modal volume get --force nvs-bench {result_json_path} {local_dir}/result.json",
+                    shell=True,
+                    check=True,
+                )
+
+                # Download only the website_images directory
+                website_images_path = f"results/{method}/{dataset}/{scene}/website_images"
+                subprocess.run(
+                    f"modal volume get --force nvs-bench {website_images_path} {local_dir}", shell=True, check=True
+                )
+
+                print(f"Downloaded results for {method}/{dataset}/{scene}")
+
+            except subprocess.CalledProcessError as e:
+                print(f"Failed to download results for {method}/{dataset}/{scene}: {e}")
+                continue
 
 
 @app.local_entrypoint()
@@ -138,7 +151,7 @@ def main(method: str | None = None, data: str | None = None):
 
     # Determine which methods to evaluate
     if method is None:
-        methods = get_all_methods()
+        methods = list_modal_subdirs("methods")
         print("Running evaluation on all methods with outputs in modal://nvs-bench/methods/")
     else:
         methods = [method]
@@ -149,13 +162,10 @@ def main(method: str | None = None, data: str | None = None):
 
         if data is not None:
             evaluate.remote(method_name, data)
+            download_results(method_name, data)
         else:
             list(evaluate.starmap([(method_name, data) for data in BENCHMARK_DATA], return_exceptions=True))
-
-        # Download results
-        try:
             download_results(method_name)
-        except subprocess.CalledProcessError as e:
-            print(f"Failed to download results for method {method_name}: {e}")
-            if method is not None:  # Only continue if evaluating all methods
-                continue
+
+    # Build the website with the downloaded results
+    subprocess.run("cd website && pnpm run build", shell=True, check=True)
