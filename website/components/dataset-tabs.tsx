@@ -15,7 +15,7 @@ export function DatasetTabs() {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [selectedScene, setSelectedScene] = useState<string>("all");
   const [selectedDataset, setSelectedDataset] = useState<string>("all");
-  const [selectedMetric, setSelectedMetric] = useState<MetricType>("psnr");
+  const [selectedMetric, setSelectedMetric] = useState<MetricType>("lpips");
 
   const handleMethodSelect = (methodName: string | null) => {
     setSelectedMethod(methodName);
