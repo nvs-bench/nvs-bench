@@ -13,6 +13,8 @@
 
 It uses Modal to take any method and run it on a serverless L40S GPU (the cloud version of an RTX 4090). If you're using vscode/cursor you can even open up a native dev experience backed by cloud GPUs. Or, try the methods out in a browser with a hosted jupyter lab, vscode, or modal's new notebook experience. Their generous free tier ($30 a month) should be plenty.
 
+After a method is run, it saves renders on the validation split of the dataset to a `test_renders` folder on the `nvs-bench` modal volume. Evalution can then be run separately to compare these renders to ground truth and calculate metrics. Because of this decoupling, it's also possible to submit results just by providing the `test_render` images and skip the integration. It's open ended, so just open a PR and we can discuss!
+
 The main files for adding a new method are in `boilerplate/`:
 
 - `image.py` — (Needs to be filled in) Your installation instructions, similar to a Dockerfile.
