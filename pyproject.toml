@@ -2,7 +2,8 @@
 line-length = 120
 target-version = "py38"
 exclude = [
-    "methods/"
+    "methods/",
+    "website/"
 ]
 
 [tool.ruff.lint]
