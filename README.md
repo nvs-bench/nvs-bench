@@ -11,7 +11,7 @@
 - Rendered images are all you need for evaluation.
 
 
-It uses Modal to take any method and run it on serverless GPUs. If you're using vscode/cursor you can even open up a native dev experience backed by cloud gpus. Or, try the methods out in a browser with a hoster jupyter lab, vscode, or modal's new notebook experience. Their generous free tier ($30 a month) should be plenty.
+It uses Modal to take any method and run it on a serverless L40S GPU (the cloud version of an RTX 4090). If you're using vscode/cursor you can even open up a native dev experience backed by cloud gpus. Or, try the methods out in a browser with a hoster jupyter lab, vscode, or modal's new notebook experience. Their generous free tier ($30 a month) should be plenty.
 
 The main files for adding a new method are in `boilerplate/`:
 
