@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+"""Convenience script to print out the results of a method in a nice format for pasting into a GH PR (for example)"""
+
 import argparse
 import json
 from collections import defaultdict
