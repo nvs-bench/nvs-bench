@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "tanksandtemples", "scene_name": "train", "psnr": 22.723274933664424, "ssim": 0.8463879776628394, "lpips": 0.18908208647840902, "time": 824.03, "max_gpu_memory": 6034.0}

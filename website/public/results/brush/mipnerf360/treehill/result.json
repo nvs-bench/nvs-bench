@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 23.211540434095596, "ssim": 0.6593782371944852, "lpips": 0.3293083806832631, "time": 712.02, "max_gpu_memory": 5840.0}

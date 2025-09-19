@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "mipnerf360", "scene_name": "kitchen", "psnr": 31.829819597516742, "ssim": 0.9297631365912301, "lpips": 0.15096794537135533, "time": 1485.46, "max_gpu_memory": 2764.0}

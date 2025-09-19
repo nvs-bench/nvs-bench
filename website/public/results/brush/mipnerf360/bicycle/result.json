@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 25.720955429077147, "ssim": 0.7906885981559754, "lpips": 0.2025934064388275, "time": 890.27, "max_gpu_memory": 6610.0}

@@ -33,5 +33,10 @@
     "method_name": "LichtFeld-Studio",
     "method_display_name": "LichtFeld-Studio",
     "method_url": "https://github.com/N-Demir/LichtFeld-Studio/blob/master/nvs-bench/eval.sh"
+  },
+  {
+    "method_name": "brush",
+    "method_display_name": "brush",
+    "method_url": "https://github.com/N-Demir/brush/blob/main/nvs-bench/eval.sh"
   }
 ]
