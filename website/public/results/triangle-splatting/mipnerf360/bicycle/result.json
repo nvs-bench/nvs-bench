@@ -1,1 +1,1 @@
-{"method_name": "triangle-splatting", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 24.52397674560547, "ssim": 0.7471369361877441, "lpips": 0.22815197467803955, "time": 2247.14, "max_gpu_memory": 15783.0}
+{"method_name": "triangle-splatting", "dataset_name": "mipnerf360", "scene_name": "bicycle", "psnr": 24.810876693725586, "ssim": 0.7580009937286377, "lpips": 0.21814717769622802, "time": 3684.41, "max_gpu_memory": 28115.0}
