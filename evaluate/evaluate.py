@@ -131,7 +131,17 @@ def write_result_to_json(data: str, method: str, metrics: Metrics, time: float):
         "time": time,
         "max_gpu_memory": memory,
     }
-    print(result)
+
+    print(f"  Method:   {method}")
+    print(f"  Dataset:  {data.split('/')[0]}")
+    print(f"  Scene:    {data.split('/')[1]}")
+    print("---")
+    print(f"  SSIM :    {metrics.ssim:.7f}")
+    print(f"  PSNR :    {metrics.psnr:.7f}")
+    print(f"  LPIPS:    {metrics.lpips:.7f}")
+    print("---")
+    print(f"  Time :    {time:.2f}")
+    print(f"  Memory:   {memory:.1f}")
 
     with open(result_json_file_path, "w") as f:
         json.dump(result, f)
