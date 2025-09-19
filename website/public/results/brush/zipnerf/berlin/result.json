@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "zipnerf", "scene_name": "berlin", "psnr": 27.426077484453796, "ssim": 0.9040426820043533, "lpips": 0.30292796552496615, "time": 828.21, "max_gpu_memory": 5538.0}

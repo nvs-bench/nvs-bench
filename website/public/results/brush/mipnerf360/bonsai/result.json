@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "mipnerf360", "scene_name": "bonsai", "psnr": 32.29704434162861, "ssim": 0.9446128300718359, "lpips": 0.24201184188997424, "time": 1703.63, "max_gpu_memory": 2625.0}

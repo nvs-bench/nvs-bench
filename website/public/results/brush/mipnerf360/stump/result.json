@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 27.241127610206604, "ssim": 0.8033210895955563, "lpips": 0.21033666562289, "time": 683.67, "max_gpu_memory": 5649.0}

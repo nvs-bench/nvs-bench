@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "mipnerf360", "scene_name": "counter", "psnr": 29.254055213928222, "ssim": 0.9135613222916921, "lpips": 0.24429177542527516, "time": 1296.08, "max_gpu_memory": 2615.0}

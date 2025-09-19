@@ -22,3 +22,6 @@
 [submodule "methods/LichtFeld-Studio"]
 	path = methods/LichtFeld-Studio
 	url = https://github.com/MrNeRF/LichtFeld-Studio.git
+[submodule "methods/brush"]
+	path = methods/brush
+	url = https://github.com/N-Demir/brush

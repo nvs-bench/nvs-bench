@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 30.24578521991598, "ssim": 0.9113501474775118, "lpips": 0.31338431917387866, "time": 465.78, "max_gpu_memory": 2418.0}

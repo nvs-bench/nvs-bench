@@ -1,0 +1,1 @@
+{"method_name": "brush", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 22.783252768802203, "ssim": 0.7783052744129286, "lpips": 0.3211985905461597, "time": 1060.61, "max_gpu_memory": 6395.0}
