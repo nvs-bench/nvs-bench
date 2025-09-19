@@ -1083,51 +1083,51 @@
     "method_name": "triangle-splatting",
     "dataset_name": "mipnerf360",
     "scene_name": "bicycle",
-    "psnr": 24.52397674560547,
-    "ssim": 0.7471369361877441,
-    "lpips": 0.22815197467803955,
-    "time": 2247.14,
-    "max_gpu_memory": 15783
+    "psnr": 24.824091262817383,
+    "ssim": 0.7584986639022827,
+    "lpips": 0.21808159947395325,
+    "time": 3032.97,
+    "max_gpu_memory": 26543
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "mipnerf360",
     "scene_name": "bonsai",
-    "psnr": 28.763011545748324,
-    "ssim": 0.855998083546355,
-    "lpips": 0.2863564052291819,
-    "time": 3723.61,
-    "max_gpu_memory": 39055
+    "psnr": 30.824078662975413,
+    "ssim": 0.9191434721688967,
+    "lpips": 0.2268372790233509,
+    "time": 2824.49,
+    "max_gpu_memory": 16105
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "mipnerf360",
     "scene_name": "counter",
-    "psnr": 28.77056802113851,
-    "ssim": 0.9062459111213684,
-    "lpips": 0.21866767406463622,
-    "time": 4063.51,
-    "max_gpu_memory": 18897
+    "psnr": 28.863339869181313,
+    "ssim": 0.9095674157142639,
+    "lpips": 0.21694019734859465,
+    "time": 2729.16,
+    "max_gpu_memory": 13459
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "mipnerf360",
     "scene_name": "flowers",
-    "psnr": 20.64736808430065,
-    "ssim": 0.5979617928916757,
-    "lpips": 0.3239638290622018,
-    "time": 2706.09,
-    "max_gpu_memory": 16667
+    "psnr": 20.74323203346946,
+    "ssim": 0.607990867712281,
+    "lpips": 0.3176012174649672,
+    "time": 3555.9,
+    "max_gpu_memory": 21257
   },
   {
     "method_name": "triangle-splatting",
     "dataset_name": "mipnerf360",
     "scene_name": "garden",
-    "psnr": 27.088472366333008,
-    "ssim": 0.8567965974410375,
-    "lpips": 0.12278155951450269,
-    "time": 3052.54,
-    "max_gpu_memory": 15757
+    "psnr": 27.158847093582153,
+    "ssim": 0.860369344552358,
+    "lpips": 0.11922464519739151,
+    "time": 2968.16,
+    "max_gpu_memory": 20107
   },
   {
     "method_name": "triangle-splatting",
