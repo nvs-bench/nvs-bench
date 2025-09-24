@@ -1220,6 +1220,156 @@
     "max_gpu_memory": 2157
   },
   {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "deepblending",
+    "scene_name": "drjohnson",
+    "psnr": 14.568277156714236,
+    "ssim": 0.6164748966693878,
+    "lpips": 0.7041805621349451,
+    "time": 162.51,
+    "max_gpu_memory": 11859
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "deepblending",
+    "scene_name": "playroom",
+    "psnr": 15.379605293273926,
+    "ssim": 0.673318607026133,
+    "lpips": 0.5876035793074246,
+    "time": 164.53,
+    "max_gpu_memory": 12011
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bicycle",
+    "psnr": 18.669781913757323,
+    "ssim": 0.3901248925924301,
+    "lpips": 0.496635582447052,
+    "time": 259.09,
+    "max_gpu_memory": 13549
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "bonsai",
+    "psnr": 29.199274088885332,
+    "ssim": 0.8986335622297751,
+    "lpips": 0.2569888197892421,
+    "time": 426.88,
+    "max_gpu_memory": 19237
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "counter",
+    "psnr": 28.176164054870604,
+    "ssim": 0.8913333455721537,
+    "lpips": 0.24274939050277075,
+    "time": 449.44,
+    "max_gpu_memory": 20469
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "flowers",
+    "psnr": 11.427271409468217,
+    "ssim": 0.13247992166064002,
+    "lpips": 0.6901111873713407,
+    "time": 170.8,
+    "max_gpu_memory": 10091
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "garden",
+    "psnr": 25.768287022908527,
+    "ssim": 0.7969396064678828,
+    "lpips": 0.20935960114002228,
+    "time": 318.98,
+    "max_gpu_memory": 13573
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "kitchen",
+    "psnr": 15.15633328301566,
+    "ssim": 0.42793503190789905,
+    "lpips": 0.6518214736665998,
+    "time": 325.24,
+    "max_gpu_memory": 16979
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "room",
+    "psnr": 18.661290780091896,
+    "ssim": 0.6682653052684588,
+    "lpips": 0.5504578925096072,
+    "time": 442.09,
+    "max_gpu_memory": 20543
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "stump",
+    "psnr": 16.033804416656494,
+    "ssim": 0.25497483648359776,
+    "lpips": 0.6469381488859653,
+    "time": 170.99,
+    "max_gpu_memory": 11109
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "mipnerf360",
+    "scene_name": "treehill",
+    "psnr": 13.515444172753227,
+    "ssim": 0.2769889293445481,
+    "lpips": 0.699786924653583,
+    "time": 154.58,
+    "max_gpu_memory": 9189
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "tanksandtemples",
+    "scene_name": "train",
+    "psnr": 14.660787130656995,
+    "ssim": 0.45866042375564575,
+    "lpips": 0.5340287446191436,
+    "time": 342.95,
+    "max_gpu_memory": 12283
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "tanksandtemples",
+    "scene_name": "truck",
+    "psnr": 23.88186115026474,
+    "ssim": 0.8293759357184172,
+    "lpips": 0.20912787364795804,
+    "time": 295.92,
+    "max_gpu_memory": 9081
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "zipnerf",
+    "scene_name": "alameda",
+    "psnr": 11.848332890717115,
+    "ssim": 0.40302210524334886,
+    "lpips": 0.7613560914443934,
+    "time": 765.77,
+    "max_gpu_memory": 16105
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "dataset_name": "zipnerf",
+    "scene_name": "berlin",
+    "psnr": 14.242742659553649,
+    "ssim": 0.625076950857879,
+    "lpips": 0.6272615692602894,
+    "time": 1058.15,
+    "max_gpu_memory": 29647
+  },
+  {
     "method_name": "triangle-splatting",
     "dataset_name": "deepblending",
     "scene_name": "drjohnson",
@@ -1353,11 +1503,11 @@
     "method_name": "triangle-splatting",
     "dataset_name": "tanksandtemples",
     "scene_name": "truck",
-    "psnr": 25.05241686105728,
-    "ssim": 0.8781898412853479,
-    "lpips": 0.13967970106750727,
-    "time": 2902.2,
-    "max_gpu_memory": 17517
+    "psnr": 24.924624741077423,
+    "ssim": 0.8851952143013477,
+    "lpips": 0.12966821971349418,
+    "time": 1861.95,
+    "max_gpu_memory": 8779
   },
   {
     "method_name": "triangle-splatting",

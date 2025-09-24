@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "mipnerf360", "scene_name": "garden", "psnr": 25.768287022908527, "ssim": 0.7969396064678828, "lpips": 0.20935960114002228, "time": 318.98, "max_gpu_memory": 13573.0}

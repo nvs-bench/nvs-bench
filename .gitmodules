@@ -25,3 +25,6 @@
 [submodule "methods/brush"]
 	path = methods/brush
 	url = https://github.com/N-Demir/brush
+[submodule "methods/on-the-fly-nvs"]
+	path = methods/on-the-fly-nvs
+	url = https://github.com/N-Demir/on-the-fly-nvs

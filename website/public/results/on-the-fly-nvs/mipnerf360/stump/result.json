@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "mipnerf360", "scene_name": "stump", "psnr": 16.033804416656494, "ssim": 0.25497483648359776, "lpips": 0.6469381488859653, "time": 170.99, "max_gpu_memory": 11109.0}

@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "zipnerf", "scene_name": "alameda", "psnr": 11.848332890717115, "ssim": 0.40302210524334886, "lpips": 0.7613560914443934, "time": 765.77, "max_gpu_memory": 16105.0}
