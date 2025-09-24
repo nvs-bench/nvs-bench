@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "zipnerf", "scene_name": "berlin", "psnr": 14.242742659553649, "ssim": 0.625076950857879, "lpips": 0.6272615692602894, "time": 1058.15, "max_gpu_memory": 29647.0}

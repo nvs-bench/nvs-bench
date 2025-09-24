@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "tanksandtemples", "scene_name": "train", "psnr": 14.660787130656995, "ssim": 0.45866042375564575, "lpips": 0.5340287446191436, "time": 342.95, "max_gpu_memory": 12283.0}

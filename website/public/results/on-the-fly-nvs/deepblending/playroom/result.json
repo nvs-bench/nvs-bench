@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "deepblending", "scene_name": "playroom", "psnr": 15.379605293273926, "ssim": 0.673318607026133, "lpips": 0.5876035793074246, "time": 164.53, "max_gpu_memory": 12011.0}

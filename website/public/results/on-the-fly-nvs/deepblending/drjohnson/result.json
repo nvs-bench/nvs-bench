@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "deepblending", "scene_name": "drjohnson", "psnr": 14.568277156714236, "ssim": 0.6164748966693878, "lpips": 0.7041805621349451, "time": 162.51, "max_gpu_memory": 11859.0}

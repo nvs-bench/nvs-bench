@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "mipnerf360", "scene_name": "bonsai", "psnr": 29.199274088885332, "ssim": 0.8986335622297751, "lpips": 0.2569888197892421, "time": 426.88, "max_gpu_memory": 19237.0}

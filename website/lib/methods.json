@@ -38,5 +38,10 @@
     "method_name": "brush",
     "method_display_name": "brush",
     "method_url": "https://github.com/N-Demir/brush/blob/main/nvs-bench/eval.sh"
+  },
+  {
+    "method_name": "on-the-fly-nvs",
+    "method_display_name": "On-the-fly NVS",
+    "method_url": "https://github.com/N-Demir/on-the-fly-nvs/blob/main/nvs-bench/eval.sh"
   }
 ]

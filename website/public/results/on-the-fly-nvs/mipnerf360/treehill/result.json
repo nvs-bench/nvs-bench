@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "mipnerf360", "scene_name": "treehill", "psnr": 13.515444172753227, "ssim": 0.2769889293445481, "lpips": 0.699786924653583, "time": 154.58, "max_gpu_memory": 9189.0}

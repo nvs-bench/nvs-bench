@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "mipnerf360", "scene_name": "room", "psnr": 18.661290780091896, "ssim": 0.6682653052684588, "lpips": 0.5504578925096072, "time": 442.09, "max_gpu_memory": 20543.0}

@@ -1,0 +1,1 @@
+{"method_name": "on-the-fly-nvs", "dataset_name": "mipnerf360", "scene_name": "counter", "psnr": 28.176164054870604, "ssim": 0.8913333455721537, "lpips": 0.24274939050277075, "time": 449.44, "max_gpu_memory": 20469.0}
