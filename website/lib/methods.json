@@ -21,7 +21,7 @@
   },
   {
     "method_name": "triangle-splatting",
-    "method_display_name": "3DTS",
+    "method_display_name": "Triangle Splatting",
     "method_url": "https://github.com/N-Demir/triangle-splatting/blob/main/nvs-bench/eval.sh"
   },
   {
