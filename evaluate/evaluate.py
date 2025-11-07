@@ -30,7 +30,9 @@ def get_image_pair_paths(data: str, method: str) -> list[tuple[Path, Path]]:
     rendered_files = sorted([f for f in rendered_path.iterdir() if f.is_file()])
 
     if len(gt_files) != len(rendered_files):
-        raise ValueError("The number of ground truth and rendered images do not match.")
+        raise ValueError(
+            f"The number of ground truth and rendered images do not match. gt: {len(gt_files)} != rendered: {len(rendered_files)}"
+        )
 
     print(f"Loading {len(gt_files)} image pairs...")
 
