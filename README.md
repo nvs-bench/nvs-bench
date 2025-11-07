@@ -9,7 +9,7 @@ git remote add nvs-bench https://github.com/N-Demir/nvs-bench.git && git subtree
 
 Then, fill out:
 - `image.py`
-- `eval.sh`
+- `run.sh`
 
 I would first test with 10 training iterations to make sure the method integration works end to end before trying to run on the whole benchmark.
 
