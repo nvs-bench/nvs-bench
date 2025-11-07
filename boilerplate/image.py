@@ -12,14 +12,28 @@ You might also want to change the `workdir` to keep it consistent with the Docke
 See their docs for more info: https://modal.com/docs/guide/images
 """
 
+import subprocess
 from pathlib import Path, PurePosixPath
 
 from modal import Image, Volume
 
-method_name = Path.cwd().name
-assert method_name != "nvs-bench", (
+assert Path.cwd().name != "nvs-bench", (
     "nvs-bench must be called from the method's directory, not the nvs-bench subdirectory. Eg: `modal run nvs-bench/image.py`."
 )
+method_name = Path.cwd().name
+
+try:
+    git_branch = (
+        subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"], stderr=subprocess.DEVNULL)
+        .decode()
+        .strip()
+    )
+    if git_branch not in ("main", "master"):
+        method_name = f"{method_name}-{git_branch}"
+        print(f"Found git branch {git_branch}, appending to method name: {method_name}")
+except (subprocess.CalledProcessError, FileNotFoundError):
+    pass
+
 
 nvs_bench_volume = Volume.from_name("nvs-bench", create_if_missing=True)
 

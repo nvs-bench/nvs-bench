@@ -34,6 +34,7 @@ nvs_bench_volume = modal.Volume.from_name("nvs-bench", create_if_missing=True)
     )
     .run_commands("gcloud auth activate-service-account --key-file=/root/gcs-service-account-key.json")
     .workdir("/root")
+    .pip_install("numpy")
     .add_local_dir("data", "/root/data"),
     volumes={"/nvs-bench": nvs_bench_volume},
     timeout=60 * 60,

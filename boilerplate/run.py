@@ -48,7 +48,7 @@ def log_time(log_file: str):
     timeout=3600 * 8,
     gpu="L40S",
 )
-def eval(data: str):
+def run(data: str):
     data_folder = Path(f"/nvs-bench/data/{data}/")
     output_folder = Path(f"/nvs-bench/methods/{method_name}/{data}/")
 
@@ -61,7 +61,7 @@ def eval(data: str):
     output_folder.mkdir(parents=True, exist_ok=True)
 
     with log_max_gpu_memory(f"{output_folder}/max_gpu_memory.txt"), log_time(f"{output_folder}/time.txt"):
-        subprocess.run(f"bash nvs-bench/eval.sh {data_folder} {output_folder}", shell=True, check=True)
+        subprocess.run(f"bash nvs-bench/run.sh {data_folder} {output_folder}", shell=True, check=True)
 
     nvs_bench_volume.commit()
 

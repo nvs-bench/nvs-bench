@@ -18,8 +18,8 @@ After a method is run, it saves renders on the validation split of the dataset t
 The main files for adding a new method are in `boilerplate/`:
 
 - `image.py` — (Needs to be filled in) Your installation instructions, similar to a Dockerfile.
-- `eval.sh` — (Needs to be filled in) Your training / rendering commands.
-- `run.py` — Runs `eval.sh` with an image built from `image.py` on Modal.
+- `run.sh` — (Needs to be filled in) Your training / rendering commands.
+- `run.py` — Runs `run.sh` with an image built from `image.py` on Modal.
 - `dev_env.py` — if you have vscode/cursor, opens up a remote GPU-backed dev environment.
 
 A summary of how to use these files is in `boilerplate/README.md` and each file should have plenty of instructional comments as well.
@@ -36,7 +36,7 @@ git remote add nvs-bench https://github.com/nvs-bench/nvs-bench.git && git subtr
 
 2) Fill out 
 - `image.py` with steps needed to install your method on a new machine or use an existing Dockerfile.
-- `eval.sh` with the commands for training, rendering, and moving of test renders to the necessary `$output_folder/test_renders` folder.
+- `run.sh` with the commands for training, rendering, and moving of test renders to the necessary `$output_folder/test_renders` folder.
 
 ## Running
 Then, [install modal](https://modal.com/docs/guide#getting-started) and run it with `modal run -m nvs_bench.run --data <mipnerf360/bicycle>`
