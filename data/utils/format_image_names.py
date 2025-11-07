@@ -1,6 +1,6 @@
 """
 Script to take whatever image names there are and standardize them to be:
-00001.JPG, 00002.JPG, 00003.JPG, etc.
+00001.JPG, 00002.JPG, 00003.JPG, etc. (or .PNG for PNG images)
 
 Zero-padded naming convention is critical for correct sorting!
 - Without zero-padding: "1.JPG", "10.JPG", "2.JPG" sorts incorrectly as "1.JPG", "10.JPG", "2.JPG"
@@ -10,13 +10,31 @@ Zero-padded naming convention is critical for correct sorting!
 Names aren't zero indexed, instead they match the image_ids.
 This was done for simplicities sake to follow the existing COLMAP format, but
 please mention any arguments for 0 indexing them.
+
+Note: this function is deployed as a modal function to be able to be called on demand
 """
 
 import argparse
 import shutil
 from pathlib import Path
 
-from read_write_model import Image, read_model, write_model
+import modal
+from modal.volume import Volume
+
+from data.utils.read_write_model import Image, read_model, write_model
+
+nvs_bench_volume = Volume.from_name("nvs-bench", create_if_missing=True)
+app = modal.App(
+    "nvs-bench",
+    volumes={"/nvs-bench": nvs_bench_volume},
+    image=modal.Image.debian_slim().pip_install("numpy"),
+)
+
+
+@app.function(volumes={"/nvs-bench": nvs_bench_volume})
+def format_image_names_modal(data: str):
+    format_image_names(Path("/nvs-bench/data") / data)
+    nvs_bench_volume.commit()
 
 
 def format_image_names(data_path: str | Path):
@@ -28,11 +46,11 @@ def format_image_names(data_path: str | Path):
     cameras, images, points3D = read_model(model_path)  # type: ignore # noqa: N806
 
     image_names = sorted([img.name for img in images.values()])
-    assert all(img.upper().endswith(".JPG") for img in image_names)
+    assert all(img.upper().endswith((".JPG", ".PNG")) for img in image_names)
 
     old_name_to_new_name = {
-        img_name: f"{i + 1:05d}.JPG" for i, img_name in enumerate(image_names)
-    }  # i+1 = 1-indexed, 5-digit zero-padded
+        img_name: f"{i + 1:05d}{Path(img_name).suffix.upper()}" for i, img_name in enumerate(image_names)
+    }  # i+1 = 1-indexed, 5-digit zero-padded, preserves original extension
 
     # Create new Image objects with updated names and rename actual image files
     updated_images = {}
@@ -64,7 +82,9 @@ def format_image_names(data_path: str | Path):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Format image names to be zero-padded (00001.JPG, 00002.JPG, etc.)")
+    parser = argparse.ArgumentParser(
+        description="Format image names to be zero-padded (00001.JPG, 00002.JPG, etc. or .PNG for PNG images)"
+    )
     parser.add_argument("data_path", help="Path to the dataset directory containing images/ and sparse/0/ folders")
     args = parser.parse_args()
 
