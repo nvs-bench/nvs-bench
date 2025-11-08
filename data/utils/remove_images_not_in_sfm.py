@@ -17,7 +17,7 @@ from data.utils.read_write_model import read_model
 
 nvs_bench_volume = Volume.from_name("nvs-bench", create_if_missing=True)
 app = modal.App(
-    "nvs-bench",
+    "nvs-bench-remove-images-not-in-sfm",
     volumes={"/nvs-bench": nvs_bench_volume},
     image=modal.Image.debian_slim().pip_install("numpy"),
 )
